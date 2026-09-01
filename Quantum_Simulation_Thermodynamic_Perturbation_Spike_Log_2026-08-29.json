@@ -1,0 +1,43 @@
+{
+  "system": "ZYRQUEN Ω∞ Sovereign Operating System",
+  "module": "Quantum Simulation Controller • Thermodynamic Perturbation Spike Log",
+  "canonicalBaseline": "Frozen Multiverse v1.2 LTS (Δ0 SSoT)",
+  "thresholdLimit": "0.05 J/K",
+  "totalRecordedEvents": 3,
+  "exportedAt": "2026-08-29T21:55:18.653Z",
+  "events": [
+    {
+      "id": "SPIKE-40202-03",
+      "timestamp": "2026-08-30 04:55:11.214",
+      "peakDeltaS": 0.063,
+      "preset": "soliton",
+      "presetName": "Soliton Wave Packet",
+      "severity": "critical",
+      "stability": 94.2,
+      "cryo": 15.26,
+      "description": "Manual test injection: thermal surge (+0.063 J/K) simulated in Soliton Wave Packet profile."
+    },
+    {
+      "id": "SPIKE-40202-02",
+      "timestamp": "2026-08-30 04:55:07.355",
+      "peakDeltaS": 0.08,
+      "preset": "soliton",
+      "presetName": "Soliton Wave Packet",
+      "severity": "critical",
+      "stability": 86.5,
+      "cryo": 15.34,
+      "description": "Manual test injection: thermal surge (+0.08 J/K) simulated in Soliton Wave Packet profile."
+    },
+    {
+      "id": "SPIKE-40202-01",
+      "timestamp": "2026-08-30 04:54:54.082",
+      "peakDeltaS": 0.076,
+      "preset": "soliton",
+      "presetName": "Soliton Wave Packet",
+      "severity": "critical",
+      "stability": 88.3,
+      "cryo": 15.32,
+      "description": "Manual test injection: thermal surge (+0.076 J/K) simulated in Soliton Wave Packet profile."
+    }
+  ]
+}
