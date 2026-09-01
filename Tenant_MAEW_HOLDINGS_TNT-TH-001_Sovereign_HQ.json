@@ -1,0 +1,15 @@
+{
+  "tenantId": "TNT-TH-001",
+  "organizationName": "MAEW HOLDINGS CO., LTD. (Sovereign HQ)",
+  "isolationMode": "Sovereign Physical Hardware Isolation",
+  "encryptionKeyFingerprint": "0xTH-990A-F11E-8C2A-4F11",
+  "activeReleaseVersion": "v2.8.0-GA-SEAL",
+  "quotaStatus": {
+    "cpuPercent": 32,
+    "storageGb": 480,
+    "maxStorageGb": 2000,
+    "monthlyRequestsMillions": 142.8
+  },
+  "cryptographicProof": "sha256_tenant_audit_tnt_th_001_sealed",
+  "timestamp": "2026-08-01T14:58:13.449Z"
+}
