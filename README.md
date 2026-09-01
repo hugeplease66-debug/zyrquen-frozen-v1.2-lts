@@ -10,7 +10,7 @@
 **Platform Boundary:** Ω601–Ω1000 | Strict Enforcement  
 **Classification:** Sovereign Immutable Kernel — Single Source of Truth (SSoT)
 **Block:** #849202 / #849203 / #40202 | **Merkle Root:** `909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68` | **Cert:** ZQ-GOLD-DEP-849202-3908
-**Live:** https://hugeplease66-debug.github.io/
+**Live:** 
 
 ---
 
