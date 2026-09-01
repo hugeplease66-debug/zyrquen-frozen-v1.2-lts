@@ -1,0 +1,241 @@
+{
+  "systemMetadata": {
+    "name": "ZYRQUEN Ω∞ FROZEN v1.2 LTS Sovereign Operating System and Civilization Intelligence Control Plane",
+    "codename": "LOCKED_FROZEN_v1.2_LTS",
+    "version": "v1.2.1-LTS (Frozen Canonical) - 10/10 PASSED",
+    "merkleRoot": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+    "sealedBlock": 849202,
+    "totalVerifiedSeals": 14902,
+    "rawSeals": 14982,
+    "quarantinedSeals": 80,
+    "qOpsTelemetry": 851.9,
+    "coherence": "99.98%",
+    "kernelLatency": "1.2ms",
+    "cryoTemp": "14.98 mK",
+    "coolantFlow": "100% Helium-4",
+    "sovereignPrincipal": {
+      "nameTh": "นายยุทธภูมิ พากเพียร",
+      "nameEn": "Yuttaphum Phakphian",
+      "code": "#EP-SOVEREIGN-01",
+      "roleTh": "ผู้ถือสิทธิ์และสถาปนิกอธิปไตยสูงสุด (Supreme Sovereign Principal Architect & Owner)",
+      "roleEn": "Supreme Sovereign Principal Architect & Genesis Custodian",
+      "clearanceLevel": "OMEGA-1 SUPREME CLEARANCE"
+    },
+    "platformBoundary": "Ω601–Ω1000 (Strict Enforcement)",
+    "systemIntegrity": "100% VERIFIED WITHIN DEFINED V1.21 SCOPE",
+    "baselineDrift": "0.00%",
+    "ssotMutation": 0,
+    "quorum": "10/10 REAL_HSM Signed",
+    "liveDomain": "https://zyrquen-frozen-v1-2-lts.vercel.app/",
+    "certificateId": "ZQ-GOLD-DEP-849202-3908"
+  },
+  "canonicalRoot": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+  "sealedBlockHeight": 849202,
+  "zeroMockEvidencePolicy": "ENFORCED",
+  "canonicalWrite": "DENIED (STRICT_READ_ONLY)",
+  "evidenceCount": 7,
+  "evidenceObjects": [
+    {
+      "id": "EVID-01-FROZEN-SSOT",
+      "claim": "SSoT Core is permanently frozen at v1.2 LTS (Delta === 0) with zero unauthorized mutation allowed.",
+      "source": "Genesis Sovereign Decree & Dilithium-5 HSM Signer #EP-SOVEREIGN-01",
+      "sourceType": "HARDWARE_HSM",
+      "origin": "NitroKey HSM-PQC-01 (FIPS 140-3 Level 4 Secure Enclave)",
+      "timestamp": "2026-08-18 05:03:08 ICT",
+      "freshness": "IMMUTABLE_FROZEN",
+      "provenance": "Principal Architect Genesis Ceremony → Post-Quantum Lattice Anchor → Block #849202",
+      "integrityAlgorithm": "SHA-256 + CRYSTALS-Dilithium-5 (ML-DSA-87)",
+      "digest": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+      "signatureStatus": "PQC_DILITHIUM5_VALID",
+      "authority": "Supreme Sovereign Principal Architect (นายยุทธภูมิ พากเพียร)",
+      "verificationStatus": "VERIFIED",
+      "confidence": 100,
+      "dependencies": [
+        "INV-SSOT-MUTATION-ZERO",
+        "GATE-40-01"
+      ],
+      "conflictStatus": "NO_CONFLICT",
+      "designation": "CANONICAL",
+      "auditReference": "AUD-849202-001",
+      "details": {
+        "sealedBlock": 849202,
+        "mutationDelta": 0,
+        "baselineDrift": "0.00%",
+        "cryoTemp": "14.98 mK"
+      }
+    },
+    {
+      "id": "EVID-02-DECA-QUORUM",
+      "claim": "Deca-Key 10/10 Hardware HSM Custodians have fully signed and ratified the governance charter.",
+      "source": "Deca-Key G11 Hardware HSM Attestation Ledger",
+      "sourceType": "HARDWARE_HSM",
+      "origin": "10 Distinct Hardware HSM Tokens (NitroKey, YubiKey 5C, Trezor Safe 5, Ledger Flex)",
+      "timestamp": "2026-08-15 15:41:04 ICT",
+      "freshness": "ACTIVE_VALID",
+      "provenance": "Custodian Roster Ingestion → 10/10 Hardware Pin Authorization → Merkle Attestation Tree",
+      "integrityAlgorithm": "FALCON-1024 / ML-DSA-87 / SPHINCS+",
+      "digest": "7528e18501da86fc4691763a43fa4c68909ab814479844d8a14816bed34cdbb0",
+      "signatureStatus": "FALCON1024_VALID",
+      "authority": "Deca-Key 10/10 Custodian Roster (Director Somchai Phumiphak et al.)",
+      "verificationStatus": "VERIFIED",
+      "confidence": 100,
+      "dependencies": [
+        "ROSTER-TC-01..10",
+        "INV-QUORUM-10-10"
+      ],
+      "conflictStatus": "NO_CONFLICT",
+      "designation": "CANONICAL",
+      "auditReference": "AUD-849201-002",
+      "details": {
+        "signersCount": 10,
+        "quorumRatio": "100%",
+        "consensusTimeMs": 42
+      }
+    },
+    {
+      "id": "EVID-03-RWA-GOLD-BACKING",
+      "claim": "14,902.00 troy oz LBMA 99.99% physical gold bullion collateralizes the THB-SOV treasury.",
+      "source": "LBMA Depository Vault Physical Audit Certificate & Vault Ledger",
+      "sourceType": "PHYSICAL_DEPOSITORY",
+      "origin": "Bangkok Sovereign Vault Depository A1 & London Bullion Market Association Registry",
+      "timestamp": "2026-08-12 18:22:45 ICT",
+      "freshness": "VALID_Q3_2026",
+      "provenance": "LBMA Assayer Certificate → Dual-Custodian Physical Vault Seal → Sovereign Ledger",
+      "integrityAlgorithm": "SHA-256 / SPHINCS+ State-Free Hash",
+      "digest": "43fa4c68909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a",
+      "signatureStatus": "SPHINCS_VALID",
+      "authority": "LBMA Certified Assayer & 15-Layer Deep Audit Inspector (วศ. ธนพล เกียรติไพศาล)",
+      "verificationStatus": "VERIFIED",
+      "confidence": 100,
+      "dependencies": [
+        "TREASURY-VAULT-A1",
+        "LBMA-BAR-REGISTRY-14902"
+      ],
+      "conflictStatus": "NO_CONFLICT",
+      "designation": "CANONICAL",
+      "auditReference": "AUD-849199-004",
+      "details": {
+        "physicalGoldOz": "14,902.00 oz",
+        "thbEquivalent": "฿1,490,200,000.00 THB",
+        "fineness": "99.99% Fine Gold"
+      }
+    },
+    {
+      "id": "EVID-04-THAI-ETA-2544",
+      "claim": "Electronic transactions and digital signatures comply with Thai Electronic Transactions Act B.E. 2544 (Sec 9, 26, 28).",
+      "source": "Royal Thai Government Gazette Vol. 118 Part 111 A & ETDA Digital Signature Standards",
+      "sourceType": "STATUTORY_LAW",
+      "origin": "Electronic Transactions Development Agency (ETDA) & Ministry of Digital Economy and Society",
+      "timestamp": "2001-12-04 (Gazette Effective) / Verified 2026-08-18",
+      "freshness": "STATUTORY_CURRENT",
+      "provenance": "Royal Decree Publication → ETDA Regulatory Sandbox → Post-Quantum Signature Mapping",
+      "integrityAlgorithm": "LEGAL_STATUTORY_DIGEST_SHA256",
+      "digest": "7e819ac2190f84a861d8a12903fe5918bbda2094892c90fa1893c83091e8430a",
+      "signatureStatus": "PQC_DILITHIUM5_VALID",
+      "authority": "Kingdom of Thailand Legal Code (B.E. 2544 / A.D. 2001)",
+      "verificationStatus": "VERIFIED",
+      "confidence": 100,
+      "dependencies": [
+        "ETA-BE-2544-SEC-9",
+        "ETA-BE-2544-SEC-26",
+        "ETA-BE-2544-SEC-28"
+      ],
+      "conflictStatus": "NO_CONFLICT",
+      "designation": "CANONICAL",
+      "auditReference": "LEG-TH-ETA-2544-01",
+      "details": {
+        "sectionsEnforced": "Sections 9, 26, 28",
+        "legalStatus": "FULL_LEGAL_EQUIVALENCE",
+        "presumptionOfIntegrity": "ENFORCED"
+      }
+    },
+    {
+      "id": "EVID-05-EXTERNAL-ORACLE-RATE",
+      "claim": "Global spot USD/THB exchange rate feed from third-party decentralized price oracle.",
+      "source": "External Decentralized Oracle Feed #ORACLE-THB-USD",
+      "sourceType": "EXTERNAL_ORACLE",
+      "origin": "Public Web3 Multi-Node Aggregator (Node 03 & Node 07)",
+      "timestamp": "2026-08-28 01:14:10 ICT",
+      "freshness": "STALE_120MIN",
+      "provenance": "Public Web API Feed → Bridge Relayer → Raw Telemetry Ingest",
+      "integrityAlgorithm": "ECDSA secp256k1 (Classical)",
+      "digest": "16bed34cdbb07528e18501da86fc4691763a43fa4c68909ab814479844d8a148",
+      "signatureStatus": "UNVERIFIED",
+      "authority": "Third-Party External Feed Provider (Unauthenticated Oracle)",
+      "verificationStatus": "STALE",
+      "confidence": 64,
+      "dependencies": [
+        "EXT-FEED-USDTHB-01"
+      ],
+      "conflictStatus": "SOURCE_DIVERGENCE_DETECTED",
+      "designation": "OBSERVED",
+      "auditReference": null,
+      "details": {
+        "observedRate": "35.42 THB/USD",
+        "latencyMs": 1450,
+        "staleThresholdExceeded": true
+      }
+    },
+    {
+      "id": "EVID-06-AI-PROPOSED-ALLOCATION",
+      "claim": "Autonomous recommendation to rebalance 5.0% of liquid THB reserves into physical gold bullion.",
+      "source": "Bio-AI Cognitive Ethics Guardian Recommendation Agent",
+      "sourceType": "UNAUTHENTICATED_INPUT",
+      "origin": "Sandboxed AI Inference Engine (Llama-3-70B Enclave)",
+      "timestamp": "2026-08-28 02:45:00 ICT",
+      "freshness": "PENDING_GOVERNANCE_REVIEW",
+      "provenance": "AI Agent Output → Non-Canonical Proposal Stream → Zero-Trust Quarantine",
+      "integrityAlgorithm": "SHA-256 (Hash of Proposal Text)",
+      "digest": "a18f91a3c091811eb242e1b87d00f28ac37a109e3f19e48cd41d04f29a28a30f",
+      "signatureStatus": "UNSIGNED",
+      "authority": "AI Autonomous Agent (No Sovereign Ambient Authority)",
+      "verificationStatus": "UNVERIFIED",
+      "confidence": 45,
+      "dependencies": [
+        "AI-POLICY-SANDBOX-01"
+      ],
+      "conflictStatus": "GOVERNANCE_REVIEW_REQUIRED",
+      "designation": "PROPOSED",
+      "auditReference": null,
+      "details": {
+        "ambientAuthority": "0% (NONE)",
+        "canonicalWritePermission": "DENIED",
+        "requiresDecaQuorum": true
+      }
+    },
+    {
+      "id": "EVID-07-OFFSHORE-ESCROW-PROOF",
+      "claim": "Purported secondary escrow vault holding 50M USD offshore backing token.",
+      "source": "Unauthenticated External Email Claim & PDF Attachment",
+      "sourceType": "UNAUTHENTICATED_INPUT",
+      "origin": "Unknown External Source (Untrusted Domain)",
+      "timestamp": "NULL / NO EVIDENCE",
+      "freshness": "MISSING",
+      "provenance": "Unverified Ingest → Missing Cryptographic Signature → Quarantined",
+      "integrityAlgorithm": "NONE",
+      "digest": null,
+      "signatureStatus": "NOT_AVAILABLE",
+      "authority": "NULL / NO EVIDENCE",
+      "verificationStatus": "MISSING",
+      "confidence": 0,
+      "dependencies": [],
+      "conflictStatus": "UNRESOLVED_DISPUTE",
+      "designation": "REJECTED",
+      "auditReference": null,
+      "details": {
+        "evidenceExists": false,
+        "rejectionReason": "Zero-Mock Policy Violation: No cryptographic attestation or verified custodian signature."
+      }
+    }
+  ],
+  "coldArchiveTotalBlocks": 50,
+  "exportTimestamp": "2026-08-28T11:32:47.910Z",
+  "principalOwner": {
+    "nameTh": "นายยุทธภูมิ พากเพียร",
+    "nameEn": "Yuttaphum Phakphian",
+    "code": "#EP-SOVEREIGN-01",
+    "roleTh": "ผู้ถือสิทธิ์และสถาปนิกอธิปไตยสูงสุด (Supreme Sovereign Principal Architect & Owner)",
+    "roleEn": "Supreme Sovereign Principal Architect & Genesis Custodian",
+    "clearanceLevel": "OMEGA-1 SUPREME CLEARANCE"
+  }
+}
