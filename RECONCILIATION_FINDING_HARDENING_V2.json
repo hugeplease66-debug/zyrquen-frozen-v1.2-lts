@@ -1,0 +1,50 @@
+{
+  "event": "RECONCILIATION_FINDING",
+  "contract": "HARDENING_V2_RECONCILIATION_ASSURANCE",
+  "timestampIct": "2026-08-22 02:25:00 ICT",
+  "frozenBaseline": {
+    "merkleRoot": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+    "blockHeight": "#849202",
+    "canonicalSeals": 14902,
+    "ssotMutation": 0,
+    "status": "IMMUTABLE_READ_ONLY"
+  },
+  "reconciliationEvaluation": {
+    "merkleMatch": true,
+    "blockMatch": true,
+    "canonicalSeals": 14902,
+    "observedSeals": 14907,
+    "delta": "+5",
+    "sealMatch": false,
+    "result": "FAIL_CLOSED",
+    "quarantineState": "ACTIVE",
+    "autoReconcile": "BLOCKED",
+    "autoReseal": "BLOCKED"
+  },
+  "chainOfCustody": {
+    "sourceIdentity": "EPHEMERAL_OBSERVED_STREAM",
+    "timestamp": "2026-08-22 02:25:00 ICT",
+    "artifactDigest": "SHA256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+    "merkleAnchor": "909ab814...43fa4c68",
+    "blockBinding": "#849202",
+    "evidenceDigest": "UNBOUND_ORPHAN_EMISSIONS",
+    "provenance": "QUARANTINED",
+    "status": "BLOCKED"
+  },
+  "deterministicReplay": {
+    "inputEvidence": "SET_CANONICAL_P0_849202",
+    "replayEngine": "DETERMINISTIC_EVM_WASM_P0",
+    "outputDigest": "MATCH_CANONICAL",
+    "observedOutputDigest": "MISMATCH_OBSERVED_STREAM",
+    "status": "FAIL_CLOSED"
+  },
+  "promotionFirewall": {
+    "canonicalReconciliation": "FAIL (DRIFT +5)",
+    "artifactIntegrityLocal": "VERIFIED",
+    "artifactIntegrityDeployed": "PENDING",
+    "independentRuntimeEvidence": "NOT_EXECUTED",
+    "requiredCustodianSignatures": "4/10 (HELD)",
+    "governanceApproval": "10/10_INVARIANTS_PASSED",
+    "canonicalPromotion": "BLOCKED"
+  }
+}

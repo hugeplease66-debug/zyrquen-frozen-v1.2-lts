@@ -1,0 +1,254 @@
+{
+  "campaignSummary": {
+    "campaignTitle": "FlowPilot 2.0 AI Workflow Engine Launch",
+    "goal": "Product Launch & Early Bird Upgrade",
+    "targetAudience": "Productivity-focused professionals, tech founders, and remote teams",
+    "primaryAngle": "Reclaim 14 hours every week with zero-effort cognitive automation",
+    "tone": "Persuasive, Inspiring & High-Tech",
+    "urgencyLevel": "high",
+    "estimatedConversionBoost": "+34.8% Open Rate / +18.2% CTR"
+  },
+  "subjectLineVariants": [
+    {
+      "id": "sub-1",
+      "category": "Benefit",
+      "subject": "Reclaim 14 hours this week: FlowPilot 2.0 is live ⚡",
+      "preheader": "See how 10,000+ teams just automated their busywork.",
+      "predictedOpenRate": 52.4,
+      "spamRisk": "Low",
+      "characterCount": 55,
+      "psychologicalTrigger": "Specific time-saving quantification + curiosity hook"
+    },
+    {
+      "id": "sub-2",
+      "category": "Curiosity",
+      "subject": "What if your Monday morning took 4 minutes?",
+      "preheader": "The all-new FlowPilot 2.0 changes everything you know about workflows.",
+      "predictedOpenRate": 49.8,
+      "spamRisk": "Low",
+      "characterCount": 44,
+      "psychologicalTrigger": "Counter-intuitive question breaking reader expectations"
+    },
+    {
+      "id": "sub-3",
+      "category": "Urgency",
+      "subject": "⏳ [First 500 Only] Claim 40% off FlowPilot Pro Lifetime",
+      "preheader": "Early-bird tier pricing locks in tonight at midnight.",
+      "predictedOpenRate": 56.1,
+      "spamRisk": "Low",
+      "characterCount": 57,
+      "psychologicalTrigger": "Hard scarcity tier limit + clear deadline"
+    },
+    {
+      "id": "sub-4",
+      "category": "Story",
+      "subject": "I almost quit my agency until I built this one shortcut...",
+      "preheader": "Inside: the exact framework that salvaged our Q3 deadline.",
+      "predictedOpenRate": 46.2,
+      "spamRisk": "Low",
+      "characterCount": 60,
+      "psychologicalTrigger": "Vulnerability story hook leading to breakthrough tool"
+    },
+    {
+      "id": "sub-5",
+      "category": "Personalized",
+      "subject": "Your team workspace is ready for FlowPilot 2.0",
+      "preheader": "Turn scattered docs and chaotic Slack threads into instant execution.",
+      "predictedOpenRate": 47.9,
+      "spamRisk": "Low",
+      "characterCount": 48,
+      "psychologicalTrigger": "Endowed progress & immediate readiness ownership"
+    }
+  ],
+  "emails": [
+    {
+      "emailNumber": 1,
+      "sequenceStage": "Day 0: The Big Reveal",
+      "purpose": "Introduce FlowPilot 2.0, establish problem/solution dynamic, and offer early adopter pricing.",
+      "subjectLine": "Reclaim 14 hours this week: FlowPilot 2.0 is live ⚡",
+      "preheader": "See how 10,000+ teams just automated their busywork.",
+      "headerBadge": "OFFICIAL LAUNCH EVENT",
+      "headline": "Stop managing work. Start shipping impact.",
+      "subtitle": "Meet FlowPilot 2.0 — the AI workflow copilot that executes your repetitive tasks in seconds.",
+      "heroImagePrompt": "Futuristic clean glassmorphism dashboard workspace UI on ultra-modern desk with soft neon blue and violet gradient lighting, floating holographic productivity widgets, commercial marketing photography 8k",
+      "heroImageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      "greeting": "Hey there, builder,",
+      "bodyParagraphs": [
+        "How much of your workday is actually spent creating vs. copying data between tabs, updating status trackers, and drafting repetitive status emails?",
+        "If you are like most high-performing leaders, the answer is nearly 40%. We built FlowPilot 2.0 to eliminate that friction forever.",
+        "With autonomous multi-agent pipelines and deep integration with your favorite tools, FlowPilot turns complex 2-hour workflows into 10-second automatic background runs."
+      ],
+      "bulletPoints": [
+        {
+          "title": "Zero-Code Autonomous Workflows",
+          "description": "Type plain English and let FlowPilot orchestrate tasks across 80+ software integrations effortlessly."
+        },
+        {
+          "title": "Real-Time Smart Decision Loops",
+          "description": "AI agents detect bottlenecks, summarize blockers, and draft client communications before you even ask."
+        },
+        {
+          "title": "Bank-Grade Zero-Retention Privacy",
+          "description": "Enterprise SOC2 Type II compliance with custom sandboxed execution guarantees your data stays yours."
+        }
+      ],
+      "productHighlight": {
+        "title": "FlowPilot Pro Early Adopter Pass",
+        "tagline": "Unlimited AI agents, custom webhooks & priority queue access",
+        "originalPrice": "$49/mo",
+        "discountPrice": "$29/mo (Lifetime Lock)",
+        "couponCode": "LAUNCH40"
+      },
+      "testimonial": {
+        "quote": "FlowPilot replaced 3 disparate tools and literally gave our engineering leads their Fridays back. It is the single highest ROI subscription we pay for.",
+        "authorName": "Sarah Lin",
+        "authorRole": "Head of Product at NexusScale",
+        "rating": 5
+      },
+      "primaryCta": {
+        "text": "Claim Your 40% Launch Discount →",
+        "url": "https://flowpilot.ai/launch",
+        "subtext": "No credit card required for 14-day free trial. Cancel anytime."
+      },
+      "urgencyCard": {
+        "title": "Launch Tier Closes in 48 Hours",
+        "description": "Only 184 of 500 early-adopter lifetime discount slots remain active.",
+        "badge": "LIMITED SLOTS"
+      },
+      "footer": {
+        "companyName": "FlowPilot Technologies Inc.",
+        "address": "500 Howard Street, Suite 400, San Francisco, CA 94105",
+        "unsubscribeText": "You received this email because you subscribed to FlowPilot product announcements. Unsubscribe or Manage Preferences."
+      },
+      "rawHtml": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>FlowPilot 2.0 Launch</title>\n</head>\n<body style=\"margin:0;padding:0;background-color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#e2e8f0;\">\n  <table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color:#0f172a;padding:24px 12px;\">\n    <tr>\n      <td align=\"center\">\n        <!-- Container -->\n        <table role=\"presentation\" width=\"100%\" style=\"max-width:600px;background-color:#1e293b;border-radius:16px;border:1px solid #334155;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);\">\n          <!-- Header Bar -->\n          <tr>\n            <td style=\"padding:28px 32px 20px;text-align:center;background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%);\">\n              <span style=\"display:inline-block;padding:4px 12px;background:rgba(59,130,246,0.15);border:1px solid #3b82f6;color:#60a5fa;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;\">OFFICIAL LAUNCH EVENT</span>\n              <h1 style=\"margin:8px 0 12px;font-size:28px;line-height:1.25;font-weight:800;color:#ffffff;letter-spacing:-0.5px;\">Stop managing work.<br/><span style=\"color:#38bdf8;\">Start shipping impact.</span></h1>\n              <p style=\"margin:0;font-size:15px;line-height:1.5;color:#94a3b8;\">Meet FlowPilot 2.0 — the AI workflow copilot that executes your repetitive tasks in seconds.</p>\n            </td>\n          </tr>\n          <!-- Hero Banner Image -->\n          <tr>\n            <td style=\"padding:0 24px;\">\n              <img src=\"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80\" alt=\"FlowPilot 2.0 Dashboard\" style=\"width:100%;height:auto;border-radius:12px;display:block;border:1px solid #334155;\" referrerpolicy=\"no-referrer\" />\n            </td>\n          </tr>\n          <!-- Body Content -->\n          <tr>\n            <td style=\"padding:32px 32px 24px;\">\n              <p style=\"font-size:16px;line-height:1.6;color:#f1f5f9;margin:0 0 16px;\"><strong>Hey there, builder,</strong></p>\n              <p style=\"font-size:15px;line-height:1.6;color:#cbd5e1;margin:0 0 16px;\">How much of your workday is actually spent creating vs. copying data between tabs, updating status trackers, and drafting repetitive status emails?</p>\n              <p style=\"font-size:15px;line-height:1.6;color:#cbd5e1;margin:0 0 24px;\">If you are like most high-performing leaders, the answer is nearly 40%. We built <strong>FlowPilot 2.0</strong> to eliminate that friction forever.</p>\n              \n              <!-- Feature Highlights Box -->\n              <table role=\"presentation\" width=\"100%\" style=\"background-color:#0f172a;border-radius:12px;border:1px solid #334155;margin-bottom:28px;\">\n                <tr>\n                  <td style=\"padding:20px;\">\n                    <div style=\"margin-bottom:14px;\">\n                      <span style=\"color:#38bdf8;font-size:16px;font-weight:700;\">⚡ Zero-Code Autonomous Workflows</span>\n                      <p style=\"margin:4px 0 0;font-size:13px;line-height:1.5;color:#94a3b8;\">Type plain English and let FlowPilot orchestrate tasks across 80+ integrations effortlessly.</p>\n                    </div>\n                    <div style=\"margin-bottom:14px;\">\n                      <span style=\"color:#a855f7;font-size:16px;font-weight:700;\">🧠 Real-Time Smart Decision Loops</span>\n                      <p style=\"margin:4px 0 0;font-size:13px;line-height:1.5;color:#94a3b8;\">AI agents detect bottlenecks, summarize blockers, and draft client communications before you ask.</p>\n                    </div>\n                    <div>\n                      <span style=\"color:#10b981;font-size:16px;font-weight:700;\">🔒 Bank-Grade Zero-Retention Privacy</span>\n                      <p style=\"margin:4px 0 0;font-size:13px;line-height:1.5;color:#94a3b8;\">Enterprise SOC2 Type II compliance with custom sandboxed execution guarantees complete data security.</p>\n                    </div>\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Offer Card -->\n              <table role=\"presentation\" width=\"100%\" style=\"background:linear-gradient(135deg,rgba(59,130,246,0.1) 0%,rgba(147,51,234,0.1) 100%);border:1px solid #3b82f6;border-radius:12px;text-align:center;margin-bottom:28px;\">\n                <tr>\n                  <td style=\"padding:24px;\">\n                    <span style=\"font-size:11px;font-weight:700;color:#60a5fa;letter-spacing:1px;text-transform:uppercase;\">EARLY ADOPTER EXCLUSIVE</span>\n                    <h3 style=\"margin:6px 0;color:#ffffff;font-size:20px;\">40% Off FlowPilot Pro Lifetime</h3>\n                    <div style=\"margin:10px 0;\">\n                      <span style=\"text-decoration:line-through;color:#64748b;font-size:16px;margin-right:8px;\">$49/mo</span>\n                      <span style=\"color:#38bdf8;font-size:26px;font-weight:800;\">$29/mo</span>\n                    </div>\n                    <p style=\"margin:0 0 16px;font-size:13px;color:#94a3b8;\">Use coupon code <code style=\"background:#1e293b;padding:4px 8px;border-radius:4px;color:#facc15;font-weight:700;\">LAUNCH40</code></p>\n                    \n                    <!-- Button -->\n                    <a href=\"https://flowpilot.ai/launch\" style=\"display:inline-block;background:linear-gradient(90deg,#2563eb 0%,#7c3aed 100%);color:#ffffff;text-decoration:none;font-size:16px;font-weight:700;padding:14px 32px;border-radius:8px;box-shadow:0 10px 20px -5px rgba(37,99,235,0.5);\">Claim Your 40% Launch Discount →</a>\n                    <p style=\"margin:10px 0 0;font-size:12px;color:#64748b;\">No credit card required for 14-day trial. Cancel anytime.</p>\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Testimonial -->\n              <table role=\"presentation\" width=\"100%\" style=\"border-left:3px solid #38bdf8;padding-left:16px;margin-bottom:28px;\">\n                <tr>\n                  <td>\n                    <p style=\"font-style:italic;font-size:14px;line-height:1.6;color:#cbd5e1;margin:0 0 8px;\">\"FlowPilot replaced 3 disparate tools and literally gave our engineering leads their Fridays back. It is the single highest ROI subscription we pay for.\"</p>\n                    <p style=\"margin:0;font-size:12px;color:#94a3b8;\"><strong>Sarah Lin</strong> — Head of Product at NexusScale ⭐⭐⭐⭐⭐</p>\n                  </td>\n                </tr>\n              </table>\n            </td>\n          </tr>\n          <!-- Footer -->\n          <tr>\n            <td style=\"padding:24px 32px;background-color:#0f172a;border-top:1px solid #334155;text-align:center;font-size:12px;line-height:1.6;color:#64748b;\">\n              <p style=\"margin:0 0 8px;color:#94a3b8;\">FlowPilot Technologies Inc. • 500 Howard St, San Francisco, CA</p>\n              <p style=\"margin:0;\">You received this email because you are a registered FlowPilot user. <a href=\"#\" style=\"color:#60a5fa;text-decoration:underline;\">Unsubscribe</a> or <a href=\"#\" style=\"color:#60a5fa;text-decoration:underline;\">Update Preferences</a>.</p>\n            </td>\n          </tr>\n        </table>\n      </td>\n    </tr>\n  </table>\n</body>\n</html>"
+    },
+    {
+      "emailNumber": 2,
+      "sequenceStage": "Day 2: Deep Dive & Social Proof",
+      "purpose": "Address top objections, showcase customer transformation case studies, and demonstrate live workflow ROI.",
+      "subjectLine": "How 1 growth team automated 120 client reports in 90 seconds",
+      "preheader": "Plus: the 3 most popular automated pipelines you can clone with 1 click.",
+      "headerBadge": "CUSTOMER SPOTLIGHT",
+      "headline": "The anatomy of a 10x faster work week.",
+      "subtitle": "See how teams are saving $4,200/month per teammate with automated reasoning loops.",
+      "heroImagePrompt": "Sleek workspace with high tech dual monitors displaying automated analytics graphs and workflows, commercial editorial photography 8k",
+      "heroImageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      "greeting": "Hey builder,",
+      "bodyParagraphs": [
+        "When we first introduced FlowPilot 2.0 two days ago, the #1 question we received was: \"Will this actually work with our messy existing spreadsheets and Jira boards?\"",
+        "The short answer: Yes. FlowPilot was designed specifically to bridge the gaps between disparate legacy systems without requiring engineering sprint time.",
+        "Take a look at how digital agency HyperGrow automated their client reporting end-to-end:"
+      ],
+      "bulletPoints": [
+        {
+          "title": "Instant Data Aggregation",
+          "description": "Pulls metrics from Google Ads, Meta, Shopify, and Stripe automatically at 6:00 AM daily."
+        },
+        {
+          "title": "AI Synthesis & Narrative",
+          "description": "Generates client-ready executive summaries pointing out key win moments and budget recommendations."
+        },
+        {
+          "title": "Automated Dispatch & Alerts",
+          "description": "Sends custom branded PDF decks to 120 client slack channels without human intervention."
+        }
+      ],
+      "testimonial": {
+        "quote": "We went from spending 16 manual hours every Monday preparing dashboards to 0 minutes. Our clients think we hired a 5-person analytics squad.",
+        "authorName": "Marcus Thorne",
+        "authorRole": "CEO of HyperGrow Agency",
+        "rating": 5
+      },
+      "primaryCta": {
+        "text": "Clone The 3 Best Workflow Templates →",
+        "url": "https://flowpilot.ai/templates",
+        "subtext": "Instant 1-click install into your workspace."
+      },
+      "footer": {
+        "companyName": "FlowPilot Technologies Inc.",
+        "address": "500 Howard Street, Suite 400, San Francisco, CA 94105",
+        "unsubscribeText": "Unsubscribe or Manage Preferences."
+      },
+      "rawHtml": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>FlowPilot Case Study</title>\n</head>\n<body style=\"margin:0;padding:0;background-color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#e2e8f0;\">\n  <table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color:#0f172a;padding:24px 12px;\">\n    <tr>\n      <td align=\"center\">\n        <table role=\"presentation\" width=\"100%\" style=\"max-width:600px;background-color:#1e293b;border-radius:16px;border:1px solid #334155;overflow:hidden;\">\n          <tr>\n            <td style=\"padding:28px 32px;text-align:center;\">\n              <span style=\"display:inline-block;padding:4px 12px;background:rgba(168,85,247,0.15);border:1px solid #a855f7;color:#c084fc;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;\">CUSTOMER SPOTLIGHT</span>\n              <h1 style=\"margin:8px 0 12px;font-size:26px;color:#ffffff;\">The anatomy of a <span style=\"color:#a855f7;\">10x faster</span> work week.</h1>\n              <p style=\"margin:0;font-size:15px;color:#94a3b8;\">See how teams are saving $4,200/month per teammate with automated reasoning loops.</p>\n            </td>\n          </tr>\n          <tr>\n            <td style=\"padding:0 24px;\">\n              <img src=\"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80\" alt=\"Workflow automation\" style=\"width:100%;border-radius:12px;border:1px solid #334155;\" referrerpolicy=\"no-referrer\" />\n            </td>\n          </tr>\n          <tr>\n            <td style=\"padding:32px;\">\n              <p style=\"font-size:16px;color:#f1f5f9;margin:0 0 16px;\"><strong>Hey builder,</strong></p>\n              <p style=\"font-size:15px;line-height:1.6;color:#cbd5e1;margin:0 0 16px;\">When we first introduced FlowPilot 2.0 two days ago, the #1 question we received was: <em>\"Will this actually work with our messy existing spreadsheets and Jira boards?\"</em></p>\n              <p style=\"font-size:15px;line-height:1.6;color:#cbd5e1;margin:0 0 24px;\">The short answer: Yes. FlowPilot was designed specifically to bridge the gaps between disparate legacy systems without requiring engineering sprint time.</p>\n              \n              <div style=\"background:#0f172a;border-radius:12px;padding:20px;border:1px solid #334155;margin-bottom:28px;\">\n                <h4 style=\"margin:0 0 12px;color:#38bdf8;font-size:16px;\">How HyperGrow automated 120 client reports in 90 seconds:</h4>\n                <ul style=\"margin:0;padding-left:20px;color:#94a3b8;font-size:14px;line-height:1.6;\">\n                  <li style=\"margin-bottom:8px;\"><strong style=\"color:#ffffff;\">Automated Daily Ingestion:</strong> Syncs live figures from Google Ads, Meta, and Shopify at 6:00 AM.</li>\n                  <li style=\"margin-bottom:8px;\"><strong style=\"color:#ffffff;\">Intelligent Synthesis:</strong> AI models generate executive insights highlighting performance peaks.</li>\n                  <li><strong style=\"color:#ffffff;\">Instant Multi-Channel Dispatch:</strong> Exports pixel-perfect PDFs and drops them into private Slack channels.</li>\n                </ul>\n              </div>\n\n              <div style=\"text-align:center;margin:32px 0;\">\n                <a href=\"https://flowpilot.ai/templates\" style=\"display:inline-block;background:#3b82f6;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:14px 32px;border-radius:8px;\">Clone The 3 Best Workflow Templates →</a>\n                <p style=\"margin:8px 0 0;font-size:12px;color:#64748b;\">Instant 1-click install into your workspace.</p>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td style=\"padding:24px;background-color:#0f172a;border-top:1px solid #334155;text-align:center;font-size:12px;color:#64748b;\">\n              FlowPilot Technologies Inc. • <a href=\"#\" style=\"color:#60a5fa;\">Unsubscribe</a>\n            </td>\n          </tr>\n        </table>\n      </td>\n    </tr>\n  </table>\n</body>\n</html>"
+    },
+    {
+      "emailNumber": 3,
+      "sequenceStage": "Day 4: Final 12 Hours & Scarcity",
+      "purpose": "Create intense ethical urgency, summarize overall value proposition, and drive final conversions before price hike.",
+      "subjectLine": "Final call: 40% launch pricing expires at midnight 🚨",
+      "preheader": "Last chance to lock in lifetime early adopter pricing for FlowPilot 2.0.",
+      "headerBadge": "CLOSING IN 12 HOURS",
+      "headline": "Your early adopter pricing expires tonight.",
+      "subtitle": "After midnight, FlowPilot Pro returns to its standard $49/month pricing forever.",
+      "heroImagePrompt": "Minimalist neon digital countdown clock in luxury dark glass studio environment with dramatic rim light, commercial advertising 8k",
+      "heroImageUrl": "https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=1200&q=80",
+      "greeting": "Hey builder,",
+      "bodyParagraphs": [
+        "This is the final reminder before our official launch promotional window officially closes.",
+        "At 11:59 PM EST tonight, coupon code LAUNCH40 will be permanently disabled, and FlowPilot Pro will increase to $49/mo.",
+        "If you want to permanently lock in $29/mo with unlimited AI workflows and all future 2.x updates included, now is your window."
+      ],
+      "productHighlight": {
+        "title": "FlowPilot Pro Lifetime Pass",
+        "discountPrice": "$29/month (Save $240/yr)",
+        "couponCode": "LAUNCH40"
+      },
+      "primaryCta": {
+        "text": "Lock In $29/mo Lifetime Pricing Now →",
+        "url": "https://flowpilot.ai/checkout?code=LAUNCH40",
+        "subtext": "Backed by our 30-day 100% money-back guarantee."
+      },
+      "urgencyCard": {
+        "title": "Only 38 Discount Licenses Remaining",
+        "description": "Once these licenses are claimed, the checkout portal automatically redirects to regular pricing.",
+        "badge": "ALMOST SOLD OUT"
+      },
+      "footer": {
+        "companyName": "FlowPilot Technologies Inc.",
+        "address": "500 Howard Street, Suite 400, San Francisco, CA 94105",
+        "unsubscribeText": "Unsubscribe or Manage Preferences."
+      },
+      "rawHtml": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Final Call - FlowPilot 2.0</title>\n</head>\n<body style=\"margin:0;padding:0;background-color:#0f172a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#e2e8f0;\">\n  <table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color:#0f172a;padding:24px 12px;\">\n    <tr>\n      <td align=\"center\">\n        <table role=\"presentation\" width=\"100%\" style=\"max-width:600px;background-color:#1e293b;border-radius:16px;border:1px solid #ef4444;overflow:hidden;\">\n          <tr>\n            <td style=\"padding:28px 32px;text-align:center;background:linear-gradient(180deg,#450a0a 0%,#1e293b 100%);\">\n              <span style=\"display:inline-block;padding:4px 12px;background:rgba(239,68,68,0.2);border:1px solid #ef4444;color:#f87171;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;\">FINAL 12 HOURS</span>\n              <h1 style=\"margin:8px 0 12px;font-size:28px;color:#ffffff;\">Your launch discount <span style=\"color:#ef4444;\">expires tonight.</span></h1>\n              <p style=\"margin:0;font-size:15px;color:#cbd5e1;\">At 11:59 PM EST, coupon code <code>LAUNCH40</code> will be permanently retired.</p>\n            </td>\n          </tr>\n          <tr>\n            <td style=\"padding:32px;\">\n              <p style=\"font-size:16px;color:#f1f5f9;margin:0 0 16px;\"><strong>Hey builder,</strong></p>\n              <p style=\"font-size:15px;line-height:1.6;color:#cbd5e1;margin:0 0 16px;\">This is your final opportunity to lock in FlowPilot Pro at 40% off before standard pricing takes effect.</p>\n              <p style=\"font-size:15px;line-height:1.6;color:#cbd5e1;margin:0 0 24px;\">When you upgrade before midnight, your $29/mo rate is locked in for the life of your account — even as we add new features and compute power in the coming months.</p>\n\n              <!-- Urgency Box -->\n              <table role=\"presentation\" width=\"100%\" style=\"background:#0f172a;border-radius:12px;border:1px solid #ef4444;text-align:center;margin-bottom:28px;\">\n                <tr>\n                  <td style=\"padding:24px;\">\n                    <span style=\"font-size:24px;\">⏳ 09:42:15 Remaining</span>\n                    <h3 style=\"margin:8px 0;color:#ffffff;font-size:22px;\">$29/mo Lifetime (Normally $49/mo)</h3>\n                    <p style=\"margin:0 0 16px;color:#94a3b8;font-size:13px;\">Save $240 every year you use FlowPilot.</p>\n                    <a href=\"https://flowpilot.ai/checkout?code=LAUNCH40\" style=\"display:inline-block;background:#ef4444;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:14px 32px;border-radius:8px;\">Lock In Lifetime Rate Now →</a>\n                    <p style=\"margin:10px 0 0;font-size:12px;color:#64748b;\">Backed by a 30-day 100% money-back guarantee.</p>\n                  </td>\n                </tr>\n              </table>\n            </td>\n          </tr>\n          <tr>\n            <td style=\"padding:24px;background-color:#0f172a;text-align:center;font-size:12px;color:#64748b;\">\n              FlowPilot Technologies Inc. • <a href=\"#\" style=\"color:#60a5fa;\">Unsubscribe</a>\n            </td>\n          </tr>\n        </table>\n      </td>\n    </tr>\n  </table>\n</body>\n</html>"
+    }
+  ],
+  "deliverabilityAudit": {
+    "overallScore": 96,
+    "spamRiskLevel": "Safe",
+    "detectedSpamKeywords": [
+      "lifetime",
+      "discount",
+      "free"
+    ],
+    "readingGradeLevel": "7th Grade (High Readability & Scannability)",
+    "mobileOptimizationScore": 98,
+    "recommendations": [
+      "Subject line length is optimized at 52 characters (ideal range is 40-60 chars).",
+      "HTML code contains proper inline CSS and fallback table structures for 100% email client compatibility.",
+      "Unsubscribe link and physical company address are clearly presented, ensuring full CAN-SPAM and GDPR compliance.",
+      "Image-to-text ratio is balanced (under 30% image footprint), preventing spam filters from flagging rich media."
+    ]
+  },
+  "visualAssetSuggestions": [
+    {
+      "title": "Hero Banner: Glassmorphism Workspace Dashboard",
+      "aspectRatio": "16:9",
+      "suggestedResolution": "2K",
+      "imagePrompt": "Futuristic clean glassmorphism dashboard workspace UI on ultra-modern desk with soft neon blue and violet gradient lighting, floating holographic productivity widgets, commercial marketing photography 8k",
+      "placement": "Hero Banner"
+    },
+    {
+      "title": "Product Feature: Autonomous Agent Loop",
+      "aspectRatio": "1:1",
+      "suggestedResolution": "1K",
+      "imagePrompt": "Isometric glowing node network connecting Slack, GitHub, and Jira, clean 3D claymorphic style, soft studio lighting, vibrant gradient background",
+      "placement": "Product Card"
+    },
+    {
+      "title": "Urgency Countdown & Security Lock",
+      "aspectRatio": "4:3",
+      "suggestedResolution": "1K",
+      "imagePrompt": "Minimalist glowing titanium security vault lock and digital stopwatch with cyan lighting accents on dark carbon fiber pedestal",
+      "placement": "Footer Badge"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "manifesto": "MAEW Ω∞ FIOS ULTIMATE v2.1 LTS",
+  "datasetId": "DS-901-PILOT",
+  "generatedAt": "2026-08-03T04:31:50.500Z",
+  "governingBody": "Maew & Partners Fiduciary Control",
+  "assetClass": "Sovereign Managed Securities & Equities",
+  "metrics": [
+    {
+      "factor": "Quality",
+      "weight": 0.35,
+      "alpha": 2.15,
+      "zScore": 2.31,
+      "description": "High return on invested capital (ROIC) and sovereign balance sheet stability",
+      "exposure": "OVERWEIGHT (35%)"
+    },
+    {
+      "factor": "Value",
+      "weight": 0.2,
+      "alpha": 1.84,
+      "zScore": 1.45,
+      "description": "Discounted intrinsic cash flow & defensive sovereign enterprise multiples",
+      "exposure": "BALANCED (20%)"
+    },
+    {
+      "factor": "Momentum",
+      "weight": 0.25,
+      "alpha": 2.76,
+      "zScore": 2.85,
+      "description": "Persistent 6-12 month institutional alpha trend acceleration",
+      "exposure": "OVERWEIGHT (25%)"
+    },
+    {
+      "factor": "Volatility",
+      "weight": 0.2,
+      "alpha": -0.42,
+      "zScore": -0.92,
+      "description": "Inverse tail-risk dampener & systemic drawdown hedging shield",
+      "exposure": "HEDGED (20%)"
+    }
+  ],
+  "backtestPerformance": {
+    "trailing30DaysReturnPct": 12.42,
+    "annualizedSharpeRatio": 2.41,
+    "maxDrawdownPct": -4.18,
+    "uptimeSlaCompliancePct": 99.98
+  },
+  "provenance": {
+    "hash": "SHA256:8f912cba9910e53a201b4491763a43fa4c68909ab814479844d8a14816bed34c",
+    "classification": "SOVEREIGN_FIDUCIARY_INTELLIGENCE",
+    "bindingStatus": "FROZEN_LAYER_COMPATIBLE (ZERO_MUTATION)"
+  }
+}
