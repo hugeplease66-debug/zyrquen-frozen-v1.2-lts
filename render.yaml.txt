@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: zyrquen-chamber17-api
+    env: python
+    plan: free
+    region: singapore
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn ZYRQUEN_Audit_Trail_API_Chamber17:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: CANONICAL_BLOCK
+        value: "849202"
+      - key: SYSTEM_STATUS
+        value: LOCKED_FROZEN_v1.2_LTS
+      - key: SSOT_DELTA
+        value: "Δ0 - Zero Drift 0.00%"
