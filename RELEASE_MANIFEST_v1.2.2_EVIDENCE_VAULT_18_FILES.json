@@ -1,0 +1,28 @@
+{
+  "version": "v1.2.2 EVIDENCE VAULT 18 FILES",
+  "block": 849202,
+  "merkle_root": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+  "seals": 14902,
+  "files": [
+    "RELEASE_MANIFEST.json",
+    "RELEASE_MANIFEST_EVIDENCE_BOUND_v1.2.1.json",
+    "ZYRQUEN_40_PHASES_REPORT.json",
+    "ZYRQUEN_EVIDENCE_BOUND_CLASSIFICATION_v1.2.json",
+    "ZYRQUEN_G11_INVARIANT_AUDIT_10_LAWS.json",
+    "ZYRQUEN_SELF_AUDIT_ENGINE_v1.2.js",
+    "ZYRQUEN_SELF_AUDIT_REPORT_WITH_HSM_ARCHIVE.json",
+    "ZYRQUEN_SOVEREIGN_KERNEL_INTEGRITY_VS_TRUTH_SPEC_v1.2.md",
+    "index.html",
+    "zyrquen-certificate-validation-results.json",
+    "zyrquen-chain-of-custody.json",
+    "zyrquen-etda-compliance-guide.pdf",
+    "zyrquen-g11-attack-simulation-report.pdf",
+    "zyrquen-integrity-audit-results.json",
+    "zyrquen-sovereign-court-admissible-report.pdf",
+    "zyrquen-sovereign-master-ledger-v2.json",
+    "zyrquen_sovereign_certificate_seal.png",
+    "zyrquen_sovereign_certificate_seal.webp"
+  ],
+  "total_files": 18,
+  "vault": "zyrquen-complete-sovereign-evidence-vault.zip"
+}
