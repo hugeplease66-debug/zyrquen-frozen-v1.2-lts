@@ -1,0 +1,158 @@
+{
+  "archiveId": "ARC-SOV-MERKLE-1787852775841",
+  "merkleRoot": "0x5a13396c129c611f...[REDACTED]",
+  "canonicalTimestamp": "2026-08-27T17:46:15.840Z",
+  "consensusState": "10/10 REAL_HSM CONSENSUS RATIFIED",
+  "sovereignDecree": {
+    "decreeCode": "DOC-SOV-HSM-1010-2026",
+    "systemStatus": "FROZEN v1.2 LTS (Active & Fully Operational)",
+    "totalNodes": 10,
+    "requiredQuorum": 8,
+    "achievedQuorum": 10,
+    "quorumRule": "8 ใน 10 โหนด (8/10 Consensus Required) + Master Key Override by Supreme Architect"
+  },
+  "totalMembers": 10,
+  "verifiedHsmCount": 10,
+  "totalQuorumWeight": 10,
+  "canonicalSealsFrozen": 14902,
+  "leaves_public": [
+    {
+      "slotId": 1,
+      "councilCode": "TC-01",
+      "clearanceLevel": "OMEGA-1 SUPREME CLEARANCE",
+      "hardwareEnclave": "NitroKey HSM-PQC-01 [MODEL REDACTED]",
+      "fipsCertification": "FIPS 140-3 Level 4 Secure Element",
+      "pqcAlgorithm": "CRYSTALS-Dilithium-5 (ML-DSA-87)",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:5a133...[REDACTED]"
+    },
+    {
+      "slotId": 2,
+      "councilCode": "TC-02",
+      "clearanceLevel": "LEVEL 25 SOVEREIGN GOVERNOR",
+      "hardwareEnclave": "YubiKey 5C FIPS [MODEL REDACTED]",
+      "fipsCertification": "FIPS 140-2 Overall Level 3",
+      "pqcAlgorithm": "FALCON-1024 (NIST Round 3)",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:909ab...[REDACTED]"
+    },
+    {
+      "slotId": 3,
+      "councilCode": "TC-03",
+      "clearanceLevel": "LEVEL 22 CIPHER CUSTODIAN",
+      "hardwareEnclave": "Trezor Safe 5 PQC Enclave [MODEL REDACTED]",
+      "fipsCertification": "Common Criteria EAL6+ Certified",
+      "pqcAlgorithm": "CRYSTALS-Dilithium-5 / Kyber-1024",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:7528e...[REDACTED]"
+    },
+    {
+      "slotId": 4,
+      "councilCode": "TC-04",
+      "clearanceLevel": "LEVEL 20 SRE OVERSEER",
+      "hardwareEnclave": "Ledger Flex Secure Enclave [MODEL REDACTED]",
+      "fipsCertification": "Common Criteria EAL6+ Certified",
+      "pqcAlgorithm": "SPHINCS+ PQC (State-Free Hash Signature)",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:43fa4...[REDACTED]"
+    },
+    {
+      "slotId": 5,
+      "councilCode": "TC-05",
+      "clearanceLevel": "LEVEL 20 TOPOLOGY MASTER",
+      "hardwareEnclave": "NitroKey HSM-PQC-05 [MODEL REDACTED]",
+      "fipsCertification": "FIPS 140-3 Level 3 Hardware",
+      "pqcAlgorithm": "CRYSTALS-Dilithium-5 (ML-DSA-87)",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:16bed...[REDACTED]"
+    },
+    {
+      "slotId": 6,
+      "councilCode": "TC-06",
+      "clearanceLevel": "LEVEL 18 BIO-AI CUSTODIAN",
+      "hardwareEnclave": "YubiKey 5C FIPS PIV-06 [MODEL REDACTED]",
+      "fipsCertification": "FIPS 140-2 Level 3 (PIV Slot 9A)",
+      "pqcAlgorithm": "FALCON-1024 (NIST Round 3)",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:86fc4...[REDACTED]"
+    },
+    {
+      "slotId": 7,
+      "councilCode": "TC-07",
+      "clearanceLevel": "LEVEL 18 WARP CHIEF",
+      "hardwareEnclave": "Trezor Safe 5 PQC-07 [MODEL REDACTED]",
+      "fipsCertification": "Common Criteria EAL6+ Certified",
+      "pqcAlgorithm": "CRYSTALS-Dilithium-5 (ML-DSA-87)",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:a18f9...[REDACTED]"
+    },
+    {
+      "slotId": 8,
+      "councilCode": "TC-08",
+      "clearanceLevel": "LEVEL 18 FORENSIC AUDITOR",
+      "hardwareEnclave": "Ledger Stax Enclave-08 [MODEL REDACTED]",
+      "fipsCertification": "Common Criteria EAL6+ Secure Chip",
+      "pqcAlgorithm": "SPHINCS+ PQC (State-Free Hash Signature)",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:b242e...[REDACTED]"
+    },
+    {
+      "slotId": 9,
+      "councilCode": "TC-09",
+      "clearanceLevel": "LEVEL 16 RESILIENCE MASTER",
+      "hardwareEnclave": "NitroKey HSM-PQC-09 [MODEL REDACTED]",
+      "fipsCertification": "FIPS 140-3 Level 3 Hardware",
+      "pqcAlgorithm": "CRYSTALS-Dilithium-5 (ML-DSA-87)",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:c37a1...[REDACTED]"
+    },
+    {
+      "slotId": 10,
+      "councilCode": "TC-10",
+      "clearanceLevel": "LEVEL 16 KNOWLEDGE STEWARD",
+      "hardwareEnclave": "Custom Hardware HSM-10 [MODEL REDACTED]",
+      "fipsCertification": "Hardware Security Module Level 3",
+      "pqcAlgorithm": "FALCON-1024 (NIST Round 3)",
+      "verificationStatus": "REAL_HSM_SIGNED",
+      "keyFingerprint": "SHA256:d41d0...[REDACTED]"
+    }
+  ],
+  "consensusLedger_public": [
+    {
+      "id": "PROP-SOV-2026-001",
+      "titleEn": "Enactment of Frozen v1.2 LTS Architectural Zero-Mutation Invariant",
+      "status": "RATIFIED_IMMUTABLE",
+      "votesFor": 10,
+      "quorumRequired": 8
+    },
+    {
+      "id": "PROP-SOV-2026-002",
+      "titleEn": "Sub-Kelvin Cryo-Bus Route Optimization & Latency Clamp (<=0.20ms)",
+      "status": "EXECUTED",
+      "votesFor": 10,
+      "quorumRequired": 8
+    },
+    {
+      "id": "PROP-SOV-2026-003",
+      "titleEn": "Forensic Quarantine Ring Flush & Quantum Entropy Pool Re-seeding",
+      "status": "EXECUTED",
+      "votesFor": 10,
+      "quorumRequired": 8
+    },
+    {
+      "id": "PROP-SOV-2026-004",
+      "titleEn": "FIOS Multi-Dimensional RWA Liquidity Vault Sovereign Bridge Enactment",
+      "status": "EXECUTED",
+      "votesFor": 10,
+      "quorumRequired": 8
+    },
+    {
+      "id": "PROP-SOV-2026-005",
+      "titleEn": "Post-Quantum CRYSTALS-Dilithium-5 Parameter Escalation (Round 4 Mode)",
+      "status": "RATIFIED_10_10",
+      "votesFor": 10,
+      "quorumRequired": 8
+    }
+  ],
+  "note": "PUBLIC REDACTED VERSION - Full cryptoSignature, leafHash, full fingerprints removed. For GitHub public repo only. Full version kept offline for ETDA submission."
+}
