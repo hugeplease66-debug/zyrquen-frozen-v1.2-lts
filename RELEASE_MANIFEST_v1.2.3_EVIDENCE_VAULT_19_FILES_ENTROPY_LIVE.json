@@ -1,0 +1,68 @@
+{
+  "version": "v1.2.3 LTS EVIDENCE VAULT 19 FILES - ENTROPY TELEMETRY LIVE",
+  "engine": "v4.16",
+  "block": 849202,
+  "blocks": [
+    "#849202",
+    "#849203",
+    "#40202"
+  ],
+  "seals": 14902,
+  "raw_observed": 14982,
+  "quarantined": 80,
+  "merkle_root": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+  "sha256_digest": "e28f89b26b... 849202_LOCKED",
+  "ledger_signature": "SIG_FIOS_GAS_EXPENSE_INTEGRITY_DILITHIUMS_E28F89B28B",
+  "sovereign_principal": "นายยุทธภูมิ พากเพียร #EP-SOVEREIGN-01",
+  "sovereign_level": "OMEGA-1",
+  "boundary": "Ω601-Ω1000 Strict",
+  "quorum": "10/10 REAL_HSM FIPS 140-3 L4",
+  "cert": "ZQ-GOLD-DEP-849202-3908",
+  "ssoT_delta": "0.00%",
+  "mutation_authority": 0,
+  "pdpa": "COMPLIANT",
+  "etda": "VERIFIED ACTIVE Sec 9,26,28",
+  "pqc": [
+    "FIPS 203 ML-KEM-1024",
+    "FIPS 204 Dilithium-5 ML-DSA-87",
+    "FIPS 205 SLH-DSA SPHINCS+"
+  ],
+  "telemetry": {
+    "qops": 851.9,
+    "coherence": 99.992,
+    "cryo_mK": 14.98,
+    "storage_EiB": 851.9,
+    "entropy_baseline_kbps": 11264,
+    "entropy_current_kbps": 11233,
+    "entropy_max_kbps": 14380,
+    "entropy_stability": 98.2
+  },
+  "live_url": "https://hugeplease66-debug.github.io/",
+  "verdict": "APPROVED_SECURED COURT ADMISSIBLE READY 100% GREEN - ENTROPY LIVE",
+  "files": [
+    "RELEASE_MANIFEST.json",
+    "RELEASE_MANIFEST_EVIDENCE_BOUND_v1.2.1.json",
+    "ZYRQUEN_40_PHASES_REPORT.json",
+    "ZYRQUEN_ACTIVE_ENTROPY_RATE_TIME_SERIES_2026-09-02.json",
+    "ZYRQUEN_EVIDENCE_BOUND_CLASSIFICATION_v1.2.json",
+    "ZYRQUEN_G11_INVARIANT_AUDIT_10_LAWS.json",
+    "ZYRQUEN_SELF_AUDIT_ENGINE_v1.2.js",
+    "ZYRQUEN_SELF_AUDIT_REPORT_WITH_HSM_ARCHIVE.json",
+    "ZYRQUEN_SOVEREIGN_KERNEL_INTEGRITY_VS_TRUTH_SPEC_v1.2.md",
+    "index.html",
+    "zyrquen-certificate-validation-results.json",
+    "zyrquen-chain-of-custody.json",
+    "zyrquen-etda-compliance-guide.pdf",
+    "zyrquen-g11-attack-simulation-report.pdf",
+    "zyrquen-integrity-audit-results.json",
+    "zyrquen-sovereign-court-admissible-report.pdf",
+    "zyrquen-sovereign-master-ledger-v2.json",
+    "zyrquen_sovereign_certificate_seal.png",
+    "zyrquen_sovereign_certificate_seal.webp"
+  ],
+  "total_files": 19,
+  "added": [
+    "ZYRQUEN_ACTIVE_ENTROPY_RATE_TIME_SERIES_2026-09-02.json"
+  ],
+  "note": "FROZEN 5 files remain untouched - this is extension plane v1.2.3 with active entropy telemetry"
+}

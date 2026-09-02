@@ -1,0 +1,1628 @@
+{
+  "reportType": "ZYRQUEN_ACTIVE_ENTROPY_RATE_TIME_SERIES",
+  "canonicalEntropyAnchorHash": "0x3319203849102834019283401928340192834019283401928340192834019283",
+  "fipsCertification": "NIST FIPS 140-3 Level 4 physical security & Common Criteria EAL6+",
+  "timestampUtc": "Wed, 02 Sep 2026 03:58:11 GMT",
+  "timeRangeMinutes": 60,
+  "baselineKBps": 11264,
+  "statistics": {
+    "current": 11233,
+    "avg": 11630,
+    "max": 14380,
+    "min": 10739,
+    "stdDev": 1012,
+    "stabilityIndex": 98.2,
+    "peakCount": 3,
+    "peakPoint": {
+      "minute": 720,
+      "timestamp": "2026-09-01T16:56:21.957Z",
+      "timeLabel": "23:56",
+      "entropyRateKBps": 14380,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": true,
+      "peakLabel": "12:00 Midday Quantum TRNG Reseed",
+      "surgeFactorPct": 28,
+      "stabilityScorePct": 98.69,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2615
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1307
+        }
+      ]
+    }
+  },
+  "readingsCount": 24,
+  "readings": [
+    {
+      "minute": 0,
+      "timestamp": "2026-09-01T04:56:21.957Z",
+      "timeLabel": "11:56",
+      "entropyRateKBps": 11340,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.77,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2062
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1031
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1031
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1031
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1031
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1031
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1031
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1031
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1031
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1031
+        }
+      ]
+    },
+    {
+      "minute": 60,
+      "timestamp": "2026-09-01T05:56:21.957Z",
+      "timeLabel": "12:56",
+      "entropyRateKBps": 11332,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.78,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2060
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1030
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1030
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1030
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1030
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1030
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1030
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1030
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1030
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1030
+        }
+      ]
+    },
+    {
+      "minute": 120,
+      "timestamp": "2026-09-01T06:56:21.957Z",
+      "timeLabel": "13:56",
+      "entropyRateKBps": 11538,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.7,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2098
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1049
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1049
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1049
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1049
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1049
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1049
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1049
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1049
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1049
+        }
+      ]
+    },
+    {
+      "minute": 180,
+      "timestamp": "2026-09-01T07:56:21.957Z",
+      "timeLabel": "14:56",
+      "entropyRateKBps": 11599,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.68,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2109
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1054
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1054
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1054
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1054
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1054
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1054
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1054
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1054
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1054
+        }
+      ]
+    },
+    {
+      "minute": 240,
+      "timestamp": "2026-09-01T08:56:21.957Z",
+      "timeLabel": "15:56",
+      "entropyRateKBps": 14334,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": true,
+      "peakLabel": "04:00 Lattice Dilithium Quorum Rekey",
+      "surgeFactorPct": 23.1,
+      "stabilityScorePct": 98.71,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2606
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1303
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1303
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1303
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1303
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1303
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1303
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1303
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1303
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1303
+        }
+      ]
+    },
+    {
+      "minute": 300,
+      "timestamp": "2026-09-01T09:56:21.957Z",
+      "timeLabel": "16:56",
+      "entropyRateKBps": 11730,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.63,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2133
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1066
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1066
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1066
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1066
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1066
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1066
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1066
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1066
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1066
+        }
+      ]
+    },
+    {
+      "minute": 360,
+      "timestamp": "2026-09-01T10:56:21.957Z",
+      "timeLabel": "17:56",
+      "entropyRateKBps": 11734,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.63,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2133
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1067
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1067
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1067
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1067
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1067
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1067
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1067
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1067
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1067
+        }
+      ]
+    },
+    {
+      "minute": 420,
+      "timestamp": "2026-09-01T11:56:21.957Z",
+      "timeLabel": "18:56",
+      "entropyRateKBps": 11791,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.61,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2144
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1072
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1072
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1072
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1072
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1072
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1072
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1072
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1072
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1072
+        }
+      ]
+    },
+    {
+      "minute": 480,
+      "timestamp": "2026-09-01T12:56:21.957Z",
+      "timeLabel": "19:56",
+      "entropyRateKBps": 11666,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.66,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2121
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1061
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1061
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1061
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1061
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1061
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1061
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1061
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1061
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1061
+        }
+      ]
+    },
+    {
+      "minute": 540,
+      "timestamp": "2026-09-01T13:56:21.957Z",
+      "timeLabel": "20:56",
+      "entropyRateKBps": 11530,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.71,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2096
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1048
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1048
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1048
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1048
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1048
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1048
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1048
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1048
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1048
+        }
+      ]
+    },
+    {
+      "minute": 600,
+      "timestamp": "2026-09-01T14:56:21.957Z",
+      "timeLabel": "21:56",
+      "entropyRateKBps": 11434,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.74,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2079
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1039
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1039
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1039
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1039
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1039
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1039
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1039
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1039
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1039
+        }
+      ]
+    },
+    {
+      "minute": 660,
+      "timestamp": "2026-09-01T15:56:21.957Z",
+      "timeLabel": "22:56",
+      "entropyRateKBps": 11467,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.73,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2085
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1042
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1042
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1042
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1042
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1042
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1042
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1042
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1042
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1042
+        }
+      ]
+    },
+    {
+      "minute": 720,
+      "timestamp": "2026-09-01T16:56:21.957Z",
+      "timeLabel": "23:56",
+      "entropyRateKBps": 14380,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": true,
+      "peakLabel": "12:00 Midday Quantum TRNG Reseed",
+      "surgeFactorPct": 28,
+      "stabilityScorePct": 98.69,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2615
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1307
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1307
+        }
+      ]
+    },
+    {
+      "minute": 780,
+      "timestamp": "2026-09-01T17:56:21.957Z",
+      "timeLabel": "00:56",
+      "entropyRateKBps": 11122,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.75,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2022
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1011
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1011
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1011
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1011
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1011
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1011
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1011
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1011
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1011
+        }
+      ]
+    },
+    {
+      "minute": 840,
+      "timestamp": "2026-09-01T18:56:21.957Z",
+      "timeLabel": "01:56",
+      "entropyRateKBps": 11069,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.73,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2013
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1006
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1006
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1006
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1006
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1006
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1006
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1006
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1006
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1006
+        }
+      ]
+    },
+    {
+      "minute": 900,
+      "timestamp": "2026-09-01T19:56:21.957Z",
+      "timeLabel": "02:56",
+      "entropyRateKBps": 10961,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.69,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 1993
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 996
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 996
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 996
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 996
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 996
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 996
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 996
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 996
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 996
+        }
+      ]
+    },
+    {
+      "minute": 960,
+      "timestamp": "2026-09-01T20:56:21.957Z",
+      "timeLabel": "03:56",
+      "entropyRateKBps": 10824,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.64,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 1968
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 984
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 984
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 984
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 984
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 984
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 984
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 984
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 984
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 984
+        }
+      ]
+    },
+    {
+      "minute": 1020,
+      "timestamp": "2026-09-01T21:56:21.957Z",
+      "timeLabel": "04:56",
+      "entropyRateKBps": 10739,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.61,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 1953
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 976
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 976
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 976
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 976
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 976
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 976
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 976
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 976
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 976
+        }
+      ]
+    },
+    {
+      "minute": 1080,
+      "timestamp": "2026-09-01T22:56:21.957Z",
+      "timeLabel": "05:56",
+      "entropyRateKBps": 10756,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.62,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 1956
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 978
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 978
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 978
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 978
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 978
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 978
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 978
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 978
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 978
+        }
+      ]
+    },
+    {
+      "minute": 1140,
+      "timestamp": "2026-09-01T23:56:21.957Z",
+      "timeLabel": "06:56",
+      "entropyRateKBps": 13765,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": true,
+      "peakLabel": "19:00 Cross-Border Sovereign Sync",
+      "surgeFactorPct": 25.7,
+      "stabilityScorePct": 98.91,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2503
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1251
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1251
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1251
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1251
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1251
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1251
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1251
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1251
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1251
+        }
+      ]
+    },
+    {
+      "minute": 1200,
+      "timestamp": "2026-09-02T00:56:21.957Z",
+      "timeLabel": "07:56",
+      "entropyRateKBps": 10878,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.66,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 1978
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 989
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 989
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 989
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 989
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 989
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 989
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 989
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 989
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 989
+        }
+      ]
+    },
+    {
+      "minute": 1260,
+      "timestamp": "2026-09-02T01:56:21.957Z",
+      "timeLabel": "08:56",
+      "entropyRateKBps": 10966,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.69,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 1994
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 997
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 997
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 997
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 997
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 997
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 997
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 997
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 997
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 997
+        }
+      ]
+    },
+    {
+      "minute": 1320,
+      "timestamp": "2026-09-02T02:56:21.957Z",
+      "timeLabel": "09:56",
+      "entropyRateKBps": 11007,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.71,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2001
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1001
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1001
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1001
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1001
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1001
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1001
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1001
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1001
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1001
+        }
+      ]
+    },
+    {
+      "minute": 1380,
+      "timestamp": "2026-09-02T03:56:21.957Z",
+      "timeLabel": "10:56",
+      "entropyRateKBps": 11168,
+      "baselineKBps": 11264,
+      "upperStdKBps": 11784,
+      "lowerStdKBps": 10744,
+      "isPeak": false,
+      "stabilityScorePct": 99.77,
+      "activeEnclavesCount": 10,
+      "nodeContributions": [
+        {
+          "slotId": 1,
+          "code": "TC-01",
+          "rateKBps": 2031
+        },
+        {
+          "slotId": 2,
+          "code": "TC-02",
+          "rateKBps": 1015
+        },
+        {
+          "slotId": 3,
+          "code": "TC-03",
+          "rateKBps": 1015
+        },
+        {
+          "slotId": 4,
+          "code": "TC-04",
+          "rateKBps": 1015
+        },
+        {
+          "slotId": 5,
+          "code": "TC-05",
+          "rateKBps": 1015
+        },
+        {
+          "slotId": 6,
+          "code": "TC-06",
+          "rateKBps": 1015
+        },
+        {
+          "slotId": 7,
+          "code": "TC-07",
+          "rateKBps": 1015
+        },
+        {
+          "slotId": 8,
+          "code": "TC-08",
+          "rateKBps": 1015
+        },
+        {
+          "slotId": 9,
+          "code": "TC-09",
+          "rateKBps": 1015
+        },
+        {
+          "slotId": 10,
+          "code": "TC-10",
+          "rateKBps": 1015
+        }
+      ]
+    }
+  ]
+}
