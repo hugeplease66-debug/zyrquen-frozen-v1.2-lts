@@ -1,0 +1,23 @@
+#!/bin/bash
+find src/components -type f -name "*.tsx" | while read -r file; do
+  sed -i 's|bg-\\[#0b0e1a\\]/75 border border-white/8|bg-gradient-to-br from-[#070914]/90 via-[#0b0e1e]/80 to-[#070914]/90 border border-cyan-500/20 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.1)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/85 border border-white/8|bg-gradient-to-br from-[#070914]/95 via-[#0b0e1e]/90 to-[#070914]/95 border border-cyan-500/20 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.15)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/85 border border-white/10|bg-gradient-to-br from-[#070914]/95 via-[#0b0e1e]/90 to-[#070914]/95 border border-cyan-500/20 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.15)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/70 border border-white/8|bg-gradient-to-br from-[#070914]/90 via-[#0b0e1e]/80 to-[#070914]/90 border border-cyan-500/20 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.1)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/80 border border-white/8|bg-gradient-to-br from-[#070914]/90 via-[#0b0e1e]/80 to-[#070914]/90 border border-cyan-500/20 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.1)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/80 border border-white/10|bg-gradient-to-br from-[#070914]/90 via-[#0b0e1e]/80 to-[#070914]/90 border border-cyan-500/20 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.1)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\] border border-cyan-500/40|bg-gradient-to-br from-[#070914]/95 via-[#0b0e1e]/90 to-[#070914]/95 border border-cyan-500/40 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.2)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\] border-2 border-cyan-500/40|bg-gradient-to-br from-[#070914]/95 via-[#0b0e1e]/90 to-[#070914]/95 border-2 border-cyan-500/40 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.2)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/85 border border-cyan-500/30|bg-gradient-to-br from-[#070914]/95 via-[#0b0e1e]/90 to-[#070914]/95 border border-cyan-500/30 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.15)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/85 border border-cyan-500/20|bg-gradient-to-br from-[#070914]/95 via-[#0b0e1e]/90 to-[#070914]/95 border border-cyan-500/20 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.15)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/70 border-white/8 hover:border-white/15|bg-[#070914]/60 border-cyan-500/10 hover:border-cyan-500/20 hover:bg-[#0b0e1e]/60|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/70 border border-emerald-500/30|bg-[#070914]/90 border border-emerald-500/30 shadow-[0_8px_30px_-10px_rgba(16,185,129,0.1)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/70 border border-blue-500/30|bg-[#070914]/90 border border-blue-500/30 shadow-[0_8px_30px_-10px_rgba(59,130,246,0.1)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/80 border border-cyan-500/20|bg-gradient-to-br from-[#070914]/95 via-[#0b0e1e]/90 to-[#070914]/95 border border-cyan-500/20 shadow-[0_8px_30px_-10px_rgba(6,182,212,0.15)]|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/60|bg-[#070914]/60|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/80 border-white/8 hover:border-violet-500/40|bg-[#070914]/80 border-cyan-500/20 hover:border-violet-500/40 hover:bg-[#0b0e1e]/80|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/70 border-white/6 hover:border-cyan-500/40 hover:bg-\\[#0c1322\\]|bg-[#070914]/70 border-cyan-500/10 hover:border-cyan-500/40 hover:bg-[#0b0e1e]/80|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/80 hover:bg-cyan-950/40 border border-white/8 hover:border-cyan-500/40|bg-[#070914]/80 hover:bg-[#0b0e1e]/80 border border-cyan-500/20 hover:border-cyan-500/40|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/70 border-white/6 hover:border-white/15|bg-[#070914]/60 border-cyan-500/10 hover:border-cyan-500/20 hover:bg-[#0b0e1e]/60|g' "$file"
+  sed -i 's|bg-\\[#0b0e1a\\]/85 border-white/8 hover:border-white/20|bg-[#070914]/80 border-cyan-500/20 hover:border-cyan-500/40 hover:bg-[#0b0e1e]/80|g' "$file"
+done
