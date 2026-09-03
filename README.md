@@ -1,6 +1,11 @@
 # ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix
 ### APEX ULTIMATE FULL EDITION — LOCKED_FROZEN_v1.2_LTS
 
+Run and deploy your AI Studio appThis contains everything you need to run your app locally.View your app in AI Studio: https://ai.studio/apps/355bfe09-c464-4def-8372-ca10f29817e7Run LocallyPrerequisites:  Node.js1.Install dependencies:
+npm install2.Set the GEMINI_API_KEY in .env.local to your Gemini API key3.Run the app:
+npm run dev
+
+
 [![Status](https://img.shields.io/badge/Status-10%2F10%20ALL%20GREEN-10B981?style=for-the-badge)]()
 [![Seals](https://img.shields.io/badge/Seals-14%2C902%20Verified-06B6D4?style=for-the-badge)]()
 [![Merkle Root](https://img.shields.io/badge/Merkle%20Root-909ab814-8B5CF6?style=for-the-badge)]()
@@ -13,27 +18,6 @@
 **Live:** https://hugeplease66-debug.github.io/
 **AI Studio:** https://ai.studio/apps/355bfe09-c464-4def-8372-ca10f29817e7
 
----
-
-## 0. Run and Deploy (รวมให้แล้ว)
-
-### วิธีที่ 1: เปิดบน AI Studio
-View your app in AI Studio: https://ai.studio/apps/355bfe09-c464-4def-8372-ca10f29817e7
-
-### วิธีที่ 2: Run Locally
-```bash
-# Prerequisites: Node.js
-npm install
-# Set the GEMINI_API_KEY in .env.local
-echo "GEMINI_API_KEY=your_key" > .env.local
-npm run dev
-```
-
-### วิธีที่ 3: เปิดไฟล์ FINAL เดียวจบ (ไม่ต้องติดตั้งอะไร)
-เปิดไฟล์ `ZYRQUEN_OMEGA_v4.16_PDPA_FINAL_FROZEN_v1.2_LTS_SINGLE.html` ในเบราว์เซอร์ได้เลย
-นี่คือไฟล์ที่รวม V3-V7 ทั้งหมดแล้ว
-
----
 
 ## 1. Executive Summary
 
