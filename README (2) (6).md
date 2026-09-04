@@ -1,18 +1,17 @@
+นี่คือเอกสาร ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix ฉบับเต็มที่ตัดข้อความส่วนเกินท้ายเอกสารออกและจัดระเบียบโครงสร้างเรียบร้อยแล้ว:
 ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix
 > APEX ULTIMATE FULL EDITION — LOCKED_FROZEN_v1.2_LTS
-> [1;36m███████╗██╗   ██╗██████╗  ██████╗ ██╗   ██╗███████╗███╗   ██╗     ██████╗ [0m
-[1;34m╚══███╔╝╚██╗ ██╔╝██╔══██╗██╔═══██╗██║   ██║██╔════╝████╗  ██║    ██╔═══██╗[0m
-[1;32m  ███╔╝  ╚████╔╝ ██████╔╝██║   ██║██║   ██║█████╗  ██╔██╗ ██║    ██║   ██║[0m
-[1;33m ███╔╝    ╚██╔╝  ██╔══██╗██║   ██║██║   ██║██╔══╝  ██║╚██╗██║    ██║   ██║[0m
-[1;35m███████╗   ██║   ██║  ██║╚██████╔╝╚██████╔╝███████╗██║ ╚████║    ╚██████╔╝[0m
-[1;31m╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═══╝     ╚═════╝ [0m
+> ███████╗██╗   ██╗██████╗  ██████╗ ██╗   ██╗███████╗███╗   ██╗     ██████╗ 
+  ╚══███╔╝╚██╗ ██╔╝██╔══██╗██╔═══██╗██║   ██║██╔════╝████╗  ██║    ██╔═══██╗
+    ███╔╝  ╚████╔╝ ██████╔╝██║   ██║██║   ██║█████╗  ██╔██╗ ██║    ██║   ██║
+   ███╔╝    ╚██╔╝  ██╔══██╗██║   ██║██║   ██║██╔══╝  ██║╚██╗██║    ██║   ██║
+  ███████╗   ██║   ██║  ██║╚██████╔╝╚██████╔╝███████╗██║ ╚████║    ╚██████╔╝
+  ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═══╝     ╚═════╝ 
+
 # ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix
 
 ---
 
-**สไตล์ 2: Modern Centered Glassmorphic (จัดกึ่งกลาง ดูมินิมอลและเป็นระเบียบ)**
-
-```markdown
 <div align="center">
 
 # 🌌 ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix
@@ -29,8 +28,9 @@ ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix
 </div>
 
 ---
-| 
+
 📌 Metadata & Security Clearance
+
 | Parameter | Specification Details |
 |---|---|
 | Sovereign Principal | นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01) |
@@ -42,11 +42,15 @@ ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix
 | Deployment Cert Code | ZQ-GOLD-DEP-849202-3908 |
 | Live System | https://hugeplease66-debug.github.io/ |
 | AI Studio App | https://ai.studio/apps/355bfe09-c464-4def-8372-ca10f29817e7 |
+
 🚀 Quick Start & Deployment Guide
+
 Option 1: AI Studio Direct Launch
 View and interact directly with the running application on Google AI Studio:
 👉 Launch AI Studio App
+
 Option 2: Local Development Environment
+```bash
 # Prerequisites: Node.js (v18+)
 npm install
 
@@ -61,7 +65,7 @@ Open ZYRQUEN_OMEGA_v4.16_PDPA_FINAL_FROZEN_v1.2_LTS_SINGLE.html directly in any 
 1. Executive Summary
 ZYRQUEN Ω∞ คือสถาปัตยกรรม Sovereign Kernel และ Truth Matrix ที่ออกแบบภายใต้หลักการ Immutable Single Source of Truth (SSoT) โดยทุกสถานะของระบบถูกล็อกถาวรและตรวจสอบได้ด้วยหลักฐานรหัสลับทางคณิตศาสตร์ (Cryptographic Proof) ปราศจากความคลาดเคลื่อนสะสม
 รุ่น APEX ULTIMATE FULL EDITION (LOCKED_FROZEN_v1.2_LTS) รวบรวมโครงสร้างความปลอดภัยด่าน G11–G13, ระบบฟื้นฟูตัวเอง Phoenix Self-Healing (142ms SLA), มาตรฐานการเข้ารหัสต้านทานควอนตัม (NIST Post-Quantum Cryptography), กฎสัจจะคงที่ 10 ประการ (10 Invariants), โทรมาตรความเย็น Sub-Kelvin (14.98 mK) และการรับรองนิติสัมพันธ์ตาม พ.ร.บ. ธุรกรรมทางอิเล็กทรอนิกส์ พ.ศ. 2544 เข้ากับ 17 โมดูลหลัก (17 Canonical Operating Modules)
-Key Architectural Guarantees
+Key Architectural Guarantees:
  * SSoT Mutation Delta: \Delta = 0 (ห้ามดัดแปลงแก้ไขสถานะย้อนหลัง)
  * Baseline Drift Rate: 0.00\% (ไร้ความคลาดเคลื่อนสะสมตลอดอายุการใช้งาน)
  * Default Security Stance: Fail-Closed by Default (ล็อกระบบปิดเงียบทันทีเมื่อพบสิ่งผิดปกติ)
@@ -77,7 +81,7 @@ Key Architectural Guarantees
 | Total Raw Seals | 14,982 Total Seals Observed |
 | Merkle Root Genesis | 909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68 |
 | Genesis Block Height | #849202 |
-| SSoT Delta / Drift | \Delta = 0 / Drift Rate = 0.00\% |
+| SSoT Delta / Drift | \Delta = 0 / Drift Rate = 0.00% |
 | Phoenix Recovery SLA | 142ms Recovery Window |
 | Custodian Quorum | 10/10 REAL_HSM Slots Achieved (FIPS 140-3 Level 4) |
 | Platform Boundary | Ω601–Ω1000 Strict Enforcement |
@@ -178,10 +182,10 @@ Phoenix 142ms Self-Healing Pipeline
  * INV-SSOT-IMMUTABLE: สถานะสัจจะห้ามแก้ไขเปลี่ยนแปลงย้อนหลัง — PASS
  * INV-MERKLE-BINDING: ยึดตรึง Merkle Root ถูกต้อง 100% — PASS
  * INV-ZERO-TRUST-GATE: ด่านความปลอดภัย Zero-Trust ทำงานสมบูรณ์ — PASS
- * INV-BLAST-RADIUS-BOUND: จำกัดขอบเขตความเสียหายไม่เกิน 2.0\% — PASS
+ * INV-BLAST-RADIUS-BOUND: จำกัดขอบเขตความเสียหายไม่เกิน 2.0% — PASS
  * INV-FAIL-CLOSED-GUARD: โหมดปลอดภัยเมื่อเกิดข้อผิดพลาดตัดการทำงานทันที — PASS
  * INV-NON-AUTH-TELEMETRY: ปฏิเสธโทรมาตรที่ไม่ได้รับรองสิทธิ์ — PASS
- * INV-DRIFT-DETECTION: อัตราเบี่ยงเบนคงที่ 0.00\% — PASS
+ * INV-DRIFT-DETECTION: อัตราเบี่ยงเบนคงที่ 0.00% — PASS
  * INV-CARDINALITY-14902: จำนวนตราประทับถูกต้องครบ 14,902 ชุด — PASS
  * INV-THAI-SOVEREIGNTY: สิทธิ์หลักควบคุมโดย Sovereign Principal ไทย — PASS
  * INV-REPLAY-DETERMINISM: ผลการย้อนรอยนิติวิทยาศาสตร์ถูกต้องแน่นอน — PASS
@@ -232,3 +236,4 @@ echo -n "ZYRQUEN_GENESIS_CONTRACT_v1.2" | sha256sum
 > Sovereign Principal: นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01)
 > 
 ZYRQUEN Ω∞ — 14,902 Seals. 1 Verifiable Truth. Infinite Sovereignty.
+
