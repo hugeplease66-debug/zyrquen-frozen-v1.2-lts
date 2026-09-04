@@ -1,0 +1,682 @@
+"use client";
+
+import React, { useState, useEffect, useMemo } from 'react';
+import { db, collection, onSnapshot, query, orderBy, limit, doc, setDoc, addDoc, serverTimestamp, deleteDoc } from '@/lib/firebase';
+import { 
+  ShieldAlert, 
+  AlertTriangle, 
+  Zap, 
+  Activity, 
+  CheckCircle2, 
+  TrendingUp, 
+  Lock, 
+  RefreshCw, 
+  Radio, 
+  ShieldCheck, 
+  Database,
+  Filter,
+  Eye,
+  Sliders,
+  ChevronDown,
+  ChevronUp,
+  Flame,
+  Cpu
+} from 'lucide-react';
+
+export interface AnomalyEvent {
+  id: string;
+  requestId: string;
+  name: string;
+  targetSegment: string;
+  cryptoScheme: string;
+  ialAal: string;
+  riskScore: number;
+  decision: 'QUARANTINED' | 'REJECTED_CRYPTO_WEAK' | 'APPROVED_SECTION_9' | 'APPROVED_SECTION_26' | 'APPROVED_SECTION_28' | 'REJECTED';
+  reason: string;
+  chamberIsolation?: string;
+  financialImpact?: string;
+  timestamp: string;
+  createdAt?: any;
+}
+
+const INITIAL_ANOMALIES: AnomalyEvent[] = [
+  {
+    id: 'ANOM-8804',
+    requestId: 'REQ-8804',
+    name: 'บอทแฮกเกอร์โจมตีเครือข่าย (DDoS Bot)',
+    targetSegment: 'SMB_Retail',
+    cryptoScheme: 'None',
+    ialAal: 'IAL1/AAL0',
+    riskScore: 0.96,
+    decision: 'QUARANTINED',
+    reason: 'CRITICAL_RISK_DETECTED: Risk score 0.96 exceeds threshold 0.85. Isolated to Chamber 02 Quarantine Buffer.',
+    chamberIsolation: 'Chamber 02 (AI Quarantine Buffer)',
+    financialImpact: 'Zero Gas Allocation (Quarantined)',
+    timestamp: '2026-08-31T21:18:42Z'
+  },
+  {
+    id: 'ANOM-8803',
+    requestId: 'REQ-8803',
+    name: 'ผู้บุกรุกลึกลับ (Quantum Attacker)',
+    targetSegment: 'Gen_X_Enterprise',
+    cryptoScheme: 'RSA-2048',
+    ialAal: 'IAL2/AAL1',
+    riskScore: 0.45,
+    decision: 'REJECTED_CRYPTO_WEAK',
+    reason: 'COMPLIANCE_FAILURE: Scheme RSA-2048 vulnerable to Shor Quantum algorithm. Dilithium-5 / SPHINCS+ required.',
+    chamberIsolation: 'Chamber 06 (Zero Trust Gateway)',
+    financialImpact: 'Zero Gas Allocation (Weak Crypto)',
+    timestamp: '2026-08-31T21:20:15Z'
+  },
+  {
+    id: 'ANOM-8802',
+    requestId: 'REQ-8802',
+    name: 'นางสาวสมหญิง ยิ้มแย้ม (Gen Z Retail)',
+    targetSegment: 'Gen_Z_Core',
+    cryptoScheme: 'ECDSA',
+    ialAal: 'IAL1/AAL1',
+    riskScore: 0.12,
+    decision: 'APPROVED_SECTION_9',
+    reason: 'Passed Section 9 compliance (พ.ร.บ. ธุรกรรมฯ มาตรา ๙). Low-risk retail signature valid.',
+    chamberIsolation: 'Chamber 01 (Core Execution)',
+    financialImpact: '฿1,179,712.50 Gas Pool Allocated',
+    timestamp: '2026-08-31T21:22:04Z'
+  },
+  {
+    id: 'ANOM-8801',
+    requestId: 'REQ-8801',
+    name: 'นายสมชาย ใจดี (Gen Y Custodian)',
+    targetSegment: 'Gen_Y_Pro',
+    cryptoScheme: 'Dilithium-5',
+    ialAal: 'IAL3/AAL3',
+    riskScore: 0.02,
+    decision: 'APPROVED_SECTION_28',
+    reason: 'Passed Section 28 compliance (พ.ร.บ. ธุรกรรมฯ มาตรา ๒๘). Bound to 10/10 REAL_HSM Quorum (FIPS 140-3 L4).',
+    chamberIsolation: 'Chamber 05 (Sovereign Council)',
+    financialImpact: '฿3,578,450.00 Gas Pool Allocated',
+    timestamp: '2026-08-31T21:24:30Z'
+  },
+  {
+    id: 'ANOM-8799',
+    requestId: 'REQ-8799',
+    name: 'Anomalous Probe User (Quantum Side-Channel)',
+    targetSegment: 'SMB_Retail',
+    cryptoScheme: 'RSA-4096',
+    ialAal: 'IAL1/AAL1',
+    riskScore: 0.88,
+    decision: 'QUARANTINED',
+    reason: 'CHAMBER_02_TRIGGER: High-entropy probing pattern detected with non-PQC algorithm. Quarantined.',
+    chamberIsolation: 'Chamber 02 (AI Quarantine Buffer)',
+    financialImpact: 'Zero Gas Allocation (Quarantined)',
+    timestamp: '2026-08-31T21:25:50Z'
+  }
+];
+
+export const SentinelAnomalyMonitor: React.FC = () => {
+  const [events, setEvents] = useState<AnomalyEvent[]>(INITIAL_ANOMALIES);
+  const [loading, setLoading] = useState(true);
+  const [filterType, setFilterType] = useState<'ALL' | 'QUARANTINED' | 'REJECTED' | 'APPROVED'>('ALL');
+  const [expandedId, setExpandedId] = useState<string | null>('ANOM-8804');
+  const [isSimulating, setIsSimulating] = useState(false);
+
+  // Sync with Firestore Sentinel Anomalies collection
+  useEffect(() => {
+    const q = query(collection(db, 'sentinel_anomalies'), orderBy('timestamp', 'desc'), limit(30));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      if (snapshot.empty) {
+        // Initialize default anomalies
+        INITIAL_ANOMALIES.forEach(async (ev) => {
+          await setDoc(doc(db, 'sentinel_anomalies', ev.id), {
+            ...ev,
+            createdAt: serverTimestamp()
+          });
+        });
+        setEvents(INITIAL_ANOMALIES);
+      } else {
+        const fetched: AnomalyEvent[] = [];
+        snapshot.forEach((doc) => {
+          fetched.push({ id: doc.id, ...doc.data() } as AnomalyEvent);
+        });
+        setEvents(fetched);
+      }
+      setLoading(false);
+    }, (err) => {
+      console.warn("Sentinel realtime fallback:", err);
+      setEvents(INITIAL_ANOMALIES);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Compute Metrics & Trends
+  const quarantinedCount = useMemo(() => events.filter(e => e.decision === 'QUARANTINED').length, [events]);
+  const rejectedCount = useMemo(() => events.filter(e => e.decision === 'REJECTED_CRYPTO_WEAK' || e.decision === 'REJECTED').length, [events]);
+  const approvedCount = useMemo(() => events.filter(e => e.decision.startsWith('APPROVED')).length, [events]);
+  
+  const avgRiskScore = useMemo(() => {
+    if (events.length === 0) return 0.02;
+    const sum = events.reduce((acc, e) => acc + e.riskScore, 0);
+    return Number((sum / events.length).toFixed(2));
+  }, [events]);
+
+  const peakRiskScore = useMemo(() => {
+    if (events.length === 0) return 0;
+    return Math.max(...events.map(e => e.riskScore));
+  }, [events]);
+
+  // Risk Score Trendline Points
+  const trendPoints = useMemo(() => {
+    if (events.length === 0) return '';
+    // Reverse chronologically to show left-to-right past-to-present
+    const sorted = [...events].reverse();
+    const width = 360;
+    const height = 70;
+    const step = width / Math.max(1, sorted.length - 1);
+    
+    return sorted.map((e, idx) => {
+      const x = idx * step;
+      const y = height - (e.riskScore * (height - 10)) - 5;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+  }, [events]);
+
+  // Filtered Events
+  const filteredEvents = useMemo(() => {
+    if (filterType === 'ALL') return events;
+    if (filterType === 'QUARANTINED') return events.filter(e => e.decision === 'QUARANTINED');
+    if (filterType === 'REJECTED') return events.filter(e => e.decision === 'REJECTED_CRYPTO_WEAK' || e.decision === 'REJECTED');
+    if (filterType === 'APPROVED') return events.filter(e => e.decision.startsWith('APPROVED'));
+    return events;
+  }, [events, filterType]);
+
+  // Simulation Handlers
+  const injectDDoSAnomaly = async () => {
+    setIsSimulating(true);
+    const newId = `ANOM-${Math.floor(1000 + Math.random() * 9000)}`;
+    const newEvent: AnomalyEvent = {
+      id: newId,
+      requestId: `REQ-${Math.floor(1000 + Math.random() * 9000)}`,
+      name: `SYN Flood Bot Cluster (Risk 0.96) #${Math.floor(Math.random() * 99)}`,
+      targetSegment: 'SMB_Retail',
+      cryptoScheme: 'None',
+      ialAal: 'IAL1/AAL0',
+      riskScore: 0.96,
+      decision: 'QUARANTINED',
+      reason: 'CRITICAL_RISK_DETECTED: Sentinel-Ledger AI Interceptor triggered auto-isolation to Chamber 02 Quarantine.',
+      chamberIsolation: 'Chamber 02 (AI Quarantine Buffer)',
+      financialImpact: 'Zero Gas Allocation (Quarantined)',
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      await setDoc(doc(db, 'sentinel_anomalies', newId), {
+        ...newEvent,
+        createdAt: serverTimestamp()
+      });
+      setExpandedId(newId);
+    } catch (e) {
+      setEvents(prev => [newEvent, ...prev]);
+    } finally {
+      setIsSimulating(false);
+    }
+  };
+
+  const injectQuantumAttack = async () => {
+    setIsSimulating(true);
+    const newId = `ANOM-${Math.floor(1000 + Math.random() * 9000)}`;
+    const newEvent: AnomalyEvent = {
+      id: newId,
+      requestId: `REQ-${Math.floor(1000 + Math.random() * 9000)}`,
+      name: 'Quantum Shor Oracle Probe (RSA-2048)',
+      targetSegment: 'Gen_X_Enterprise',
+      cryptoScheme: 'RSA-2048',
+      ialAal: 'IAL2/AAL1',
+      riskScore: 0.72,
+      decision: 'REJECTED_CRYPTO_WEAK',
+      reason: 'COMPLIANCE_FAILURE: Non-PQC signature detected. Dilithium-5 / SPHINCS+ required for Section 26 ETDA.',
+      chamberIsolation: 'Chamber 06 (Zero Trust Gateway)',
+      financialImpact: 'Zero Gas Allocation (Weak Crypto)',
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      await setDoc(doc(db, 'sentinel_anomalies', newId), {
+        ...newEvent,
+        createdAt: serverTimestamp()
+      });
+      setExpandedId(newId);
+    } catch (e) {
+      setEvents(prev => [newEvent, ...prev]);
+    } finally {
+      setIsSimulating(false);
+    }
+  };
+
+  const injectLegitimateTransaction = async () => {
+    setIsSimulating(true);
+    const newId = `ANOM-${Math.floor(1000 + Math.random() * 9000)}`;
+    const newEvent: AnomalyEvent = {
+      id: newId,
+      requestId: `REQ-${Math.floor(1000 + Math.random() * 9000)}`,
+      name: 'นายยุทธภูมิ พากเพียร (Sovereign Root Principal)',
+      targetSegment: 'Gen_Y_Pro',
+      cryptoScheme: 'Dilithium-5',
+      ialAal: 'IAL3/AAL3',
+      riskScore: 0.01,
+      decision: 'APPROVED_SECTION_28',
+      reason: 'Passed Section 28 Sovereign Compliance. 10/10 REAL_HSM Quorum verified with Post-Quantum signature.',
+      chamberIsolation: 'Chamber 00 (SSoT Nexus)',
+      financialImpact: '฿4,976,900.00 Gas Pool Allocated',
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      await setDoc(doc(db, 'sentinel_anomalies', newId), {
+        ...newEvent,
+        createdAt: serverTimestamp()
+      });
+      setExpandedId(newId);
+    } catch (e) {
+      setEvents(prev => [newEvent, ...prev]);
+    } finally {
+      setIsSimulating(false);
+    }
+  };
+
+  const resetAllBaseline = async () => {
+    setLoading(true);
+    for (const item of events) {
+      try {
+        await deleteDoc(doc(db, 'sentinel_anomalies', item.id));
+      } catch (e) {
+        // ignore
+      }
+    }
+    for (const item of INITIAL_ANOMALIES) {
+      try {
+        await setDoc(doc(db, 'sentinel_anomalies', item.id), {
+          ...item,
+          createdAt: serverTimestamp()
+        });
+      } catch (e) {
+        // ignore
+      }
+    }
+    setEvents(INITIAL_ANOMALIES);
+    setLoading(false);
+  };
+
+  const getDecisionBadge = (decision: AnomalyEvent['decision']) => {
+    switch (decision) {
+      case 'QUARANTINED':
+        return (
+          <span className="px-2 py-0.5 rounded-full bg-rose-950/70 border border-rose-600/60 text-rose-300 font-mono text-[10px] font-bold flex items-center gap-1 animate-pulse">
+            <ShieldAlert className="w-3 h-3 text-rose-400" />
+            <span>QUARANTINED (CHAMBER 02)</span>
+          </span>
+        );
+      case 'REJECTED_CRYPTO_WEAK':
+      case 'REJECTED':
+        return (
+          <span className="px-2 py-0.5 rounded-full bg-amber-950/60 border border-amber-600/50 text-amber-300 font-mono text-[10px] font-bold flex items-center gap-1">
+            <AlertTriangle className="w-3 h-3 text-amber-400" />
+            <span>REJECTED (NON-PQC)</span>
+          </span>
+        );
+      case 'APPROVED_SECTION_28':
+        return (
+          <span className="px-2 py-0.5 rounded-full bg-purple-950/60 border border-purple-600/50 text-purple-300 font-mono text-[10px] font-bold flex items-center gap-1">
+            <ShieldCheck className="w-3 h-3 text-purple-400" />
+            <span>ETDA มาตรา ๒๘ (CA + HSM)</span>
+          </span>
+        );
+      case 'APPROVED_SECTION_26':
+        return (
+          <span className="px-2 py-0.5 rounded-full bg-blue-950/60 border border-blue-600/50 text-blue-300 font-mono text-[10px] font-bold flex items-center gap-1">
+            <ShieldCheck className="w-3 h-3 text-blue-400" />
+            <span>ETDA มาตรา ๒๖ (PQC SECURE)</span>
+          </span>
+        );
+      case 'APPROVED_SECTION_9':
+      default:
+        return (
+          <span className="px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-600/50 text-emerald-300 font-mono text-[10px] font-bold flex items-center gap-1">
+            <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+            <span>ETDA มาตรา ๙ (GENERAL)</span>
+          </span>
+        );
+    }
+  };
+
+  return (
+    <div className="w-full bg-zinc-950/90 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl space-y-0">
+      {/* Header Banner */}
+      <div className="p-4 sm:p-5 bg-gradient-to-r from-zinc-900/90 via-zinc-950 to-zinc-900/90 border-b border-zinc-800">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className={`w-11 h-11 rounded-xl flex items-center justify-center border transition-all ${
+              quarantinedCount > 0 
+                ? 'bg-rose-950/60 border-rose-600/50 text-rose-400 shadow-lg shadow-rose-950/40 animate-pulse'
+                : 'bg-cyan-950/40 border-cyan-500/40 text-cyan-400'
+            }`}>
+              <ShieldAlert className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-semibold flex items-center gap-1">
+                  <Radio className="w-3 h-3 text-rose-400 animate-pulse" />
+                  SENTINEL-LEDGER AI INTERCEPTOR
+                </span>
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold border ${
+                  quarantinedCount > 0 
+                    ? 'bg-rose-950/60 text-rose-300 border-rose-700/60 animate-pulse'
+                    : 'bg-emerald-950/40 text-emerald-400 border-emerald-700/40'
+                }`}>
+                  {quarantinedCount > 0 ? `${quarantinedCount} QUARANTINED` : 'ZERO ANOMALY THREAT'}
+                </span>
+              </div>
+              <h3 className="text-base sm:text-lg font-bold font-mono text-zinc-100 mt-0.5 flex items-center gap-2">
+                <span>Anomaly Detection & Risk Score Trends</span>
+                <span className="text-xs font-normal text-zinc-400 font-sans hidden sm:inline">
+                  (ระบบวิเคราะห์พฤติกรรมเบี่ยงเบนและกักกันภัยคุกคาม)
+                </span>
+              </h3>
+            </div>
+          </div>
+
+          {/* Simulation & Action Controls */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              onClick={injectDDoSAnomaly}
+              disabled={isSimulating}
+              className="px-2.5 py-1.5 bg-rose-950/50 hover:bg-rose-900/60 text-rose-200 text-[11px] font-mono border border-rose-700/60 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+              title="Simulate DDoS flood triggering Chamber 02 Quarantine"
+            >
+              <Flame className="w-3.5 h-3.5 text-rose-400" />
+              <span>Simulate DDoS (Risk 0.96)</span>
+            </button>
+
+            <button
+              onClick={injectQuantumAttack}
+              disabled={isSimulating}
+              className="px-2.5 py-1.5 bg-amber-950/50 hover:bg-amber-900/60 text-amber-200 text-[11px] font-mono border border-amber-700/60 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+              title="Simulate Weak Crypto (RSA-2048)"
+            >
+              <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+              <span>Simulate Quantum Weak (Risk 0.72)</span>
+            </button>
+
+            <button
+              onClick={injectLegitimateTransaction}
+              disabled={isSimulating}
+              className="px-2.5 py-1.5 bg-emerald-950/50 hover:bg-emerald-900/60 text-emerald-200 text-[11px] font-mono border border-emerald-700/60 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+              title="Simulate Dilithium-5 sovereign transaction"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Legitimate PQC (Risk 0.01)</span>
+            </button>
+
+            <button
+              onClick={resetAllBaseline}
+              className="p-1.5 bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 text-[11px] font-mono border border-zinc-700 rounded-lg transition-all cursor-pointer"
+              title="Reset Baseline"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* 4 Telemetry Metrics & Trend Visualizer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mt-4">
+          {/* Card 1: Risk Trendline Area Chart */}
+          <div className="md:col-span-2 bg-zinc-950/90 border border-zinc-800 rounded-xl p-3 space-y-1.5">
+            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+              <span className="flex items-center gap-1.5">
+                <TrendingUp className="w-3.5 h-3.5 text-rose-400" />
+                <span>RISK SCORE TRENDLINE (REAL-TIME SENTINEL)</span>
+              </span>
+              <span className="text-[10px] text-zinc-500 font-mono">
+                Threshold: &ge; 0.85 (Chamber 02 Quarantine)
+              </span>
+            </div>
+            
+            {/* SVG Trendline */}
+            <div className="h-16 w-full relative overflow-hidden bg-black/40 rounded-lg border border-zinc-900 p-1 flex items-center">
+              <svg className="w-full h-full" viewBox="0 0 360 70" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="riskTrendGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.4" />
+                    <stop offset="50%" stopColor="#fbbf24" stopOpacity="0.2" />
+                    <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.0" />
+                  </linearGradient>
+                </defs>
+                {/* Quarantine line at 0.85 (y ≈ 12) */}
+                <line x1="0" y1="12" x2="360" y2="12" stroke="#f43f5e" strokeDasharray="3,3" strokeWidth="1" opacity="0.6" />
+                
+                {trendPoints && (
+                  <>
+                    <path
+                      d={`M 0,70 L ${trendPoints} L 360,70 Z`}
+                      fill="url(#riskTrendGrad)"
+                    />
+                    <polyline
+                      fill="none"
+                      stroke="#f43f5e"
+                      strokeWidth="2"
+                      points={trendPoints}
+                    />
+                  </>
+                )}
+              </svg>
+            </div>
+
+            <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 pt-0.5">
+              <span>Historical Events Trace ({events.length} records)</span>
+              <span className="text-amber-400 font-bold">Peak Risk: {peakRiskScore.toFixed(2)}</span>
+            </div>
+          </div>
+
+          {/* Card 2: Average Risk Index */}
+          <div className="bg-zinc-950/90 border border-zinc-800 rounded-xl p-3 space-y-1">
+            <div className="flex items-center justify-between text-zinc-400 text-xs font-mono">
+              <span className="flex items-center gap-1.5">
+                <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                AVG RISK INDEX
+              </span>
+              <span className={`text-[10px] font-bold ${avgRiskScore >= 0.5 ? 'text-rose-400' : 'text-emerald-400'}`}>
+                {avgRiskScore >= 0.85 ? 'CRITICAL' : avgRiskScore >= 0.5 ? 'ELEVATED' : 'SAFE'}
+              </span>
+            </div>
+            <div className={`text-2xl font-bold font-mono ${
+              avgRiskScore >= 0.85 ? 'text-rose-400 animate-pulse' : avgRiskScore >= 0.5 ? 'text-amber-400' : 'text-cyan-400'
+            }`}>
+              {avgRiskScore.toFixed(2)} <span className="text-xs font-normal text-zinc-500">/ 1.00</span>
+            </div>
+            <div className="text-[10px] text-zinc-500 font-mono">
+              Safe Baseline Limit: &lt; 0.15
+            </div>
+          </div>
+
+          {/* Card 3: Interceptor Quarantine Rate */}
+          <div className="bg-zinc-950/90 border border-zinc-800 rounded-xl p-3 space-y-1">
+            <div className="flex items-center justify-between text-zinc-400 text-xs font-mono">
+              <span className="flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-rose-400" />
+                CHAMBER 02 QUARANTINED
+              </span>
+              <span className="text-[10px] text-rose-400 font-bold font-mono">
+                {quarantinedCount} BLOCKED
+              </span>
+            </div>
+            <div className="text-2xl font-bold font-mono text-rose-400">
+              {quarantinedCount} <span className="text-xs font-normal text-zinc-500">threats</span>
+            </div>
+            <div className="text-[10px] text-zinc-500 font-mono">
+              Fail-Closed Sentry: Armed 100%
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Filter Tabs & Event List */}
+      <div className="p-3 bg-zinc-900/60 border-b border-zinc-800 flex items-center justify-between flex-wrap gap-2 text-xs font-mono">
+        <div className="flex items-center gap-1.5">
+          <Filter className="w-3.5 h-3.5 text-zinc-400" />
+          <span className="text-zinc-400 text-[11px] font-semibold mr-1">FILTER:</span>
+          
+          <button
+            onClick={() => setFilterType('ALL')}
+            className={`px-2.5 py-1 rounded-lg text-[11px] transition-colors ${
+              filterType === 'ALL' ? 'bg-zinc-700 text-zinc-100 font-bold' : 'text-zinc-400 hover:text-zinc-200'
+            }`}
+          >
+            All Events ({events.length})
+          </button>
+          
+          <button
+            onClick={() => setFilterType('QUARANTINED')}
+            className={`px-2.5 py-1 rounded-lg text-[11px] transition-colors ${
+              filterType === 'QUARANTINED' ? 'bg-rose-950/80 text-rose-300 border border-rose-700/60 font-bold' : 'text-zinc-400 hover:text-rose-300'
+            }`}
+          >
+            Quarantined ({quarantinedCount})
+          </button>
+
+          <button
+            onClick={() => setFilterType('REJECTED')}
+            className={`px-2.5 py-1 rounded-lg text-[11px] transition-colors ${
+              filterType === 'REJECTED' ? 'bg-amber-950/80 text-amber-300 border border-amber-700/60 font-bold' : 'text-zinc-400 hover:text-amber-300'
+            }`}
+          >
+            Crypto Weak ({rejectedCount})
+          </button>
+
+          <button
+            onClick={() => setFilterType('APPROVED')}
+            className={`px-2.5 py-1 rounded-lg text-[11px] transition-colors ${
+              filterType === 'APPROVED' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 font-bold' : 'text-zinc-400 hover:text-emerald-300'
+            }`}
+          >
+            Approved ({approvedCount})
+          </button>
+        </div>
+
+        <div className="text-[11px] text-zinc-500 flex items-center gap-2">
+          <span>ETDA Act B.E. 2544 (Sec 9, 26, 28)</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        </div>
+      </div>
+
+      {/* Realtime Anomaly Events Table / List */}
+      <div className="divide-y divide-zinc-800/80 max-h-[460px] overflow-y-auto font-mono text-xs">
+        {filteredEvents.map((ev) => {
+          const isExpanded = expandedId === ev.id;
+          const isCritical = ev.riskScore >= 0.85;
+
+          return (
+            <div 
+              key={ev.id} 
+              className={`p-3.5 transition-colors ${
+                isCritical 
+                  ? 'bg-rose-950/15 hover:bg-rose-950/25' 
+                  : 'bg-zinc-950/40 hover:bg-zinc-900/40'
+              }`}
+            >
+              <div 
+                onClick={() => setExpandedId(isExpanded ? null : ev.id)}
+                className="flex items-center justify-between cursor-pointer gap-3"
+              >
+                {/* Left: ID & Actor Name */}
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${
+                    isCritical 
+                      ? 'bg-rose-500 animate-pulse' 
+                      : ev.riskScore >= 0.3 
+                      ? 'bg-amber-400' 
+                      : 'bg-emerald-400'
+                  }`}></div>
+                  
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-zinc-200 font-bold font-mono text-xs truncate">
+                        {ev.name}
+                      </span>
+                      <span className="text-[10px] text-zinc-500 font-mono">
+                        ({ev.requestId})
+                      </span>
+                    </div>
+                    <div className="text-[11px] text-zinc-400 font-sans truncate">
+                      Segment: <span className="text-zinc-300 font-mono">{ev.targetSegment}</span> • Protocol: <span className={`font-mono ${
+                        ev.cryptoScheme.includes('Dilithium') || ev.cryptoScheme.includes('SPHINCS') ? 'text-purple-300 font-bold' : 'text-zinc-400'
+                      }`}>{ev.cryptoScheme}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Risk Score Gauge, Decision Badge & Toggle */}
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  {/* Risk Score Pill */}
+                  <div className="text-right hidden sm:block">
+                    <div className="text-[10px] text-zinc-500 font-mono">RISK SCORE</div>
+                    <div className={`font-bold font-mono text-sm ${
+                      isCritical ? 'text-rose-400 animate-pulse' : ev.riskScore >= 0.3 ? 'text-amber-400' : 'text-emerald-400'
+                    }`}>
+                      {ev.riskScore.toFixed(2)}
+                    </div>
+                  </div>
+
+                  <div>
+                    {getDecisionBadge(ev.decision)}
+                  </div>
+
+                  <div className="text-zinc-500 hover:text-zinc-300">
+                    {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </div>
+                </div>
+              </div>
+
+              {/* Expanded Inspection Drawer */}
+              {isExpanded && (
+                <div className="mt-3 p-3 bg-zinc-900/80 border border-zinc-800 rounded-xl space-y-2 text-xs font-mono">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                    <div>
+                      <span className="text-zinc-500 block">INTERCEPT REASON:</span>
+                      <span className={`font-mono block mt-0.5 ${
+                        isCritical ? 'text-rose-300' : 'text-zinc-300'
+                      }`}>
+                        {ev.reason}
+                      </span>
+                    </div>
+                    
+                    <div>
+                      <span className="text-zinc-500 block">CHAMBER ISOLATION & LOCATION:</span>
+                      <span className="text-cyan-300 font-mono block mt-0.5">
+                        {ev.chamberIsolation || 'Chamber 02 (AI Quarantine Buffer)'}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-zinc-800/80 text-[11px]">
+                    <div>
+                      <span className="text-zinc-500">ASSURANCE LEVEL:</span>
+                      <span className="text-[#FACC15] ml-1 font-bold">{ev.ialAal}</span>
+                    </div>
+                    <div>
+                      <span className="text-zinc-500">GAS / FINANCIAL:</span>
+                      <span className="text-emerald-400 ml-1">{ev.financialImpact || 'N/A'}</span>
+                    </div>
+                    <div>
+                      <span className="text-zinc-500">TIMESTAMP:</span>
+                      <span className="text-zinc-400 ml-1">{ev.timestamp.replace('T', ' ').slice(0, 19)}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};

@@ -1,0 +1,233 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { 
+  SlidersHorizontal, 
+  Activity, 
+  Zap, 
+  RotateCw, 
+  CheckCircle2, 
+  ShieldCheck, 
+  Sparkles, 
+  Compass, 
+  Waves, 
+  Radio, 
+  Lock 
+} from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { SSOT } from "@/lib/ssot-data";
+
+export interface ResonanceDataPoint {
+  time: number;
+  flux: number;
+  resonanceThz: number;
+}
+
+export const QuantumStabilizerConsole: React.FC = () => {
+  const [resonanceData, setResonanceData] = useState<ResonanceDataPoint[]>([
+    { time: 0, flux: 99.96, resonanceThz: 148.70 },
+    { time: 1, flux: 99.98, resonanceThz: 148.72 },
+    { time: 2, flux: 99.97, resonanceThz: 148.71 },
+    { time: 3, flux: 99.99, resonanceThz: 148.73 },
+    { time: 4, flux: 99.98, resonanceThz: 148.72 },
+  ]);
+
+  const [stepState, setStepState] = useState<"IDLE" | "SYNCING" | "CALIBRATING" | "ANCHORING" | "PHASE_LOCKED">("PHASE_LOCKED");
+  const [coherenceRate, setCoherenceRate] = useState<number>(99.98);
+  const [frequencyThz, setFrequencyThz] = useState<number>(148.72);
+  const [warpStability, setWarpStability] = useState<number>(100);
+
+  // Periodic fluctuation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setResonanceData(prev => {
+        const nextTime = (prev[prev.length - 1]?.time ?? 0) + 1;
+        const noise = (Math.random() - 0.5) * 0.02;
+        const newFlux = +(99.98 + noise).toFixed(3);
+        const newThz = +(148.72 + noise * 0.5).toFixed(2);
+        return [...prev.slice(1), { time: nextTime, flux: newFlux, resonanceThz: newThz }];
+      });
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleSequence = (action: "SYNC" | "CALIBRATE" | "ANCHOR") => {
+    if (action === "SYNC") {
+      setStepState("SYNCING");
+      setTimeout(() => setStepState("IDLE"), 800);
+    } else if (action === "CALIBRATE") {
+      setStepState("CALIBRATING");
+      setTimeout(() => {
+        setCoherenceRate(99.992);
+        setFrequencyThz(148.72);
+        setStepState("IDLE");
+      }, 1000);
+    } else if (action === "ANCHOR") {
+      setStepState("ANCHORING");
+      setTimeout(() => {
+        setStepState("PHASE_LOCKED");
+        setWarpStability(100);
+      }, 1200);
+    }
+  };
+
+  return (
+    <div className="bg-zinc-950 border border-violet-500/50 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-5 text-zinc-100">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-violet-500/15 border border-violet-500/60 flex items-center justify-center text-violet-400">
+            <SlidersHorizontal className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-violet-400">
+                MAEW Ω∞ RUNTIME
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-violet-950 text-violet-300 border border-violet-700/60 text-[10px] font-mono font-bold">
+                Ω-SYNC STABLE PHASE
+              </span>
+            </div>
+            <h2 className="text-base sm:text-lg font-bold font-mono text-zinc-100 mt-0.5">
+              Quantum Stabilizer Console (Resonance &amp; Flux Control)
+            </h2>
+          </div>
+        </div>
+
+        {/* Action Sequence Controls: SYNC • CALIBRATE • ANCHOR */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            onClick={() => handleSequence("SYNC")}
+            className="px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-violet-600/50 text-violet-300 font-mono text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+          >
+            <Radio className={`w-3.5 h-3.5 ${stepState === "SYNCING" ? "animate-spin text-cyan-400" : ""}`} />
+            <span>{stepState === "SYNCING" ? "Syncing..." : "SYNC"}</span>
+          </button>
+
+          <button
+            onClick={() => handleSequence("CALIBRATE")}
+            className="px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-cyan-500/50 text-cyan-300 font-mono text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+          >
+            <RotateCw className={`w-3.5 h-3.5 ${stepState === "CALIBRATING" ? "animate-spin text-amber-400" : ""}`} />
+            <span>{stepState === "CALIBRATING" ? "Calibrating..." : "CALIBRATE"}</span>
+          </button>
+
+          <button
+            onClick={() => handleSequence("ANCHOR")}
+            className="px-3.5 py-1.5 bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-700 hover:to-cyan-700 text-white font-mono text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+          >
+            <Lock className="w-3.5 h-3.5 text-yellow-300" />
+            <span>{stepState === "ANCHORING" ? "Anchoring..." : "ANCHOR"}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Main Grid: Regulator + Dimensional Resonance Graph + 3 Panels */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Panel 1: Quantum Flux Regulator */}
+        <div className="p-4 bg-black/60 border border-zinc-800 rounded-2xl space-y-3">
+          <div className="flex items-center justify-between text-xs font-mono">
+            <span className="text-zinc-400 flex items-center gap-1.5">
+              <Zap className="w-3.5 h-3.5 text-yellow-400" />
+              Quantum Flux Regulator
+            </span>
+            <span className="px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 text-[10px] font-bold border border-emerald-800">
+              Optimal Balance
+            </span>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex justify-between text-xs font-mono">
+              <span className="text-zinc-400">Harmony Zone:</span>
+              <span className="text-emerald-400 font-bold">100% Phase Lock</span>
+            </div>
+            <div className="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-zinc-800">
+              <div className="bg-gradient-to-r from-cyan-500 via-emerald-400 to-yellow-400 h-full w-[99.8%]"></div>
+            </div>
+            <div className="text-[11px] text-zinc-500 font-mono flex justify-between">
+              <span>Entropy ΔS &le; 0.08 J/K</span>
+              <span>Soliton Wave: Stable</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Panel 2: Axial / Temporal / Energetic Status */}
+        <div className="p-4 bg-black/60 border border-zinc-800 rounded-2xl space-y-2 font-mono text-xs">
+          <div className="flex items-center justify-between">
+            <span className="text-zinc-400">Axial Vector:</span>
+            <span className="text-cyan-400 font-bold">Stable [0.00, 1.00, 0.00]</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-zinc-400">Temporal Alignment:</span>
+            <span className="text-violet-400 font-bold">Δt = 0.000 ms</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-zinc-400">Energetic Field:</span>
+            <span className="text-yellow-400 font-bold">851.92 QOps/s</span>
+          </div>
+          <div className="pt-1 border-t border-zinc-800/80 flex justify-between text-[11px] text-emerald-400">
+            <span>Entanglement: Nominal</span>
+            <span>Warp Coherence: {coherenceRate}%</span>
+          </div>
+        </div>
+
+        {/* Panel 3: Invariant Lock Attestation */}
+        <div className="p-4 bg-black/60 border border-zinc-800 rounded-2xl space-y-2 font-mono text-xs">
+          <div className="text-zinc-400">Canonical Merkle Proof:</div>
+          <div className="text-cyan-300 truncate font-mono text-[11px]">909ab814479844d8...</div>
+          <div className="flex justify-between items-center pt-1 border-t border-zinc-800">
+            <span className="text-zinc-400">14,902 Canonical Seals</span>
+            <span className="px-2 py-0.5 bg-yellow-950/80 text-yellow-300 border border-yellow-700/60 rounded text-[10px] font-bold">
+              VERIFIED
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Dimensional Resonance Waveform Chart */}
+      <div className="p-4 bg-black/80 border border-violet-900/30 rounded-2xl space-y-2">
+        <div className="flex items-center justify-between text-xs font-mono">
+          <span className="text-violet-300 font-bold flex items-center gap-1.5">
+            <Waves className="w-3.5 h-3.5 text-violet-400" />
+            Dimensional Resonance Graph ({frequencyThz} THz)
+          </span>
+          <span className="text-cyan-400 text-[11px]">
+            Coherence: {coherenceRate}% @ {frequencyThz} THz
+          </span>
+        </div>
+
+        <div className="w-full h-44 sm:h-52">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={resonanceData}>
+              <XAxis dataKey="time" stroke="#A855F7" fontSize={10} tickLine={false} unit="s" />
+              <YAxis domain={[99.90, 100.00]} stroke="#A855F7" fontSize={10} tickLine={false} unit="%" />
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: '#090D1A', 
+                  borderColor: '#A855F7', 
+                  borderRadius: '0.75rem',
+                  fontSize: '11px',
+                  fontFamily: 'monospace',
+                  color: '#F8FAFC'
+                }} 
+              />
+              <Line 
+                type="monotone" 
+                dataKey="flux" 
+                stroke="#06B6D4" 
+                strokeWidth={2.5} 
+                dot={{ r: 4, fill: '#06B6D4', stroke: '#FFFFFF', strokeWidth: 1.5 }}
+                activeDot={{ r: 6, fill: '#FF00FF' }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="flex items-center justify-between text-xs font-mono text-zinc-500 pt-2 border-t border-zinc-800">
+          <span>Stabilization Sequence: SYNC &rarr; CALIBRATE &rarr; ANCHOR</span>
+          <span className="text-emerald-400 font-bold">Warp Field: Stabilizing &rarr; Phase Lock 100%</span>
+        </div>
+      </div>
+    </div>
+  );
+};

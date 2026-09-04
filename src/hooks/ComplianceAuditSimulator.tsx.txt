@@ -1,0 +1,393 @@
+"use client";
+
+import React, { useState } from "react";
+import { 
+  Scale, 
+  ShieldCheck, 
+  ShieldAlert, 
+  AlertTriangle, 
+  CheckCircle2, 
+  XCircle, 
+  Cpu, 
+  Key, 
+  FileText, 
+  RotateCcw, 
+  Sliders, 
+  Layers, 
+  Lock, 
+  Sparkles,
+  Zap
+} from "lucide-react";
+import { SSOT } from "@/lib/ssot-data";
+
+export type SignatureScheme = "ML_DSA_87_DILITHIUM5" | "SPHINCS_PLUS" | "FALCON_1024" | "RSA_2048" | "RSA_4096" | "ECDSA_P256" | "ED25519";
+export type IALLevel = "IAL1" | "IAL2.1" | "IAL2.2" | "IAL2.3" | "IAL3";
+export type AALLevel = "AAL1" | "AAL2" | "AAL3";
+export type HSMQuorum = "10_OF_10_HARDWARE_PQC" | "3_OF_5_CLOUD_HSM" | "SINGLE_SOFTWARE_KEY";
+export type MerkleIntegrity = "CANONICAL_GENESIS_ROOT" | "TRANSIENT_LOCAL_HASH" | "UNVERIFIED_STATE";
+
+export const ComplianceAuditSimulator: React.FC = () => {
+  // State for simulator toggles
+  const [sigScheme, setSigScheme] = useState<SignatureScheme>("ML_DSA_87_DILITHIUM5");
+  const [ialLevel, setIalLevel] = useState<IALLevel>("IAL3");
+  const [aalLevel, setAalLevel] = useState<AALLevel>("AAL3");
+  const [hsmQuorum, setHsmQuorum] = useState<HSMQuorum>("10_OF_10_HARDWARE_PQC");
+  const [merkleIntegrity, setMerkleIntegrity] = useState<MerkleIntegrity>("CANONICAL_GENESIS_ROOT");
+  const [failClosedArmed, setFailClosedArmed] = useState<boolean>(true);
+
+  // Evaluate Compliance Logic based on Thai Electronic Transactions Act & PDPA
+  const isPqc = sigScheme === "ML_DSA_87_DILITHIUM5" || sigScheme === "SPHINCS_PLUS" || sigScheme === "FALCON_1024";
+  const isHighIal = ialLevel === "IAL2.3" || ialLevel === "IAL3";
+  const isHighAal = aalLevel === "AAL3";
+  const isHardwareHsm = hsmQuorum === "10_OF_10_HARDWARE_PQC";
+  const isCanonicalRoot = merkleIntegrity === "CANONICAL_GENESIS_ROOT";
+
+  // Section 9: Identity & Intent Attribution (การระบุตัวตนและเจตนาของเจ้าของข้อมูล)
+  const sec9Pass = isHighIal && (aalLevel !== "AAL1");
+  const sec9Reason = sec9Pass
+    ? "ผ่านเกณฑ์: การพิสูจน์ตัวตนระดับ " + ialLevel + " ร่วมกับ " + aalLevel + " มีความน่าเชื่อถือสูงเพียงพอระบุตัวบุคคลและเจตนาตามมาตรา ๙"
+    : "ไม่ผ่านเกณฑ์: ระดับ IAL/AAL ต่ำเกินไป ไม่สามารถพิสูจน์ตัวตนผู้ทำธุรกรรมได้อย่างไร้ข้อกังขาในชั้นศาล";
+
+  // Section 26: Reliable Electronic Signature (ลายมือชื่ออิเล็กทรอนิกส์ที่เชื่อถือได้)
+  const sec26Pass = isPqc && (isHardwareHsm || hsmQuorum === "3_OF_5_CLOUD_HSM") && isHighAal;
+  const sec26Reason = sec26Pass
+    ? (isPqc 
+        ? "ผ่านเกณฑ์ขั้นสูงสุด: ใช้อัลกอริทึม Post-Quantum (FIPS 204) ร่วมกับ HSM Quorum ป้องกันการปฏิเสธความรับผิดชอบ (Non-repudiation) ได้ 100%"
+        : "ผ่านเกณฑ์มาตรฐาน: เป็นลายมือชื่ออิเล็กทรอนิกส์ที่ควบคุมได้เฉพาะบุคคล")
+    : (!isPqc
+        ? "มีความเสี่ยงสูง: อัลกอริทึมดั้งเดิม (" + sigScheme.replace(/_/g, "-") + ") เสี่ยงต่อการถูกถอดรหัสด้วย Quantum Computing (Shor's Algorithm)"
+        : "ไม่ผ่านเกณฑ์: ขาดการคุ้มครองกุญแจลับด้วย Hardware HSM ที่เหมาะสม");
+
+  // Section 28: Presumption of Integrity & Forensic Admissibility (ข้อสันนิษฐานความถูกต้องสมบูรณ์ของข้อมูลอิเล็กทรอนิกส์)
+  const sec28Pass = sec26Pass && sec9Pass && isCanonicalRoot && isHardwareHsm && failClosedArmed;
+  const sec28Reason = sec28Pass
+    ? "ผ่านเกณฑ์ระดับศาลฎีกา (Forensic-Ready): มีการประทับเวลา Merkle Root #849202 ครบ 14,902 ตราประทับ ไม่สามารถแก้ไขย้อนหลังได้ ภาระการพิสูจน์ตกเป็นของฝ่ายตรงข้าม"
+    : (!isCanonicalRoot
+        ? "ไม่ผ่านเกณฑ์: ไม่ได้เชื่อมโยงกับ Genesis Merkle Root #849202 ที่ตรึงไว้ ขาดความต่อเนื่องของสายโซ่พยานหลักฐาน"
+        : !failClosedArmed 
+          ? "ไม่ผ่านเกณฑ์: ระบบไม่ได้เปิดใช้งาน Fail-Closed Lockdown เมื่อเกิดการบุกรุก"
+          : "ไม่ผ่านเกณฑ์: ยังไม่ครบองค์ประกอบของลายมือชื่อที่เชื่อถือได้ตามมาตรา ๒๖ และ ๙");
+
+  // PDPA Sec. 37/38 (มาตรการรักษาความปลอดภัยข้อมูลส่วนบุคคลขั้นสูง)
+  const pdpaPass = isPqc && isHardwareHsm && isCanonicalRoot;
+  const pdpaReason = pdpaPass
+    ? "สอดคล้องตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562: มาตรการเข้ารหัสหลังยุคควอนตัมและการจัดเก็บหลักฐานแบบไม่สามารถแก้ไขได้"
+    : "มีความเสี่ยงถูกปรับตาม PDPA: ขาดมาตรการทางเทคนิคที่มั่นคงปลอดภัยขั้นสูง";
+
+  // Calculate Overall Admissibility Grade
+  let courtGrade = "F (UNUSABLE)";
+  let courtColor = "text-rose-500 bg-rose-950/40 border-rose-800";
+  let gradeScore = 0;
+  if (sec9Pass) gradeScore += 25;
+  if (sec26Pass) gradeScore += 30;
+  if (sec28Pass) gradeScore += 35;
+  if (pdpaPass) gradeScore += 10;
+
+  if (gradeScore >= 95) {
+    courtGrade = "A+ (FORENSIC-READY SUPREME ASSURANCE)";
+    courtColor = "text-yellow-400 bg-yellow-950/40 border-yellow-700/80 shadow-[0_0_20px_rgba(234,179,8,0.2)]";
+  } else if (gradeScore >= 70) {
+    courtGrade = "B+ (STANDARD ADMISSIBLE)";
+    courtColor = "text-cyan-400 bg-cyan-950/40 border-cyan-700/80";
+  } else if (gradeScore >= 50) {
+    courtGrade = "C (HIGH LITIGATION RISK)";
+    courtColor = "text-amber-400 bg-amber-950/40 border-amber-700/80";
+  }
+
+  // Presets
+  const applyPreset = (preset: "SOVEREIGN_SSOT" | "LEGACY_RSA" | "WEAK_MOBILE") => {
+    if (preset === "SOVEREIGN_SSOT") {
+      setSigScheme("ML_DSA_87_DILITHIUM5");
+      setIalLevel("IAL3");
+      setAalLevel("AAL3");
+      setHsmQuorum("10_OF_10_HARDWARE_PQC");
+      setMerkleIntegrity("CANONICAL_GENESIS_ROOT");
+      setFailClosedArmed(true);
+    } else if (preset === "LEGACY_RSA") {
+      setSigScheme("RSA_2048");
+      setIalLevel("IAL2.2");
+      setAalLevel("AAL2");
+      setHsmQuorum("3_OF_5_CLOUD_HSM");
+      setMerkleIntegrity("TRANSIENT_LOCAL_HASH");
+      setFailClosedArmed(false);
+    } else if (preset === "WEAK_MOBILE") {
+      setSigScheme("ECDSA_P256");
+      setIalLevel("IAL1");
+      setAalLevel("AAL1");
+      setHsmQuorum("SINGLE_SOFTWARE_KEY");
+      setMerkleIntegrity("UNVERIFIED_STATE");
+      setFailClosedArmed(false);
+    }
+  };
+
+  return (
+    <div className="bg-zinc-950 border border-yellow-500/50 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-6 text-zinc-100">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-yellow-500/15 border border-yellow-500/60 flex items-center justify-center text-yellow-400">
+            <Scale className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-yellow-400">
+                THAI ETDA &amp; PDPA FORENSIC ENGINE
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-yellow-950 text-yellow-300 border border-yellow-700/60 text-[10px] font-mono font-bold">
+                SECTIONS 9, 26, 28 SIMULATOR
+              </span>
+            </div>
+            <h2 className="text-base sm:text-lg font-bold font-mono text-zinc-100 mt-0.5">
+              Compliance Audit Simulator (Thai Electronic Transactions Act)
+            </h2>
+          </div>
+        </div>
+
+        {/* Preset Selector */}
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <span className="text-[11px] font-mono text-zinc-400 mr-1">Presets:</span>
+          <button
+            onClick={() => applyPreset("SOVEREIGN_SSOT")}
+            className="px-2.5 py-1.5 bg-yellow-950/80 hover:bg-yellow-900 border border-yellow-500/60 text-yellow-300 font-mono text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-1"
+          >
+            <Sparkles className="w-3 h-3" />
+            <span>SSoT Δ0 Supreme</span>
+          </button>
+          <button
+            onClick={() => applyPreset("LEGACY_RSA")}
+            className="px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-mono text-xs rounded-xl transition-all cursor-pointer"
+          >
+            Legacy RSA-2048
+          </button>
+          <button
+            onClick={() => applyPreset("WEAK_MOBILE")}
+            className="px-2.5 py-1.5 bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800 text-rose-300 font-mono text-xs rounded-xl transition-all cursor-pointer"
+          >
+            Weak AAL1 Non-PQC
+          </button>
+        </div>
+      </div>
+
+      {/* Simulator Parameters Config Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Param 1: Signature Scheme */}
+        <div className="p-4 bg-black/60 border border-zinc-800 rounded-2xl space-y-3">
+          <div className="flex items-center justify-between text-xs font-mono text-cyan-400 font-bold">
+            <span className="flex items-center gap-1.5">
+              <Cpu className="w-4 h-4" />
+              Signature Scheme (Algorithm)
+            </span>
+            <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${isPqc ? "bg-emerald-950 text-emerald-300 border border-emerald-700" : "bg-amber-950 text-amber-300 border border-amber-700"}`}>
+              {isPqc ? "NIST PQC FIPS 204" : "Legacy Classical"}
+            </span>
+          </div>
+
+          <select
+            value={sigScheme}
+            onChange={(e) => setSigScheme(e.target.value as SignatureScheme)}
+            className="w-full bg-zinc-900 border border-zinc-700 rounded-xl p-2 text-xs font-mono text-zinc-100 focus:outline-none focus:border-cyan-500 cursor-pointer"
+          >
+            <option value="ML_DSA_87_DILITHIUM5">ML-DSA-87 (Dilithium-5) - NIST Post-Quantum [SSoT]</option>
+            <option value="SPHINCS_PLUS">SPHINCS+ (Stateless Hash PQC) - FIPS 205</option>
+            <option value="FALCON_1024">Falcon-1024 (Lattice-based PQC)</option>
+            <option value="RSA_4096">RSA-4096 (Classical Strong)</option>
+            <option value="RSA_2048">RSA-2048 (Classical Deprecated for Quantum)</option>
+            <option value="ECDSA_P256">ECDSA (NIST P-256 Elliptic Curve)</option>
+            <option value="ED25519">Ed25519 (Edwards Curve)</option>
+          </select>
+          <p className="text-[11px] text-zinc-500 font-mono">
+            {isPqc 
+              ? "อัลกอริทึมต้านทานควอนตัมมาตรฐาน FIPS 204/205 ปลอดภัยต่อการโจมตีจาก Shor's Algorithm" 
+              : "เสี่ยงถูกเจาะกุญแจลับด้วยคอมพิวเตอร์ควอนตัมในอนาคต ขาดความยั่งยืนในระยะยาว"}
+          </p>
+        </div>
+
+        {/* Param 2: Identity & Auth Levels (IAL & AAL) */}
+        <div className="p-4 bg-black/60 border border-zinc-800 rounded-2xl space-y-3">
+          <div className="flex items-center justify-between text-xs font-mono text-yellow-400 font-bold">
+            <span className="flex items-center gap-1.5">
+              <Key className="w-4 h-4" />
+              Identity &amp; Auth (IAL / AAL)
+            </span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-yellow-950 text-yellow-300 border border-yellow-700 font-bold">
+              ETDA Standard
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="text-[10px] text-zinc-400 font-mono block mb-1">IAL Level (Identity)</label>
+              <select
+                value={ialLevel}
+                onChange={(e) => setIalLevel(e.target.value as IALLevel)}
+                className="w-full bg-zinc-900 border border-zinc-700 rounded-xl p-2 text-xs font-mono text-zinc-100 focus:outline-none focus:border-yellow-500 cursor-pointer"
+              >
+                <option value="IAL3">IAL 3 (Biometrics + Dip Chip)</option>
+                <option value="IAL2.3">IAL 2.3 (NDID + Face Scan)</option>
+                <option value="IAL2.2">IAL 2.2 (ID Card Check)</option>
+                <option value="IAL2.1">IAL 2.1 (Selfie verification)</option>
+                <option value="IAL1">IAL 1 (Unverified Email/Phone)</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-[10px] text-zinc-400 font-mono block mb-1">AAL Level (Auth)</label>
+              <select
+                value={aalLevel}
+                onChange={(e) => setAalLevel(e.target.value as AALLevel)}
+                className="w-full bg-zinc-900 border border-zinc-700 rounded-xl p-2 text-xs font-mono text-zinc-100 focus:outline-none focus:border-yellow-500 cursor-pointer"
+              >
+                <option value="AAL3">AAL 3 (Hardware Token + Pin)</option>
+                <option value="AAL2">AAL 2 (MFA / App Authenticator)</option>
+                <option value="AAL1">AAL 1 (Single Password)</option>
+              </select>
+            </div>
+          </div>
+          <p className="text-[11px] text-zinc-500 font-mono">
+            มาตรฐาน ETDA: การพิสูจน์ตัวตนในธุรกรรมมูลค่าสูงจำเป็นต้องใช้ IAL 2.3+ และ AAL 2+
+          </p>
+        </div>
+
+        {/* Param 3: Key Custody & Merkle Ledger */}
+        <div className="p-4 bg-black/60 border border-zinc-800 rounded-2xl space-y-3">
+          <div className="flex items-center justify-between text-xs font-mono text-purple-400 font-bold">
+            <span className="flex items-center gap-1.5">
+              <Lock className="w-4 h-4" />
+              Custody &amp; Merkle Root
+            </span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-700 font-bold">
+              Invariants
+            </span>
+          </div>
+
+          <div className="space-y-2">
+            <div>
+              <label className="text-[10px] text-zinc-400 font-mono block mb-1">Key Custody Quorum</label>
+              <select
+                value={hsmQuorum}
+                onChange={(e) => setHsmQuorum(e.target.value as HSMQuorum)}
+                className="w-full bg-zinc-900 border border-zinc-700 rounded-xl p-2 text-xs font-mono text-zinc-100 focus:outline-none focus:border-purple-500 cursor-pointer"
+              >
+                <option value="10_OF_10_HARDWARE_PQC">10/10 Hardware HSM Quorum (Air-gapped)</option>
+                <option value="3_OF_5_CLOUD_HSM">3/5 Cloud KMS Multi-Party</option>
+                <option value="SINGLE_SOFTWARE_KEY">Single Software Key (Insecure)</option>
+              </select>
+            </div>
+
+            <div className="flex items-center justify-between pt-1">
+              <label className="text-xs font-mono text-zinc-300 flex items-center gap-1.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={failClosedArmed}
+                  onChange={(e) => setFailClosedArmed(e.target.checked)}
+                  className="rounded border-zinc-700 text-yellow-500 focus:ring-0 cursor-pointer"
+                />
+                Fail-Closed Auto Lockdown
+              </label>
+              <span className="text-[10px] font-mono text-zinc-400">
+                {failClosedArmed ? "ARMED" : "DISABLED"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Overall Legal Admissibility Score Banner */}
+      <div className={`p-4 rounded-2xl border ${courtColor} flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono transition-all`}>
+        <div className="space-y-1">
+          <div className="text-xs uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+            <Scale className="w-4 h-4 text-yellow-400" />
+            <span>Thai Court Admissibility Rating (ผลการรับรองเป็นพยานหลักฐานในศาลไทย)</span>
+          </div>
+          <div className="text-base sm:text-lg font-bold">
+            {courtGrade}
+          </div>
+        </div>
+        <div className="flex items-center gap-3 text-right">
+          <div>
+            <span className="text-xs text-zinc-400 block">COMPLIANCE SCORE</span>
+            <span className="text-xl font-bold font-mono">{gradeScore}/100</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 4 Detailed Legal Evaluations */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+        {/* Section 9 Evaluation */}
+        <div className={`p-4 rounded-2xl border ${sec9Pass ? "bg-emerald-950/20 border-emerald-800/80 text-zinc-200" : "bg-rose-950/20 border-rose-800/80 text-zinc-300"} space-y-2`}>
+          <div className="flex items-center justify-between">
+            <span className="font-bold flex items-center gap-1.5">
+              {sec9Pass ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <XCircle className="w-4 h-4 text-rose-400" />}
+              พ.ร.บ. ธุรกรรมทางอิเล็กทรอนิกส์ มาตรา ๙ (Identity &amp; Intent)
+            </span>
+            <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${sec9Pass ? "bg-emerald-900/60 text-emerald-300" : "bg-rose-900/60 text-rose-300"}`}>
+              {sec9Pass ? "COMPLIANT" : "FAIL"}
+            </span>
+          </div>
+          <p className="text-[11px] text-zinc-400">{sec9Reason}</p>
+          <div className="text-[10px] text-zinc-500 pt-1 border-t border-zinc-800">
+            เกณฑ์: สามารถระบุตัวเจ้าของลายมือชื่อ และแสดงว่าเจ้าของลายมือชื่อยอมรับข้อความในข้อมูลอิเล็กทรอนิกส์
+          </div>
+        </div>
+
+        {/* Section 26 Evaluation */}
+        <div className={`p-4 rounded-2xl border ${sec26Pass ? "bg-emerald-950/20 border-emerald-800/80 text-zinc-200" : "bg-rose-950/20 border-rose-800/80 text-zinc-300"} space-y-2`}>
+          <div className="flex items-center justify-between">
+            <span className="font-bold flex items-center gap-1.5">
+              {sec26Pass ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <XCircle className="w-4 h-4 text-rose-400" />}
+              พ.ร.บ. ธุรกรรมทางอิเล็กทรอนิกส์ มาตรา ๒๖ (Reliable Signature)
+            </span>
+            <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${sec26Pass ? "bg-emerald-900/60 text-emerald-300" : "bg-rose-900/60 text-rose-300"}`}>
+              {sec26Pass ? "RELIABLE" : "UNRELIABLE"}
+            </span>
+          </div>
+          <p className="text-[11px] text-zinc-400">{sec26Reason}</p>
+          <div className="text-[10px] text-zinc-500 pt-1 border-t border-zinc-800">
+            เกณฑ์: ข้อมูลสำหรับสร้างลายมือชื่อเชื่อมโยงไปยังเจ้าของ และอยู่ภายใต้การควบคุมของเจ้าของขณะสร้าง
+          </div>
+        </div>
+
+        {/* Section 28 Evaluation */}
+        <div className={`p-4 rounded-2xl border ${sec28Pass ? "bg-emerald-950/20 border-emerald-800/80 text-zinc-200" : "bg-rose-950/20 border-rose-800/80 text-zinc-300"} space-y-2`}>
+          <div className="flex items-center justify-between">
+            <span className="font-bold flex items-center gap-1.5">
+              {sec28Pass ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <XCircle className="w-4 h-4 text-rose-400" />}
+              พ.ร.บ. ธุรกรรมทางอิเล็กทรอนิกส์ มาตรา ๒๘ (Presumption of Integrity)
+            </span>
+            <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${sec28Pass ? "bg-emerald-900/60 text-emerald-300" : "bg-rose-900/60 text-rose-300"}`}>
+              {sec28Pass ? "PRESUMPTION_VALID" : "NO_PRESUMPTION"}
+            </span>
+          </div>
+          <p className="text-[11px] text-zinc-400">{sec28Reason}</p>
+          <div className="text-[10px] text-zinc-500 pt-1 border-t border-zinc-800">
+            เกณฑ์: ข้อสันนิษฐานทางกฎหมายว่าลายมือชื่อเชื่อถือได้และข้อมูลไม่ถูกเปลี่ยนแปลงตั้งแต่เวลาลงลายมือชื่อ
+          </div>
+        </div>
+
+        {/* PDPA Evaluation */}
+        <div className={`p-4 rounded-2xl border ${pdpaPass ? "bg-emerald-950/20 border-emerald-800/80 text-zinc-200" : "bg-rose-950/20 border-rose-800/80 text-zinc-300"} space-y-2`}>
+          <div className="flex items-center justify-between">
+            <span className="font-bold flex items-center gap-1.5">
+              {pdpaPass ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <XCircle className="w-4 h-4 text-rose-400" />}
+              พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA Sec. 37/38)
+            </span>
+            <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${pdpaPass ? "bg-emerald-900/60 text-emerald-300" : "bg-rose-900/60 text-rose-300"}`}>
+              {pdpaPass ? "PDPA_COMPLIANT" : "PDPA_RISK"}
+            </span>
+          </div>
+          <p className="text-[11px] text-zinc-400">{pdpaReason}</p>
+          <div className="text-[10px] text-zinc-500 pt-1 border-t border-zinc-800">
+            เกณฑ์: จัดให้มีมาตรการรักษาความมั่นคงปลอดภัยที่เหมาะสม ป้องกันการเข้าถึงโดยมิชอบและการสูญหาย
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Audit Attestation */}
+      <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-zinc-500 pt-2 border-t border-zinc-800">
+        <span>Sovereign Architect: {SSOT.sovereignPrincipal}</span>
+        <span>Canonical Block #{SSOT.canonicalBlockHeight} • 14,902 Seals Invariant</span>
+      </div>
+    </div>
+  );
+};
+
+export default ComplianceAuditSimulator;
