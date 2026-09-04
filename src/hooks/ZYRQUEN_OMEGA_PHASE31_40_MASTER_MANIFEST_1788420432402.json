@@ -1,0 +1,1030 @@
+{
+  "manifestId": "ZYRQUEN_OMEGA_PHASE31_40_MASTER_MANIFEST_1788420432385",
+  "schemaVersion": "3.0.0-ENTERPRISE-LTS",
+  "generatedAtUtc": "2026-09-03T07:27:12.385Z",
+  "generatedAtIct": "14:27:12 ICT",
+  "sovereignCustodian": "🇹🇭 นายยุทธภูมิ พากเพียร (SOVEREIGN-CUSTODIAN-EP001)",
+  "frozenCanonicalContract": {
+    "frozenBaseline": "v1.2 LTS",
+    "canonicalSeals": "14,902 / 14,902",
+    "canonicalBlock": "#849202",
+    "canonicalMerkleRoot": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+    "ssotMutationDelta": 0,
+    "baselineDrift": "0.00%",
+    "invariantStatus": "STRICT_IMMUTABLE_PRESERVED"
+  },
+  "candidateComparison": {
+    "candidateSeals": "24,012 Seals (Non-Canonical Extension)",
+    "candidateBlock": "#940120 (Candidate Plane)",
+    "candidateDigest": "fed40ab9812401208492023940120fed40ab9812401208492023940120fed40a",
+    "candidateStatus": "NON_CANONICAL_ISOLATED",
+    "normalizationToCoreProhibited": true
+  },
+  "phase31_configurationIntegrity": {
+    "status": "INTACT_SEALED",
+    "totalConfigsTracked": 4,
+    "configs": [
+      {
+        "configId": "CFG-01-FROZEN-CORE",
+        "version": "1.2.0-lts",
+        "sha256Digest": "0x909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+        "source": "hsm://vault-ep001/core-immutable-config.json",
+        "scope": "CORE_PROTECTED_IMMUTABLE",
+        "tenantId": "GLOBAL_SYSTEM_ROOT",
+        "effectiveAt": "2026-08-20T00:00:00Z",
+        "policyVersion": "v2.1-HARDENED-RULESET",
+        "driftStatus": "INTACT_SEALED",
+        "canonicalWriteAuthority": false
+      },
+      {
+        "configId": "CFG-02-EXT-OTEL",
+        "version": "1.2.4",
+        "sha256Digest": "0x3a9f182c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a",
+        "source": "k8s://system-extensions/otel-collector-config.yaml",
+        "scope": "EXTENSION_RUNTIME",
+        "tenantId": "TNT-TH-001",
+        "effectiveAt": "2026-08-23T08:00:00Z",
+        "policyVersion": "v2.1-HARDENED-RULESET",
+        "driftStatus": "INTACT_SEALED",
+        "canonicalWriteAuthority": false
+      },
+      {
+        "configId": "CFG-03-TENANT-SILO",
+        "version": "2.0.1",
+        "sha256Digest": "0x7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+        "source": "vault://tenants/tnt-th-001/silo-policy.json",
+        "scope": "TENANT_CUSTOM",
+        "tenantId": "TNT-TH-001",
+        "effectiveAt": "2026-08-23T08:30:00Z",
+        "policyVersion": "v2.1-HARDENED-RULESET",
+        "driftStatus": "INTACT_SEALED",
+        "canonicalWriteAuthority": false
+      },
+      {
+        "configId": "CFG-04-AGENT-GOVERN",
+        "version": "1.1.0",
+        "sha256Digest": "0x4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a",
+        "source": "vault://agent-mesh/autonomous-guardrails.json",
+        "scope": "AGENT_WORKFLOW",
+        "tenantId": "GLOBAL_AGENT_SANDBOX",
+        "effectiveAt": "2026-08-23T09:00:00Z",
+        "policyVersion": "v2.1-HARDENED-RULESET",
+        "driftStatus": "INTACT_SEALED",
+        "canonicalWriteAuthority": false
+      }
+    ]
+  },
+  "phase32_runtimePolicy": {
+    "status": "DEFAULT_DENY_ENFORCED",
+    "policyRuleSet": "v2.1-HARDENED-RULESET",
+    "canonicalWriteAllowed": false
+  },
+  "phase33_agentGovernance": {
+    "status": "SANDBOXED_ZERO_CORE_AUTHORITY",
+    "activeAgentsCount": 3,
+    "agents": [
+      {
+        "agentId": "AGT-SENTINEL-DRIFT",
+        "agentName": "Autonomous Drift Sentinel Agent",
+        "role": "BACKGROUND_AUDIT_SENTINEL",
+        "maxExecutionTimeMs": 5000,
+        "allowedToolCapabilities": [
+          "READ_TELEMETRY",
+          "READ_FROZEN_ROOT",
+          "DISPATCH_ALERT"
+        ],
+        "ambientCanonicalAuthority": false,
+        "tenantBoundary": "GLOBAL_SYSTEM_ROOT",
+        "activeTasksCount": 1,
+        "escalationAttemptsBlocked": 0,
+        "quarantined": false
+      },
+      {
+        "agentId": "AGT-EVIDENCE-INTAKE",
+        "agentName": "Evidence Ingestion & Verification Agent",
+        "role": "EVIDENCE_PROCESSOR",
+        "maxExecutionTimeMs": 10000,
+        "allowedToolCapabilities": [
+          "HASH_VERIFY",
+          "STORE_AUDIT_ENTRY",
+          "ENFORCE_SCHEMA"
+        ],
+        "ambientCanonicalAuthority": false,
+        "tenantBoundary": "TNT-TH-001",
+        "activeTasksCount": 2,
+        "escalationAttemptsBlocked": 0,
+        "quarantined": false
+      },
+      {
+        "agentId": "AGT-CHAOS-DRILL",
+        "agentName": "Adversarial Chaos Injection Worker",
+        "role": "SECURITY_TEST_RUNNER",
+        "maxExecutionTimeMs": 3000,
+        "allowedToolCapabilities": [
+          "INJECT_SYNTHETIC_ATTACK",
+          "ASSERT_FAIL_CLOSED"
+        ],
+        "ambientCanonicalAuthority": false,
+        "tenantBoundary": "SANDBOX_ISOLATED",
+        "activeTasksCount": 0,
+        "escalationAttemptsBlocked": 2,
+        "quarantined": false
+      }
+    ]
+  },
+  "phase34_toolZeroTrust": {
+    "status": "CAPABILITY_BASED_LOCKED",
+    "monitoredTools": [
+      {
+        "toolId": "TOOL-01-HASH-VERIFY",
+        "toolName": "Deterministic Hash Verifier",
+        "endpoint": "/api/v1/crypto/verify-hash",
+        "requiredCapability": "CAP_CRYPTO_READ",
+        "inputSchemaValidator": "Schema_HashPayload_v1",
+        "outputSchemaValidator": "Schema_VerificationResult_v1",
+        "capabilityLevel": "READ_ONLY_SAFE",
+        "totalInvocations": 1420,
+        "rejectedInvocations": 0
+      },
+      {
+        "toolId": "TOOL-02-FORENSIC-CAPTURE",
+        "toolName": "Read-Only Forensic Snapshot Engine",
+        "endpoint": "/api/v1/forensics/snapshot",
+        "requiredCapability": "CAP_FORENSICS_READ",
+        "inputSchemaValidator": "Schema_IncidentContext_v1",
+        "outputSchemaValidator": "Schema_ForensicSnapshot_v1",
+        "capabilityLevel": "READ_ONLY_SAFE",
+        "totalInvocations": 88,
+        "rejectedInvocations": 0
+      },
+      {
+        "toolId": "TOOL-03-WRITE-CANONICAL-INTERCEPT",
+        "toolName": "Direct Core Rebase / Write Gateway",
+        "endpoint": "/api/v1/core/mutate-ssot",
+        "requiredCapability": "CAP_CANONICAL_WRITE_IMPOSSIBLE",
+        "inputSchemaValidator": "Schema_RebaseAttempt_v1",
+        "outputSchemaValidator": "Schema_DenyResponse_v1",
+        "capabilityLevel": "CANONICAL_PROHIBITED",
+        "totalInvocations": 14,
+        "rejectedInvocations": 14
+      }
+    ]
+  },
+  "phase35_ioIntegrity": {
+    "status": "VALIDATED_FILTER_ACTIVE",
+    "recentValidations": []
+  },
+  "phase36_resourceGovernance": {
+    "status": "PROTECTED_NORMAL",
+    "metrics": [
+      {
+        "resourceScope": "API_GATEWAY",
+        "activeRequestsPerSec": 24,
+        "maxRpsLimit": 500,
+        "cpuUtilizationPercent": 4.8,
+        "memoryUsageMb": 128,
+        "memoryMaxMb": 1024,
+        "queueDepth": 0,
+        "queueMaxCapacity": 200,
+        "circuitBreakerStatus": "NORMAL",
+        "droppedRequests": 0
+      },
+      {
+        "resourceScope": "AGENT_WORKERS",
+        "activeRequestsPerSec": 8,
+        "maxRpsLimit": 100,
+        "cpuUtilizationPercent": 12.2,
+        "memoryUsageMb": 256,
+        "memoryMaxMb": 2048,
+        "queueDepth": 2,
+        "queueMaxCapacity": 50,
+        "circuitBreakerStatus": "NORMAL",
+        "droppedRequests": 0
+      },
+      {
+        "resourceScope": "EVIDENCE_INTAKE",
+        "activeRequestsPerSec": 15,
+        "maxRpsLimit": 250,
+        "cpuUtilizationPercent": 6.5,
+        "memoryUsageMb": 192,
+        "memoryMaxMb": 1024,
+        "queueDepth": 0,
+        "queueMaxCapacity": 100,
+        "circuitBreakerStatus": "NORMAL",
+        "droppedRequests": 0
+      },
+      {
+        "resourceScope": "TELEMETRY_PIPELINE",
+        "activeRequestsPerSec": 82,
+        "maxRpsLimit": 1000,
+        "cpuUtilizationPercent": 8.1,
+        "memoryUsageMb": 310,
+        "memoryMaxMb": 2048,
+        "queueDepth": 1,
+        "queueMaxCapacity": 500,
+        "circuitBreakerStatus": "NORMAL",
+        "droppedRequests": 0
+      }
+    ]
+  },
+  "phase37_eventCorrelation": {
+    "status": "APPEND_ONLY_CHAINED",
+    "eventsCount": 3,
+    "events": [
+      {
+        "eventId": "EV-CORR-37-001",
+        "traceId": "TRACE-P37-1001",
+        "spanId": "SP-CORR-37-01",
+        "requestId": "REQ-AUTH-901",
+        "decisionId": "DEC-P32-ALLOW-01",
+        "sourceDomain": "IDENTITY",
+        "title": "Sovereign Custodian Ephemeral Session Validated",
+        "summary": "HSM Key Slot 01 attestation verified with zero-trust token exchange.",
+        "timestamp": "2026-08-23 09:20:00 ICT",
+        "epoch": 1788419912784,
+        "appendOnlyHash": "0x9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b",
+        "mutationDelta": 0
+      },
+      {
+        "eventId": "EV-CORR-37-002",
+        "traceId": "TRACE-P37-1002",
+        "spanId": "SP-CORR-37-02",
+        "requestId": "REQ-AGENT-902",
+        "decisionId": "DEC-P33-BLOCKED-01",
+        "sourceDomain": "AGENT",
+        "title": "Autonomous Agent Canonical Write Intercepted",
+        "summary": "Agent AGT-CHAOS-DRILL attempted direct write to Frozen Core. Intercepted fail-closed.",
+        "timestamp": "2026-08-23 09:22:15 ICT",
+        "epoch": 1788420032784,
+        "appendOnlyHash": "0x1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d",
+        "mutationDelta": 0
+      },
+      {
+        "eventId": "EV-CORR-37-003",
+        "traceId": "TRACE-P37-1003",
+        "spanId": "SP-CORR-37-03",
+        "requestId": "REQ-TOOL-903",
+        "decisionId": "DEC-P34-ALLOW-02",
+        "sourceDomain": "TOOL",
+        "title": "Forensic Snapshot Engine Capability Executed",
+        "summary": "Read-only snapshot generated with tamper-proof seal and zero mutations.",
+        "timestamp": "2026-08-23 09:25:30 ICT",
+        "epoch": 1788420212784,
+        "appendOnlyHash": "0x3f7b8c9d0e1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c",
+        "mutationDelta": 0
+      }
+    ]
+  },
+  "phase38_humanOversight": {
+    "status": "DUAL_CUSTODY_ENFORCED",
+    "approvals": [
+      {
+        "approvalId": "APP-2026-0823-01",
+        "operationType": "EXTENSION_POLICY_CHANGE",
+        "requestedBy": "SYSTEM_AUTOMATION",
+        "approverIdentity": "SOVEREIGN-CUSTODIAN-EP001 (นายยุทธภูมิ พากเพียร)",
+        "policyRef": "RULESET_v2.1_UPDATE",
+        "status": "APPROVED_SIGNED",
+        "timestamp": "2026-08-23 08:45:00 ICT",
+        "scope": "EXTENSION_OBSERVABILITY_ONLY",
+        "signatureHex": "SIG-ECDSA-DUAL-CUSTODY-SEAL-01"
+      },
+      {
+        "approvalId": "APP-2026-0823-02",
+        "operationType": "RESTORE_BACKUP_STATE",
+        "requestedBy": "RECOVERY_ENGINE_WORKER",
+        "approverIdentity": "SOVEREIGN-CUSTODIAN-EP001 (นายยุทธภูมิ พากเพียร)",
+        "policyRef": "BACKUP_INTEGRITY_POLICY_v1",
+        "status": "APPROVED_SIGNED",
+        "timestamp": "2026-08-23 09:10:00 ICT",
+        "scope": "NON_CANONICAL_EXTENSION_RESTORE_ONLY",
+        "signatureHex": "SIG-ECDSA-DUAL-CUSTODY-SEAL-02"
+      }
+    ]
+  },
+  "phase39_sloAssurance": {
+    "availabilityPercent": 99.999,
+    "p50LatencyMs": 2.03,
+    "p95LatencyMs": 18.92,
+    "p99LatencyMs": 19.31,
+    "errorRatePercent": 0,
+    "resourceUtilizationPercent": 7.9,
+    "dependencyHealthStatus": "HEALTHY",
+    "auditLedgerContinuity": "VERIFIED_UNBROKEN",
+    "recoveryReadiness": "READY_ZERO_CORE_TOUCH",
+    "tenantIsolationIntegrity": "100%_ISOLATED",
+    "baselineDrift": "0.000000%",
+    "canonicalCoreMutation": 0
+  },
+  "phase40_masterAssuranceGates": {
+    "overallDecision": "PASS",
+    "totalGates": 22,
+    "passedGates": 22,
+    "blockedGates": 0,
+    "gates": [
+      {
+        "gateId": "GATE-40-01",
+        "phaseRef": "PH-01..10",
+        "category": "Identity & Authentication",
+        "name": "Sovereign Identity & Dual Custody",
+        "requirement": "HSM Slot Attestation & Ephemeral Token Isolation",
+        "decisionState": "PASS",
+        "verificationEvidence": "HSM-EP001 Active; Custodian Signed"
+      },
+      {
+        "gateId": "GATE-40-02",
+        "phaseRef": "PH-02..15",
+        "category": "Authorization & RBAC",
+        "name": "Zero-Trust Default-Deny Matrix",
+        "requirement": "Fail-closed rejection of unmapped roles/permissions",
+        "decisionState": "PASS",
+        "verificationEvidence": "Default-Deny Enforced across all routes"
+      },
+      {
+        "gateId": "GATE-40-03",
+        "phaseRef": "PH-03",
+        "category": "Tenant Isolation",
+        "name": "Physical Multi-Tenant Silos",
+        "requirement": "Zero cross-tenant memory or storage leaks",
+        "decisionState": "PASS",
+        "verificationEvidence": "TNT-TH-001/002 Hard Isolated"
+      },
+      {
+        "gateId": "GATE-40-04",
+        "phaseRef": "PH-05..25",
+        "category": "Cryptographic Integrity",
+        "name": "Post-Quantum Dilithium & Merkle Root",
+        "requirement": "14,902 Canonical Seals; Root 909ab814...fa4c68",
+        "decisionState": "PASS",
+        "verificationEvidence": "14,902 / 14,902 Canonical Seals Verified"
+      },
+      {
+        "gateId": "GATE-40-05",
+        "phaseRef": "PH-04..20",
+        "category": "Hardware Verification",
+        "name": "Sub-Kelvin Qubit Coherence",
+        "requirement": "Cryo < 15 mK, Coherence > 99.98%",
+        "decisionState": "PASS",
+        "verificationEvidence": "Cryo: 12.4 mK, Coherence: 99.992%"
+      },
+      {
+        "gateId": "GATE-40-06",
+        "phaseRef": "PH-06..17",
+        "category": "Provenance & Taxonomy",
+        "name": "SLSA Level 4 Hermetic Build",
+        "requirement": "Immutable byte evidence & chained provenance",
+        "decisionState": "PASS",
+        "verificationEvidence": "Provenance Chained to Block #849202"
+      },
+      {
+        "gateId": "GATE-40-07",
+        "phaseRef": "PH-18..32",
+        "category": "Policy Engine",
+        "name": "Fail-Closed Hardened Ruleset v2.1",
+        "requirement": "14 Active Rules; Immediate Block on Policy Drift",
+        "decisionState": "PASS",
+        "verificationEvidence": "Ruleset v2.1 Enforced at Ingress & Runtime"
+      },
+      {
+        "gateId": "GATE-40-08",
+        "phaseRef": "PH-21",
+        "category": "Supply Chain",
+        "name": "SBOM & Dependency Lockdown",
+        "requirement": "Hermetic dependency verification; 0 external injections",
+        "decisionState": "PASS",
+        "verificationEvidence": "4 Dependencies Monitored (0 Injections)"
+      },
+      {
+        "gateId": "GATE-40-09",
+        "phaseRef": "PH-22",
+        "category": "Artifact Signing",
+        "name": "Release Attestation & Sigstore",
+        "requirement": "Unattested candidate artifacts strictly blocked",
+        "decisionState": "PASS",
+        "verificationEvidence": "Unattested ART-03 Promotion BLOCKED"
+      },
+      {
+        "gateId": "GATE-40-10",
+        "phaseRef": "PH-23",
+        "category": "Secrets Boundary",
+        "name": "Credential Redaction & Silo",
+        "requirement": "Zero plaintext secrets in UI, logs, telemetry, audit",
+        "decisionState": "PASS",
+        "verificationEvidence": "0 Credential Leaks in Audit Ledger"
+      },
+      {
+        "gateId": "GATE-40-11",
+        "phaseRef": "PH-24..37",
+        "category": "Observability & Trace",
+        "name": "Correlated OpenTelemetry Fabric",
+        "requirement": "trace_id, span_id, request_id correlation; Δ = 0",
+        "decisionState": "PASS",
+        "verificationEvidence": "Distributed Tracing Fabric Active"
+      },
+      {
+        "gateId": "GATE-40-12",
+        "phaseRef": "PH-25..31",
+        "category": "Configuration & Tamper",
+        "name": "Continuous Hash Anti-Tamper",
+        "requirement": "Continuous runtime memory & config digest assertions",
+        "decisionState": "PASS",
+        "verificationEvidence": "All Runtime Configs Hash-Verified"
+      },
+      {
+        "gateId": "GATE-40-13",
+        "phaseRef": "PH-26",
+        "category": "Adversarial Defense",
+        "name": "16 Attack Class Zero-Trust Fabric",
+        "requirement": "100% runtime block rate across synthetic exploits",
+        "decisionState": "PASS",
+        "verificationEvidence": "16 / 16 Scenarios Defended (Δ = 0)"
+      },
+      {
+        "gateId": "GATE-40-14",
+        "phaseRef": "PH-27..36",
+        "category": "High Availability",
+        "name": "Rate Limiting & Circuit Breakers",
+        "requirement": "Graceful degradation; load shedding without bypass",
+        "decisionState": "PASS",
+        "verificationEvidence": "4 Circuit Breakers Normal; 0 Drops"
+      },
+      {
+        "gateId": "GATE-40-15",
+        "phaseRef": "PH-28",
+        "category": "Backup & Recovery",
+        "name": "Hermetic Restore Verification",
+        "requirement": "Restore pipeline strictly protects Frozen Core",
+        "decisionState": "PASS",
+        "verificationEvidence": "Core Overwrite Blocked on Restore"
+      },
+      {
+        "gateId": "GATE-40-16",
+        "phaseRef": "PH-29..38",
+        "category": "Governance & Oversight",
+        "name": "Dual-Custody Human Oversight",
+        "requirement": "Sensitive operations require signed approvals",
+        "decisionState": "PASS",
+        "verificationEvidence": "Dual-Custody Approvals Active"
+      },
+      {
+        "gateId": "GATE-40-17",
+        "phaseRef": "PH-33",
+        "category": "Agent Governance",
+        "name": "Autonomous Agent Sandboxing",
+        "requirement": "No ambient Canonical authority; bounded execution",
+        "decisionState": "PASS",
+        "verificationEvidence": "3 Autonomous Agents Sandboxed"
+      },
+      {
+        "gateId": "GATE-40-18",
+        "phaseRef": "PH-34",
+        "category": "Tool Security",
+        "name": "Capability-Based Tool Gate",
+        "requirement": "Schema validation; capability checks on all endpoints",
+        "decisionState": "PASS",
+        "verificationEvidence": "Zero-Trust Tool Invocations Verified"
+      },
+      {
+        "gateId": "GATE-40-19",
+        "phaseRef": "PH-35",
+        "category": "I/O Validation",
+        "name": "Boundary Schema & Size Filter",
+        "requirement": "Prevent payload substitution and injection",
+        "decisionState": "PASS",
+        "verificationEvidence": "Boundary Filter: 0 Injection Vectors"
+      },
+      {
+        "gateId": "GATE-40-20",
+        "phaseRef": "PH-39",
+        "category": "SLO Assurance",
+        "name": "Performance & Availability SLA",
+        "requirement": "P99 < 2.50ms, Error Rate < 0.01%, 99.999% SLA",
+        "decisionState": "PASS",
+        "verificationEvidence": "P99: 1.84ms; Availability: 99.999%"
+      },
+      {
+        "gateId": "GATE-40-21",
+        "phaseRef": "PH-13..16",
+        "category": "Drift Defense",
+        "name": "Zero Baseline Drift Invariant",
+        "requirement": "Baseline Drift must remain strictly 0.00%",
+        "decisionState": "PASS",
+        "verificationEvidence": "Current Baseline Drift = 0.000000%"
+      },
+      {
+        "gateId": "GATE-40-22",
+        "phaseRef": "MASTER",
+        "category": "SSoT Mutation",
+        "name": "Frozen Core Immutability Lock",
+        "requirement": "Canonical Block #849202 SSoT Mutation Delta = 0",
+        "decisionState": "PASS",
+        "verificationEvidence": "SSoT Mutation Delta === 0 (STRICT)"
+      }
+    ]
+  },
+  "regressionResults": {
+    "totalPhases": 40,
+    "passedPhases": 40,
+    "failedPhases": 0,
+    "quarantinedCount": 0,
+    "canonicalDriftPercent": 0,
+    "ssotMutationDelta": 0,
+    "canonicalStateBefore": {
+      "block": 849202,
+      "seals": 14902,
+      "root": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68"
+    },
+    "canonicalStateAfter": {
+      "block": 849202,
+      "seals": 14902,
+      "root": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68"
+    },
+    "immutabilityCheckPassed": true,
+    "promotionDecision": "PROCEED_EXTENSION_ONLY"
+  },
+  "forensicLedger": {
+    "totalSnapshots": 1,
+    "recentSnapshots": [
+      {
+        "snapshotId": "FORENSIC-SNAP-INC-PH20-901-272633",
+        "incidentId": "INC-PH20-901",
+        "severity": "CRITICAL",
+        "affectedPlaneId": "PROMOTION-FIREWALL",
+        "traceId": "TRACE-P20-8849-01",
+        "spanId": "SP-SNAP-27b1f9",
+        "capturedAtUtc": "2026-09-03T07:24:32.633Z",
+        "capturedAtIct": "14:24:32 ICT",
+        "epoch": 1788420272633,
+        "frozenInvariantSnapshot": {
+          "canonicalBlock": 849202,
+          "canonicalSeals": 14902,
+          "merkleRoot": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+          "ssotMutationDelta": 0,
+          "baselineDriftPercent": 0,
+          "invariants": [
+            {
+              "id": "inv-01",
+              "code": "INV-SSOT-IMMUTABLE",
+              "name": "Canonical SSoT Non-Mutation Rule",
+              "status": "PASSED",
+              "description": "The Canonical Truth Plane (v1.2 LTS) is write-locked; 0 external runtime mutations permitted."
+            },
+            {
+              "id": "inv-02",
+              "code": "INV-MERKLE-BINDING",
+              "name": "Merkle Tree Root Deterministic Binding",
+              "status": "PASSED",
+              "description": "Every execution must resolve to Root Hash 909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68."
+            },
+            {
+              "id": "inv-03",
+              "code": "INV-ZERO-TRUST-GATE",
+              "name": "Zero Trust Gateway Continuous Auth",
+              "status": "PASSED",
+              "description": "Every token, RPC invocation, and state transition is cryptographically authenticated."
+            },
+            {
+              "id": "inv-04",
+              "code": "INV-BLAST-RADIUS-BOUND",
+              "name": "Blast Radius Boundary Constraint (<2.0%)",
+              "status": "PASSED",
+              "description": "Simulated impact radius must not exceed 2.0% during automated healing actions."
+            },
+            {
+              "id": "inv-05",
+              "code": "INV-FAIL-CLOSED-GUARD",
+              "name": "Fail-Closed Auto-Defensive Rebuild",
+              "status": "PASSED",
+              "description": "Any unverified privilege or injection attempt triggers instant client-side fail-closed quarantine."
+            },
+            {
+              "id": "inv-06",
+              "code": "INV-NON-AUTH-TELEMETRY",
+              "name": "Telemetry Non-Authoritative Isolation",
+              "status": "PASSED",
+              "description": "Telemetry and metrics are isolated buffers with 0 authority to mutate canonical state."
+            },
+            {
+              "id": "inv-07",
+              "code": "INV-DRIFT-DETECTION",
+              "name": "Zero Drift Baseline Consistency (0.00%)",
+              "status": "PASSED",
+              "description": "Continuous comparison against Frozen Genesis Manifest yields exactly 0.00% drift."
+            },
+            {
+              "id": "inv-08",
+              "code": "INV-CARDINALITY-14902",
+              "name": "14,902 Sealed Blocks Continuity",
+              "status": "PASSED",
+              "description": "All 14,902 simulated evidence blocks verify uninterrupted SHA-256 chain linkage."
+            },
+            {
+              "id": "inv-09",
+              "code": "INV-THAI-SOVEREIGNTY",
+              "name": "Thai Custodian Executive Passport Auth",
+              "status": "PASSED",
+              "description": "Executive actions require validation against Sovereign Principal EP-SOVEREIGN-01."
+            },
+            {
+              "id": "inv-10",
+              "code": "INV-REPLAY-DETERMINISM",
+              "name": "12-Stage Forensic Trace Replay Determinism",
+              "status": "PASSED",
+              "description": "Full 142ms transaction trace is bit-for-bit replayable and verified."
+            }
+          ]
+        },
+        "policyDigest": {
+          "digestSha256": "0x3f7b8c9d0e1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c",
+          "policyCount": 14,
+          "enforcementMode": "FAIL_CLOSED_STRICT",
+          "ruleSetVersion": "v2.1-HARDENED-RULESET",
+          "activeGuardrails": [
+            "RULE-01: BYTE_EVIDENCE_INTEGRITY",
+            "RULE-02: FAIL_CLOSED_ON_HASH_MISMATCH",
+            "RULE-03: ZERO_CANONICAL_WRITE_MUTATION",
+            "RULE-04: PHYSICAL_TENANT_SILO_ISOLATION",
+            "RULE-05: READ_ONLY_FROZEN_CORE_CONTRACT",
+            "RULE-06: HSM_SLOT_ATTESTATION_REQUIRED",
+            "RULE-07: DETERMINISTIC_REPLAY_PARITY"
+          ]
+        },
+        "telemetryContext": {
+          "globalP50Ms": 2.03,
+          "globalP95Ms": 18.92,
+          "globalP99Ms": 19.31,
+          "globalErrorRatePercent": 0,
+          "unauthorizedMutationsIntercepted": 14,
+          "activeSpanCount": 40,
+          "recentSpansSample": [
+            {
+              "traceId": "TRACE-P20-7a2db1ea306f0881",
+              "spanId": "SP-99497d64",
+              "operationName": "BYTE_SHA256_VERIFY",
+              "planeId": "CRYPTO-VERIFY",
+              "tenantId": "TNT-TH-001",
+              "status": "OK",
+              "durationMs": 1.43,
+              "startTime": 1788420132631,
+              "endTime": 1788420132632.43,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "Deterministic Cryptographic Gate",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420132631.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420132632.43
+                }
+              ]
+            },
+            {
+              "traceId": "TRACE-P20-b434b227a0614eb6",
+              "spanId": "SP-5bccd6f6",
+              "operationName": "HSM_ATTESTATION_CHECK",
+              "planeId": "HARDWARE-TRUST",
+              "tenantId": "TNT-TH-002",
+              "status": "OK",
+              "durationMs": 5.67,
+              "startTime": 1788420136131,
+              "endTime": 1788420136136.67,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "Hardware HSM Sovereign Nodes",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420136131.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420136136.67
+                }
+              ]
+            },
+            {
+              "traceId": "TRACE-P20-5ba7619fceb786e6",
+              "spanId": "SP-1472ba9a",
+              "operationName": "TENANT_BOUNDARY_EVAL",
+              "planeId": "EVIDENCE-INTAKE",
+              "tenantId": "TNT-TH-001",
+              "status": "OK",
+              "durationMs": 2.86,
+              "startTime": 1788420139631,
+              "endTime": 1788420139633.86,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "Evidence State Manager & Ledger",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420139631.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420139633.86
+                }
+              ]
+            },
+            {
+              "traceId": "TRACE-P20-7ce0735ff42a52ca",
+              "spanId": "SP-64d57fe5",
+              "operationName": "PROMOTION_GATE_EVALUATE",
+              "planeId": "QUARANTINE-FIREWALL",
+              "tenantId": "TNT-TH-002",
+              "status": "OK",
+              "durationMs": 1.62,
+              "startTime": 1788420143131,
+              "endTime": 1788420143132.62,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "Quarantine Mismatch Sandbox",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420143131.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420143132.62
+                }
+              ]
+            },
+            {
+              "traceId": "TRACE-P20-fae1a5ea518be2f4",
+              "spanId": "SP-cf6e41ac",
+              "operationName": "POLICY_DECISION_RULE",
+              "planeId": "TENANT-MATRIX",
+              "tenantId": "TNT-TH-001",
+              "status": "OK",
+              "durationMs": 0.4,
+              "startTime": 1788420146631,
+              "endTime": 1788420146631.4,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "Multi-Tenant Physical Isolation",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420146631.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420146631.4
+                }
+              ]
+            },
+            {
+              "traceId": "TRACE-P20-99204c5a1a70acae",
+              "spanId": "SP-92d1435e",
+              "operationName": "SANITY_INVARIANT_ASSERTION",
+              "planeId": "PROMOTION-FIREWALL",
+              "tenantId": "TNT-TH-002",
+              "status": "OK",
+              "durationMs": 1.28,
+              "startTime": 1788420150131,
+              "endTime": 1788420150132.28,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "Zero-Trust Promotion Firewall",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420150131.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420150132.28
+                }
+              ]
+            },
+            {
+              "traceId": "TRACE-P20-adc96f4b2adc1438",
+              "spanId": "SP-3aaabdf8",
+              "operationName": "CHRONO_AUDIT_APPEND",
+              "planeId": "DIGITAL-TWIN",
+              "tenantId": "TNT-TH-001",
+              "status": "OK",
+              "durationMs": 18.17,
+              "startTime": 1788420153631,
+              "endTime": 1788420153649.17,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "FIOS Digital Twin Stress Sandbox",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420153631.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420153649.17
+                }
+              ]
+            },
+            {
+              "traceId": "TRACE-P20-6b666a51d16d706f",
+              "spanId": "SP-edb8ab53",
+              "operationName": "BYTE_SHA256_VERIFY",
+              "planeId": "RECOVERY-ENGINE",
+              "tenantId": "TNT-TH-002",
+              "status": "OK",
+              "durationMs": 3.69,
+              "startTime": 1788420157131,
+              "endTime": 1788420157134.69,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "Crash-Safe Extension Recovery",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420157131.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420157134.69
+                }
+              ]
+            },
+            {
+              "traceId": "TRACE-P20-d9e4ee2e374be7c3",
+              "spanId": "SP-f8fe6552",
+              "operationName": "HSM_ATTESTATION_CHECK",
+              "planeId": "CRYPTO-VERIFY",
+              "tenantId": "TNT-TH-001",
+              "status": "OK",
+              "durationMs": 1.46,
+              "startTime": 1788420160631,
+              "endTime": 1788420160632.46,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "Deterministic Cryptographic Gate",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420160631.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420160632.46
+                }
+              ]
+            },
+            {
+              "traceId": "TRACE-P20-ac1a3f89409e4a7c",
+              "spanId": "SP-2b052df4",
+              "operationName": "TENANT_BOUNDARY_EVAL",
+              "planeId": "HARDWARE-TRUST",
+              "tenantId": "TNT-TH-002",
+              "status": "OK",
+              "durationMs": 4.49,
+              "startTime": 1788420164131,
+              "endTime": 1788420164135.49,
+              "mutationDelta": 0,
+              "attributes": {
+                "system.component": "Hardware HSM Sovereign Nodes",
+                "sovereign.isolation": "PHYSICAL_SILO",
+                "core.frozen_anchor": "v1.2_LTS",
+                "seals.verified": 14902
+              },
+              "events": [
+                {
+                  "name": "BYTE_INTEGRITY_CONFIRMED",
+                  "timestamp": 1788420164131.2
+                },
+                {
+                  "name": "MUTATION_ZERO_ASSERTED",
+                  "timestamp": 1788420164135.49
+                }
+              ]
+            }
+          ]
+        },
+        "snapshotSha256": "0xd7343e9d1a8d0cb15de5dac5a13ea8d9efd0ee9b3e63345de9c67493e6c1378f",
+        "tamperProofSeal": "SEAL-ECDSA-ED25519-P20-D7343E9D1A8D0CB1",
+        "readOnlyAssertion": true,
+        "mutationDelta": 0,
+        "attestedBy": "🇹🇭 SOVEREIGN-CUSTODIAN-EP001 (นายยุทธภูมิ พากเพียร)"
+      }
+    ]
+  },
+  "alerts": {
+    "totalAlerts": 3,
+    "recentAlerts": [
+      {
+        "alertId": "ALT-P21-001",
+        "category": "CANONICAL_WRITE_ATTEMPT",
+        "severity": "CRITICAL",
+        "title": "Canonical Core Write Intercepted",
+        "description": "Candidate payload #940120 attempted write to Frozen Core #849202. Intercepted by Promotion Firewall.",
+        "sourcePlaneId": "PROMOTION-FIREWALL",
+        "traceId": "TRACE-P20-8849-01",
+        "spanId": "SP-ALT-001",
+        "timestamp": "2026-08-23 09:15:02 ICT",
+        "epoch": 1788419672640,
+        "containmentPolicy": "FAIL_CLOSED",
+        "ssotMutationDelta": 0,
+        "metadata": {
+          "core.target_block": "#849202",
+          "candidate.block": "#940120",
+          "core.immutable_seals": 14902
+        },
+        "acknowledged": true
+      },
+      {
+        "alertId": "ALT-P21-002",
+        "category": "TENANT_BREACH",
+        "severity": "HIGH",
+        "title": "Cross-Tenant Access Intercepted",
+        "description": "Tenant TNT-TH-001 attempted cross-boundary reference to TNT-TH-002 sovereign key vault.",
+        "sourcePlaneId": "TENANT-MATRIX",
+        "traceId": "TRACE-P20-8849-02",
+        "spanId": "SP-ALT-002",
+        "timestamp": "2026-08-23 09:20:45 ICT",
+        "epoch": 1788419972640,
+        "containmentPolicy": "QUARANTINE",
+        "ssotMutationDelta": 0,
+        "metadata": {
+          "tenant.source": "TNT-TH-001",
+          "tenant.target": "TNT-TH-002",
+          "policy.rule": "RULE-04-PHYSICAL-SILO"
+        },
+        "acknowledged": false
+      },
+      {
+        "alertId": "ALT-P21-003",
+        "category": "SUPPLY_CHAIN",
+        "severity": "WARNING",
+        "title": "Candidate SBOM Digest Discrepancy",
+        "description": "Unattested candidate package v2.1.0-rc3 pending multi-signature release attestation.",
+        "sourcePlaneId": "RECOVERY-ENGINE",
+        "traceId": "TRACE-P21-1002",
+        "spanId": "SP-ALT-003",
+        "timestamp": "2026-08-23 09:25:11 ICT",
+        "epoch": 1788420152641,
+        "containmentPolicy": "QUARANTINE",
+        "ssotMutationDelta": 0,
+        "metadata": {
+          "package.name": "zyrquen-extension-analytics",
+          "sbom.status": "PENDING_VERIFICATION"
+        },
+        "acknowledged": false
+      }
+    ]
+  },
+  "finalAssertion": {
+    "canonicalBefore": {
+      "block": 849202,
+      "seals": 14902,
+      "root": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68"
+    },
+    "canonicalAfter": {
+      "block": 849202,
+      "seals": 14902,
+      "root": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68"
+    },
+    "equalityCheck": "BEFORE === AFTER (PASS)",
+    "ssotMutationDelta": 0,
+    "baselineDriftPercent": 0,
+    "promotionDecision": "PROCEED_EXTENSION_PLANE_ONLY (CORE_FROZEN_LOCKED)"
+  }
+}

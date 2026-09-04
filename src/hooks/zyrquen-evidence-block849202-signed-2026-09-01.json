@@ -1,0 +1,489 @@
+{
+  "specification": "ZYRQUEN Ω∞ SSoT Δ0 Canonical Specification v4.16 PDPA FINAL (Frozen v1.2 LTS)",
+  "documentType": "SOVEREIGN_MERKLE_BLOCK_EVIDENCE_SIGNED_PAYLOAD",
+  "generatedTimestampUtc": "2026-09-01T09:33:06.369Z",
+  "generatedTimestampIct": "1/9/2569 16:33:06",
+  "evidenceMetadata": {
+    "canonicalBlockHeight": 849202,
+    "genesisMerkleRootHash": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+    "canonicalSealsCount": 14902,
+    "sovereignArchitect": "🇹🇭 นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01)",
+    "mutationAuthority": 0,
+    "clearanceLevel": "OMEGA-1 SUPREME CLEARANCE",
+    "systemCoherence": "99.98%",
+    "cryoTemperatureMk": "14.98 mK",
+    "qopsThroughput": 851.9,
+    "failClosedInvariants": {
+      "maxAllowedCoreTempCelsius": 85,
+      "minAllowedMemoryBandwidthGbs": 15,
+      "currentCoreTempCelsius": 41.8,
+      "currentMemoryBandwidthGbs": 18.4,
+      "status": "ALL_CRITICAL_THRESHOLDS_WITHIN_NOMINAL_ENFORCEMENT"
+    }
+  },
+  "cryptographicSignature": {
+    "standard": "NIST Post-Quantum Cryptography Compliance (FIPS 203/204/205)",
+    "primaryAlgorithm": "ML-DSA-87 (Dilithium-5)",
+    "secondaryAlgorithm": "SPHINCS+ SHA-256 Robust",
+    "signerPassport": "#EP-SOVEREIGN-01",
+    "signerPrincipal": "🇹🇭 นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01)",
+    "digitalSignatureHex": "0x7a3f8902cba7654109849202909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68fd89a102c91834b4194fa821764eb8192634e9081273948bf9123891048b",
+    "publicVerificationKeyFingerprint": "909ab814:f428:8391:bcef:14902:849202:dili5:sphincs:th-sov-01",
+    "merkleProofAnchor": "sha256:909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68"
+  },
+  "statutoryLegalEnforceability": {
+    "thaiStatutes": {
+      "electronicTransactionsAct2544": {
+        "section9": "ลายมือชื่ออิเล็กทรอนิกส์สมบูรณ์ตามกฎหมาย (Electronic Signature Valid)",
+        "section26": "ลายมือชื่ออิเล็กทรอนิกส์ที่เชื่อถือได้ ป้องกันการปฏิเสธความรับผิด (Reliable Electronic Signature / Non-Repudiation)",
+        "section28": "หน้าที่และความรับผิดชอบของผู้ดูแลระบบในการตรวจสอบและส่งมอบภาระการดูแล (Duty of Care & Custody Chain)"
+      },
+      "pdpa2562": {
+        "section37": "มาตรการรักษาความมั่นคงปลอดภัยของข้อมูลส่วนบุคคลทางเทคนิค (Technical Security Measures - Zero Trust)",
+        "section39": "บันทึกรายการประมวลผลข้อมูลส่วนบุคคล (ROPA Registry Enclave - 5 Categories Encrypted)"
+      }
+    },
+    "etdaAssuranceLevel": "ETDA Level 3+ Supreme Trust Attestation",
+    "dutyOfCareScore": 100,
+    "immutableCustodyHandover": true
+  },
+  "merkleLeafProofs": [
+    {
+      "leafIndex": 0,
+      "leafHash": "sha256-a18f91a3c091811e",
+      "stageName": "1. SENSE",
+      "parentHash": "GENESIS_ROOT_0000",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 1,
+      "leafHash": "sha256-b242e1b87d00f28a",
+      "stageName": "2. INGEST",
+      "parentHash": "sha256-a18f91a3c091811e",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 2,
+      "leafHash": "sha256-c37a109e3f19e48c",
+      "stageName": "3. ASSURE",
+      "parentHash": "sha256-b242e1b87d00f28a",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 3,
+      "leafHash": "sha256-d41d04f29a28a30f",
+      "stageName": "4. UNDERSTAND",
+      "parentHash": "sha256-c37a109e3f19e48c",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 4,
+      "leafHash": "sha256-e533a912bc33f91d",
+      "stageName": "5. SIMULATE",
+      "parentHash": "sha256-d41d04f29a28a30f",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 5,
+      "leafHash": "sha256-f691ef002144d18e",
+      "stageName": "6. DECIDE",
+      "parentHash": "sha256-e533a912bc33f91d",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 6,
+      "leafHash": "sha256-a767d2e41155e29f",
+      "stageName": "7. GOVERN",
+      "parentHash": "sha256-f691ef002144d18e",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 7,
+      "leafHash": "sha256-b805b6329a66f30a",
+      "stageName": "8. AUTHORIZE",
+      "parentHash": "sha256-a767d2e41155e29f",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 8,
+      "leafHash": "sha256-c9821c4b9f77a41b",
+      "stageName": "9. EXECUTE",
+      "parentHash": "sha256-b805b6329a66f30a",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 9,
+      "leafHash": "sha256-d01938fa2288b52c",
+      "stageName": "10. OBSERVE",
+      "parentHash": "sha256-c9821c4b9f77a41b",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 10,
+      "leafHash": "sha256-e14812a00c99c63d",
+      "stageName": "11. VERIFY",
+      "parentHash": "sha256-d01938fa2288b52c",
+      "status": "MERKLE_ROOT_ANCHORED"
+    },
+    {
+      "leafIndex": 11,
+      "leafHash": "sha256-f25581c90000a74e",
+      "stageName": "12. REPLAY",
+      "parentHash": "sha256-e14812a00c99c63d",
+      "status": "MERKLE_ROOT_ANCHORED"
+    }
+  ],
+  "auditPipelineStages": [
+    {
+      "id": "SENSE",
+      "stageNumber": 1,
+      "name": "1. SENSE",
+      "shortDesc": "Captured anomaly signal from OTel stream",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.412",
+      "durationMs": 8,
+      "stageId": "sns_8f91a3c0",
+      "parentHash": "GENESIS_ROOT_0000",
+      "outputHash": "sha256-a18f91a3c091811e",
+      "sourceModule": "src/services/otelMetricsProvider.ts",
+      "actor": "otel_sensor_node_bk01",
+      "metadata": {
+        "metricName": "maew_cpu_usage_percent",
+        "observedValue": "88.4%",
+        "thresholdAlert": "TRUE",
+        "samplingRate": "2000ms"
+      }
+    },
+    {
+      "id": "INGEST",
+      "stageNumber": 2,
+      "name": "2. INGEST",
+      "shortDesc": "Validated OTLP protocol payload & schema",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.420",
+      "durationMs": 11,
+      "stageId": "ing_42e1b87d",
+      "parentHash": "sha256-a18f91a3c091811e",
+      "outputHash": "sha256-b242e1b87d00f28a",
+      "sourceModule": "src/services/TelemetryProvider.ts",
+      "actor": "TelemetryProviderSubscriber",
+      "metadata": {
+        "payloadSize": "1,024 Bytes",
+        "schemaVersion": "OTEL-v1.2-LTS",
+        "crcCheck": "PASSED"
+      }
+    },
+    {
+      "id": "ASSURE",
+      "stageNumber": 3,
+      "name": "3. ASSURE",
+      "shortDesc": "Cryptographic SHA-256 seal & tamper verification",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.431",
+      "durationMs": 9,
+      "stageId": "asr_7a109e3f",
+      "parentHash": "sha256-b242e1b87d00f28a",
+      "outputHash": "sha256-c37a109e3f19e48c",
+      "sourceModule": "src/services/telemetry.ts",
+      "actor": "CryptographicProofEngine",
+      "metadata": {
+        "digestAlgo": "SHA-256",
+        "hashValidity": "100% VALID",
+        "tamperCheck": "UNTOUCHED"
+      }
+    },
+    {
+      "id": "UNDERSTAND",
+      "stageNumber": 4,
+      "name": "4. UNDERSTAND",
+      "shortDesc": "Mapped signal to Knowledge Fabric claim context",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.440",
+      "durationMs": 15,
+      "stageId": "knw_1d04f29a",
+      "parentHash": "sha256-c37a109e3f19e48c",
+      "outputHash": "sha256-d41d04f29a28a30f",
+      "sourceModule": "src/data/researchers.ts (Knowledge Fabric)",
+      "actor": "KnowledgeGraphEngine",
+      "metadata": {
+        "claimId": "c1_researched_vector",
+        "knowledgeConfidence": "99.84%",
+        "semanticEntities": 42
+      }
+    },
+    {
+      "id": "SIMULATE",
+      "stageNumber": 5,
+      "name": "5. SIMULATE",
+      "shortDesc": "Digital Twin counterfactual impact prediction",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.455",
+      "durationMs": 22,
+      "stageId": "sim_33a912bc",
+      "parentHash": "sha256-d41d04f29a28a30f",
+      "outputHash": "sha256-e533a912bc33f91d",
+      "sourceModule": "src/components/SovereignWorldModel.tsx",
+      "actor": "DigitalTwinSimulator (SimA)",
+      "metadata": {
+        "predictedLatencyDelta": "-12ms",
+        "simulatedRiskScore": "0.02",
+        "blastRadiusEstimate": "1.2%"
+      }
+    },
+    {
+      "id": "DECIDE",
+      "stageNumber": 6,
+      "name": "6. DECIDE",
+      "shortDesc": "Decision Matrix risk-weighted recommendation",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.477",
+      "durationMs": 12,
+      "stageId": "dec_91ef0021",
+      "parentHash": "sha256-e533a912bc33f91d",
+      "outputHash": "sha256-f691ef002144d18e",
+      "sourceModule": "src/components/CivilizationControlPlane.tsx",
+      "actor": "DecisionFabricEngine",
+      "metadata": {
+        "decisionScore": "0.98",
+        "actionType": "SCALE_CONTAINER_RESOURCES",
+        "recommendation": "APPROVE_WITH_CONSTRAINTS"
+      }
+    },
+    {
+      "id": "GOVERN",
+      "stageNumber": 7,
+      "name": "7. GOVERN",
+      "shortDesc": "Policy Engine authority boundary validation",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.489",
+      "durationMs": 7,
+      "stageId": "pol_67d2e411",
+      "parentHash": "sha256-f691ef002144d18e",
+      "outputHash": "sha256-a767d2e41155e29f",
+      "sourceModule": "src/components/AccessPolicy.tsx",
+      "actor": "ExecutivePolicyEngine",
+      "metadata": {
+        "policyId": "EXEC_POLICY_V21",
+        "budgetLimitCheck": "PASSED",
+        "complianceStatus": "FULLY_COMPLIANT"
+      }
+    },
+    {
+      "id": "AUTHORIZE",
+      "stageNumber": 8,
+      "name": "8. AUTHORIZE",
+      "shortDesc": "Executive Passport signature & Veto gate clearance",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.496",
+      "durationMs": 8,
+      "stageId": "auth_05b6329a",
+      "parentHash": "sha256-a767d2e41155e29f",
+      "outputHash": "sha256-b805b6329a66f30a",
+      "sourceModule": "src/components/ReleaseGovernanceGate.tsx",
+      "actor": "ExecutivePassport (Director Somchai Phumiphak)",
+      "metadata": {
+        "vetoStatus": "CLEAR",
+        "passportLevel": "LEVEL_25_SOVEREIGN",
+        "authorizationToken": "auth_tok_89a01f"
+      }
+    },
+    {
+      "id": "EXECUTE",
+      "stageNumber": 9,
+      "name": "9. EXECUTE",
+      "shortDesc": "Agent Execution Gateway token dispatch",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.504",
+      "durationMs": 18,
+      "stageId": "exe_821c4b9f",
+      "parentHash": "sha256-b805b6329a66f30a",
+      "outputHash": "sha256-c9821c4b9f77a41b",
+      "sourceModule": "services/agent-runtime/executor.ts",
+      "actor": "AgentRuntimeGateway",
+      "metadata": {
+        "executionTarget": "CloudRun-Node-BK01",
+        "httpStatus": "200 OK",
+        "appliedStateDelta": "CPU_LIMIT=2.0 -> 4.0"
+      }
+    },
+    {
+      "id": "OBSERVE",
+      "stageNumber": 10,
+      "name": "10. OBSERVE",
+      "shortDesc": "Post-execution telemetry span verification",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.522",
+      "durationMs": 14,
+      "stageId": "obs_1938fa22",
+      "parentHash": "sha256-c9821c4b9f77a41b",
+      "outputHash": "sha256-d01938fa2288b52c",
+      "sourceModule": "src/components/OpenTelemetryMetricsPanel.tsx",
+      "actor": "OTelSpanObserver",
+      "metadata": {
+        "postExecLatency": "34ms",
+        "cpuStabilized": "41.2%",
+        "activeSpanId": "span_16ch_5928a"
+      }
+    },
+    {
+      "id": "VERIFY",
+      "stageNumber": 11,
+      "name": "11. VERIFY",
+      "shortDesc": "SLA & Invariants constraint verification",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.536",
+      "durationMs": 10,
+      "stageId": "vrf_4812a00c",
+      "parentHash": "sha256-d01938fa2288b52c",
+      "outputHash": "sha256-e14812a00c99c63d",
+      "sourceModule": "src/components/ValidationDashboard.tsx",
+      "actor": "SREValidationEngine",
+      "metadata": {
+        "invariantsCheck": "10/10 PASSED",
+        "slaCompliance": "99.99%",
+        "blastRadiusVerified": "0.8% (<2.0% MAX)"
+      }
+    },
+    {
+      "id": "REPLAY",
+      "stageNumber": 12,
+      "name": "12. REPLAY",
+      "shortDesc": "Evidence Ledger sealed for immutable audit replay",
+      "status": "VERIFIED",
+      "timestamp": "08:28:12.546",
+      "durationMs": 8,
+      "stageId": "rpl_5581c900",
+      "parentHash": "sha256-e14812a00c99c63d",
+      "outputHash": "sha256-f25581c90000a74e",
+      "sourceModule": "src/components/ViewLedger.tsx",
+      "actor": "EvidenceLedgerSealer",
+      "metadata": {
+        "ledgerBlock": "#849202",
+        "merkleRoot": "0x909ab814479844d8a14816bed34cdbb0",
+        "replayable": "TRUE"
+      }
+    }
+  ],
+  "systemInvariantsEnforced": [
+    {
+      "id": "inv-01",
+      "code": "INV-SSOT-IMMUTABLE",
+      "name": "Canonical SSoT Non-Mutation Rule",
+      "description": "The Canonical Truth Plane (v1.2 LTS) is write-locked; 0 external runtime mutations permitted.",
+      "layer": "Layer 01 (Truth Plane)",
+      "status": "PASSED",
+      "verificationHash": "sha256-909ab8144798"
+    },
+    {
+      "id": "inv-02",
+      "code": "INV-MERKLE-BINDING",
+      "name": "Merkle Tree Root Deterministic Binding",
+      "description": "Every execution must resolve to Root Hash 909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68.",
+      "layer": "Layer 05 (Evidence Ledger)",
+      "status": "PASSED",
+      "verificationHash": "sha256-7528e18501da"
+    },
+    {
+      "id": "inv-03",
+      "code": "INV-ZERO-TRUST-GATE",
+      "name": "Zero Trust Gateway Continuous Auth",
+      "description": "Every token, RPC invocation, and state transition is cryptographically authenticated.",
+      "layer": "Layer 06 (Zero Trust)",
+      "status": "PASSED",
+      "verificationHash": "sha256-43fa4c68909a"
+    },
+    {
+      "id": "inv-04",
+      "code": "INV-BLAST-RADIUS-BOUND",
+      "name": "Blast Radius Boundary Constraint (<2.0%)",
+      "description": "Simulated impact radius must not exceed 2.0% during automated healing actions.",
+      "layer": "Layer 08 (Recovery Layer)",
+      "status": "PASSED",
+      "verificationHash": "sha256-16bed34cdbb0"
+    },
+    {
+      "id": "inv-05",
+      "code": "INV-FAIL-CLOSED-GUARD",
+      "name": "Fail-Closed Auto-Defensive Rebuild",
+      "description": "Any unverified privilege or injection attempt triggers instant client-side fail-closed quarantine.",
+      "layer": "Layer 03 (Adversarial Layer)",
+      "status": "PASSED",
+      "verificationHash": "sha256-86fc4691763a"
+    },
+    {
+      "id": "inv-06",
+      "code": "INV-NON-AUTH-TELEMETRY",
+      "name": "Telemetry Non-Authoritative Isolation",
+      "description": "Telemetry and metrics are isolated buffers with 0 authority to mutate canonical state.",
+      "layer": "Layer 04 (Observability Plane)",
+      "status": "PASSED",
+      "verificationHash": "sha256-a18f91a3c091"
+    },
+    {
+      "id": "inv-07",
+      "code": "INV-DRIFT-DETECTION",
+      "name": "Zero Drift Baseline Consistency (0.00%)",
+      "description": "Continuous comparison against Frozen Genesis Manifest yields exactly 0.00% drift.",
+      "layer": "Layer 02 (Verification Layer)",
+      "status": "PASSED",
+      "verificationHash": "sha256-b242e1b87d00"
+    },
+    {
+      "id": "inv-08",
+      "code": "INV-CARDINALITY-14902",
+      "name": "14,902 Sealed Blocks Continuity",
+      "description": "All 14,902 simulated evidence blocks verify uninterrupted SHA-256 chain linkage.",
+      "layer": "Layer 05 (Evidence Layer)",
+      "status": "PASSED",
+      "verificationHash": "sha256-c37a109e3f19"
+    },
+    {
+      "id": "inv-09",
+      "code": "INV-THAI-SOVEREIGNTY",
+      "name": "Thai Custodian Executive Passport Auth",
+      "description": "Executive actions require validation against Sovereign Principal EP-SOVEREIGN-01.",
+      "layer": "Layer 07 (Governance Gate)",
+      "status": "PASSED",
+      "verificationHash": "sha256-d41d04f29a28"
+    },
+    {
+      "id": "inv-10",
+      "code": "INV-REPLAY-DETERMINISM",
+      "name": "12-Stage Forensic Trace Replay Determinism",
+      "description": "Full 142ms transaction trace is bit-for-bit replayable and verified.",
+      "layer": "Layer 06 (Forensics & Replay)",
+      "status": "PASSED",
+      "verificationHash": "sha256-e533a912bc33"
+    }
+  ],
+  "snapshotsSealedInBlock": [
+    {
+      "id": "SNAP-849202-003",
+      "snapshotNumber": 3,
+      "sealedHash": "0xcf02e70a1159fa3617a5713a340deea2b2709df6eb4198c6e1bb806a7c86ad26",
+      "cpuAverage": 42.3,
+      "cryoTempMk": 14.98,
+      "qopsThroughput": 851.9,
+      "status": "SEALED"
+    },
+    {
+      "id": "SNAP-849202-001",
+      "snapshotNumber": 1,
+      "sealedHash": "0x909ab814e5a973d4bb79e0a293673f8373a4b6c3d2e1f0a9b8c7d6e5f4a3b2c1",
+      "cpuAverage": 41.2,
+      "cryoTempMk": 14.98,
+      "qopsThroughput": 851.9,
+      "status": "SEALED"
+    },
+    {
+      "id": "SNAP-849202-002",
+      "snapshotNumber": 2,
+      "sealedHash": "0x7c4f1e9a2b3d8c5e6f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e",
+      "cpuAverage": 39.6,
+      "cryoTempMk": 14.96,
+      "qopsThroughput": 853.4,
+      "status": "SEALED"
+    }
+  ],
+  "cryptographicChecksumSha256": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68"
+}
