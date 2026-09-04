@@ -8,14 +8,28 @@ ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix
 [1;31m╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═══╝     ╚═════╝ [0m
 # ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix
 
-| System Parameter | Sovereign Status & Verification |
-| :--- | :--- |
-| **Codename / Edition** | `APEX ULTIMATE FULL EDITION — LOCKED_FROZEN_v1.2_LTS` |
-| **Sovereign Principal** | นายยุทธภูมิ พากเพียร (`#EP-SOVEREIGN-01`) |
-| **System Badges** | ![Status](https://img.shields.io/badge/Status-10%2F10%20GREEN-10B981) ![Seals](https://img.shields.io/badge/Seals-14%2C902-06B6D4) ![Drift](https://img.shields.io/badge/Drift-0.00%25-8B5CF6) |
-| **Genesis Anchor** | Block `#849202` \| Merkle `909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68` |
+---
 
- 
+**สไตล์ 2: Modern Centered Glassmorphic (จัดกึ่งกลาง ดูมินิมอลและเป็นระเบียบ)**
+
+```markdown
+<div align="center">
+
+# 🌌 ZYRQUEN Ω∞ Sovereign Kernel & Truth Matrix
+### `APEX ULTIMATE FULL EDITION — LOCKED_FROZEN_v1.2_LTS`
+
+[![Status](https://img.shields.io/badge/Status-10%2F10%20ALL%20GREEN-10B981?style=for-the-badge)]()
+[![Seals](https://img.shields.io/badge/Seals-14%2C902%20Verified-06B6D4?style=for-the-badge)]()
+[![Merkle Root](https://img.shields.io/badge/Merkle%20Root-909ab814-8B5CF6?style=for-the-badge)]()
+[![Baseline](https://img.shields.io/badge/Baseline-v1.2%20LTS%20FROZEN-F59E0B?style=for-the-badge)]()
+
+**Sovereign Principal:** นายยุทธภูมิ พากเพียร (`#EP-SOVEREIGN-01`)  
+`SSoT Mutation Delta = 0` • `Baseline Drift = 0.00%` • `Fail-Closed Security`
+
+</div>
+
+---
+| 
 📌 Metadata & Security Clearance
 | Parameter | Specification Details |
 |---|---|
