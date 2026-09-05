@@ -42,9 +42,7 @@ export const DeepFreezeColdStoragePanel: React.FC<DeepFreezeColdStoragePanelProp
   useEffect(() => {
     const unsub = subscribeDeepFreeze((state) => {
       setArchiveState(state);
-      if (!selectedPartition && state.partitions.length > 0) {
-        setSelectedPartition(state.partitions[state.partitions.length - 1]);
-      }
+      setSelectedPartition((prev) => prev || (state.partitions.length > 0 ? state.partitions[state.partitions.length - 1] : null));
     });
     return unsub;
   }, []);

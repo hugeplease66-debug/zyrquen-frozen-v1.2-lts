@@ -76,7 +76,7 @@ export const GuardianVitalityD3Monitor: React.FC = () => {
   });
 
   // Inject or clear drift on a specific node
-  const handleToggleDrift = (slotId: number) => {
+  const handleToggleDrift = useCallback((slotId: number) => {
     setNodes((prev) =>
       prev.map((node) => {
         if (node.slotId !== slotId) return node;
@@ -112,7 +112,7 @@ export const GuardianVitalityD3Monitor: React.FC = () => {
         }
       })
     );
-  };
+  }, [soundEnabled]);
 
   // Re-synchronize and calibrate all 10 nodes to 0.00% Zero-Drift
   const handleRecalibrateAll = () => {
@@ -450,7 +450,7 @@ export const GuardianVitalityD3Monitor: React.FC = () => {
         .attr('fill', isDrift ? '#ef4444' : '#94a3b8')
         .text(isDrift ? 'DRIFT ALERT' : `${node.subKelvinTempMk}mK`);
     });
-  }, [nodes, hoveredNode]);
+  }, [nodes, hoveredNode, handleToggleDrift]);
 
   return (
     <div className="space-y-4 my-6">

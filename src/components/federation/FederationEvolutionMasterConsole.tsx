@@ -65,6 +65,19 @@ interface LogEntry {
   message: string;
 }
 
+// 12 Constellation Star Nodes representing the Federated Core
+const CONSTELLATION_NODES: ConstellationNode[] = [
+  { id: 'NODE-01', name: 'Genesis Runtime G11', role: 'SSoT Block #849202 Origin', x: 50, y: 15, status: 'FROZEN', color: '#06b6d4', chamberNum: 1 },
+  { id: 'NODE-02', name: 'Custodian Quorum (10/10)', role: 'FIPS 140-3 L4 HSM Mesh', x: 25, y: 35, status: 'SEALED', color: '#10b981', chamberNum: 5 },
+  { id: 'NODE-03', name: 'Post-Quantum Lattice Enclave', role: 'Dilithium-5 / Kyber-1024', x: 75, y: 35, status: 'ONLINE', color: '#8b5cf6', chamberNum: 6 },
+  { id: 'NODE-04', name: 'Cryo-Sink Dilution Matrix', role: '0.14 mK Zero-Noise Thermal', x: 15, y: 60, status: 'FROZEN', color: '#06b6d4', chamberNum: 10 },
+  { id: 'NODE-05', name: 'SSoT Ledger & Merkle Stream', role: '14,902 Canonical Invariants', x: 85, y: 60, status: 'SEALED', color: '#10b981', chamberNum: 11 },
+  { id: 'NODE-06', name: 'ERA_∞ Portal Nexus', role: 'Multiverse Defense Gateway', x: 50, y: 50, status: 'ACTIVE', color: '#f59e0b', chamberNum: 1 },
+  { id: 'NODE-07', name: 'Sentinel AI Interceptor', role: 'Auto Fail-Closed Quarantine 85°C', x: 32, y: 78, status: 'ONLINE', color: '#ef4444', chamberNum: 2 },
+  { id: 'NODE-08', name: 'Phoenix Replay Sandbox', role: '142ms Forensic Trace SLA', x: 68, y: 78, status: 'ACTIVE', color: '#38bdf8', chamberNum: 8 },
+  { id: 'NODE-09', name: '8K Lattice Defense Radar', role: 'Shor & Grover Attack Sensor', x: 50, y: 88, status: 'ONLINE', color: '#ec4899', chamberNum: 13 },
+];
+
 export const FederationEvolutionMasterConsole: React.FC<FederationConsoleProps> = ({
   lang,
   onNavigateChamber
@@ -86,24 +99,13 @@ export const FederationEvolutionMasterConsole: React.FC<FederationConsoleProps> 
   >('PANORAMA');
   const [isLiveRunning, setIsLiveRunning] = useState<boolean>(true);
   const [quantumTick, setQuantumTick] = useState<number>(0);
-  const [selectedNode, setSelectedNode] = useState<ConstellationNode | null>(null);
+  const [selectedNode, setSelectedNode] = useState<ConstellationNode | null>(CONSTELLATION_NODES[0]);
   const [resilienceScore, setResilienceScore] = useState<number>(99.98);
   const [tachyonIntegrity, setTachyonIntegrity] = useState<number>(100);
   const [entropyFlux, setEntropyFlux] = useState<number>(1840);
   const [logs, setLogs] = useState<LogEntry[]>([]);
 
-  // 12 Constellation Star Nodes representing the Federated Core
-  const constellationNodes: ConstellationNode[] = [
-    { id: 'NODE-01', name: 'Genesis Runtime G11', role: 'SSoT Block #849202 Origin', x: 50, y: 15, status: 'FROZEN', color: '#06b6d4', chamberNum: 1 },
-    { id: 'NODE-02', name: 'Custodian Quorum (10/10)', role: 'FIPS 140-3 L4 HSM Mesh', x: 25, y: 35, status: 'SEALED', color: '#10b981', chamberNum: 5 },
-    { id: 'NODE-03', name: 'Post-Quantum Lattice Enclave', role: 'Dilithium-5 / Kyber-1024', x: 75, y: 35, status: 'ONLINE', color: '#8b5cf6', chamberNum: 6 },
-    { id: 'NODE-04', name: 'Cryo-Sink Dilution Matrix', role: '0.14 mK Zero-Noise Thermal', x: 15, y: 60, status: 'FROZEN', color: '#06b6d4', chamberNum: 10 },
-    { id: 'NODE-05', name: 'SSoT Ledger & Merkle Stream', role: '14,902 Canonical Invariants', x: 85, y: 60, status: 'SEALED', color: '#10b981', chamberNum: 11 },
-    { id: 'NODE-06', name: 'ERA_∞ Portal Nexus', role: 'Multiverse Defense Gateway', x: 50, y: 50, status: 'ACTIVE', color: '#f59e0b', chamberNum: 1 },
-    { id: 'NODE-07', name: 'Sentinel AI Interceptor', role: 'Auto Fail-Closed Quarantine 85°C', x: 32, y: 78, status: 'ONLINE', color: '#ef4444', chamberNum: 2 },
-    { id: 'NODE-08', name: 'Phoenix Replay Sandbox', role: '142ms Forensic Trace SLA', x: 68, y: 78, status: 'ACTIVE', color: '#38bdf8', chamberNum: 8 },
-    { id: 'NODE-09', name: '8K Lattice Defense Radar', role: 'Shor & Grover Attack Sensor', x: 50, y: 88, status: 'ONLINE', color: '#ec4899', chamberNum: 13 },
-  ];
+  const constellationNodes = CONSTELLATION_NODES;
 
   // Live heartbeats, quantum timestamps, and log generator
   useEffect(() => {
@@ -172,7 +174,6 @@ export const FederationEvolutionMasterConsole: React.FC<FederationConsoleProps> 
       }
     ];
     setLogs(initialLogs);
-    setSelectedNode(constellationNodes[0]);
   }, []);
 
   return (

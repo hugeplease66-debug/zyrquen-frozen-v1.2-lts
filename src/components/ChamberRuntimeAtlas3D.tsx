@@ -271,6 +271,9 @@ export const ChamberRuntimeAtlas3D: React.FC<ChamberRuntimeAtlas3DProps> = ({
   interactive = true,
   onSelectChamber,
 }) => {
+  const onSelectChamberRef = useRef(onSelectChamber);
+  onSelectChamberRef.current = onSelectChamber;
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mountRef = useRef<HTMLDivElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -677,11 +680,11 @@ export const ChamberRuntimeAtlas3D: React.FC<ChamberRuntimeAtlas3DProps> = ({
         if (hit === icoMesh) {
           setSelectedNode(CHAMBER_NODES[0]);
           playTone(880, 0.08, 'sine');
-          if (onSelectChamber) onSelectChamber('chamber_00_genesis');
+          if (onSelectChamberRef.current) onSelectChamberRef.current('chamber_00_genesis');
         } else if (hit.userData?.data) {
           setSelectedNode(hit.userData.data);
           playTone(660, 0.06, 'sine');
-          if (onSelectChamber) onSelectChamber(hit.userData.data.id);
+          if (onSelectChamberRef.current) onSelectChamberRef.current(hit.userData.data.id);
         }
       }
     };

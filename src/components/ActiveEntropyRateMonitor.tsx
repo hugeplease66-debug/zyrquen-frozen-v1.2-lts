@@ -127,7 +127,7 @@ export const ActiveEntropyRateMonitor: React.FC<ActiveEntropyRateMonitorProps> =
     if (propTimeHorizon && propTimeHorizon !== timeHorizon) {
       setTimeHorizon(propTimeHorizon);
     }
-  }, [propTimeHorizon]);
+  }, [propTimeHorizon, timeHorizon]);
 
   const handleHorizonToggle = (horizon: '60m' | '24h') => {
     setTimeHorizon(horizon);
@@ -301,7 +301,7 @@ export const ActiveEntropyRateMonitor: React.FC<ActiveEntropyRateMonitorProps> =
     if (currentPoint && onCurrentRateChange) {
       onCurrentRateChange(currentPoint.entropyRateKBps);
     }
-  }, [currentPoint?.entropyRateKBps, onCurrentRateChange]);
+  }, [currentPoint, onCurrentRateChange]);
 
   useEffect(() => {
     if (onHistoryChange) {
