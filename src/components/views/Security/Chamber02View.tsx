@@ -1928,7 +1928,7 @@ export const Chamber02View: React.FC = () => {
           </div>
         ) : (
           <div className="p-8 text-center bg-black/20 border border-dashed border-zinc-800 rounded-2xl text-xs font-mono text-zinc-500">
-            คลิกปุ่ม "Test TNT-TH-001" หรือ "Test DS-901-PILOT" ด้านบนเพื่อรันไปป์ไลน์ตรวจสอบข้อมูลขาเข้า 4 ขั้นตอน (Crypto Verify &rarr; Quarantine Diff &rarr; Multi-Tenant Validation &rarr; Digital Twin)
+            คลิกปุ่ม &quot;Test TNT-TH-001&quot; หรือ &quot;Test DS-901-PILOT&quot; ด้านบนเพื่อรันไปป์ไลน์ตรวจสอบข้อมูลขาเข้า 4 ขั้นตอน (Crypto Verify &rarr; Quarantine Diff &rarr; Multi-Tenant Validation &rarr; Digital Twin)
           </div>
         )}
       </div>

@@ -996,7 +996,7 @@ export const ChamberStatusGrid: React.FC<ChamberStatusGridProps> = ({ onNavigate
           <div className="flex items-center gap-2 text-[11px] text-zinc-400 shrink-0">
             <Terminal className="w-4 h-4 text-cyan-400" />
             <span className="font-bold text-cyan-300 tracking-wider">CHAMBER_STATUS_LEGEND:</span>
-            <span className="text-[10px] text-zinc-500 hidden sm:inline">// COLOR-CODED TRUTH MAP</span>
+            <span className="text-[10px] text-zinc-500 hidden sm:inline">[COLOR-CODED TRUTH MAP]</span>
           </div>
 
           {/* Color-Coding Explanations with Terminal-Styled Icons */}

@@ -663,7 +663,7 @@ export const SovereignLegalConvergence: React.FC = () => {
                     </div>
 
                     <div className="text-[10px] text-amber-200/90 font-serif italic pt-1">
-                      "Cryptographic anchor for Sovereign Executive Passport #EP-SOVEREIGN-01 — Immutable Signatory Liability Binding under Section 28 (Thai Electronic Transactions Act B.E. 2544)"
+                      &quot;Cryptographic anchor for Sovereign Executive Passport #EP-SOVEREIGN-01 — Immutable Signatory Liability Binding under Section 28 (Thai Electronic Transactions Act B.E. 2544)&quot;
                     </div>
                   </div>
                 )}

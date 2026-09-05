@@ -344,7 +344,7 @@ export const ThaiLegalSovereignMapping: React.FC = () => {
               {currentNode.legalPrincipleTh}
             </p>
             <p className="text-zinc-400 font-sans text-xs italic leading-relaxed pt-1">
-              "{currentNode.legalPrincipleEn}"
+              &quot;{currentNode.legalPrincipleEn}&quot;
             </p>
             <div className="text-[11px] text-zinc-500 pt-2 border-t border-white/5">
               <span>อ้างอิง: </span>

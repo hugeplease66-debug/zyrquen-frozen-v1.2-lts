@@ -23,7 +23,7 @@ export const VoiceCommandBridge: React.FC<VoiceCommandBridgeProps> = ({
   }, [onCaptureSnapshot, onSwitchView]);
 
   useEffect(() => {
-    // @ts-ignore
+    // @ts-expect-error Web Speech API is not in standard DOM lib definitions
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       console.warn('SpeechRecognition API not supported in this browser.');

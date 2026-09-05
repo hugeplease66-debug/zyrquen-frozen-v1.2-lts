@@ -178,7 +178,7 @@ export const AuditCertificateModal: React.FC<AuditCertificateModalProps> = ({ is
                   THE 4-LAYER ARCHITECTURAL MANIFESTO (V1.21 PROTOCOL)
                 </h3>
                 <p className="text-xs text-zinc-400 leading-relaxed font-sans">
-                  "TEST COVERAGE ↑ ≠ CANONICAL TRUTH ↑" — All verification, telemetry, analytics, visualization,
+                  &quot;TEST COVERAGE ↑ ≠ CANONICAL TRUTH ↑&quot; — All verification, telemetry, analytics, visualization,
                   governance, recovery, and export operations are non-authoritative with respect to the Canonical
                   Truth Plane (v1.2 LTS). Extension plane expansions occur without mutating the locked core state.
                 </p>

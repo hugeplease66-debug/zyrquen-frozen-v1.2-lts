@@ -358,7 +358,7 @@ Sovereign Architect & Supreme Custodian
           }`}
         >
           <Lock className="w-4 h-4 text-emerald-400" />
-          <span>PQC Resilience vs Shor's Algorithm</span>
+          <span>PQC Resilience vs Shor&apos;s Algorithm</span>
         </button>
 
         <button
@@ -586,7 +586,7 @@ Sovereign Architect & Supreme Custodian
                   <span className="text-emerald-400 font-bold text-[10px]">ACTIVE SSoT</span>
                 </div>
                 <p className="text-[11px] text-zinc-400 leading-relaxed">
-                  Lattice-based digital signatures with Module-LWE hardness. Security category 5 (256-bit post-quantum security against Shor's algorithm).
+                  Lattice-based digital signatures with Module-LWE hardness. Security category 5 (256-bit post-quantum security against Shor&apos;s algorithm).
                 </p>
               </div>
 

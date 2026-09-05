@@ -170,7 +170,7 @@ export const Chamber14CLITerminal: React.FC<ChamberProps> = ({ lang }) => {
       default:
         responseOutput = (
           <div className="text-red-400 text-xs font-mono-code">
-            Command not recognized: '{rawCmd}'. Type <span className="text-amber-300">help</span> for command list.
+            Command not recognized: &apos;{rawCmd}&apos;. Type <span className="text-amber-300">help</span> for command list.
           </div>
         );
         break;

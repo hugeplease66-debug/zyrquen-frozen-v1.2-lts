@@ -497,7 +497,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 </span>
               </div>
               <p className="text-xs text-zinc-400 font-sans mt-0.5">
-                Verbal speech synthesis announcements for 'Critical' and 'Anomaly' system events with Thai and English auto-detection.
+                Verbal speech synthesis announcements for &apos;Critical&apos; and &apos;Anomaly&apos; system events with Thai and English auto-detection.
               </p>
             </div>
           </div>

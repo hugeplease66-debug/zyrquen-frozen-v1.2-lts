@@ -359,7 +359,7 @@ export const ThaiLegalSearchModal: React.FC<ThaiLegalSearchModalProps> = ({
                   <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs">
                     <div className="space-y-0.5">
                       <div className="text-zinc-400">
-                        Query: <span className="text-cyan-300 font-semibold">"{result.query}"</span>
+                        Query: <span className="text-cyan-300 font-semibold">&quot;{result.query}&quot;</span>
                       </div>
                       <div className="text-[11px] text-zinc-500">
                         Source: <span className="text-emerald-400">{result.source}</span> • Verified at{' '}

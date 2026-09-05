@@ -305,7 +305,7 @@ export const QuantumView: React.FC = () => {
                   </div>
 
                   <div className="p-3 bg-black/40 rounded-xl border border-white/5 text-xs text-zinc-300 font-sans italic">
-                    "{agent.quote}"
+                    &quot;{agent.quote}&quot;
                   </div>
 
                   <div className="grid grid-cols-2 gap-2 text-xs font-mono text-zinc-400 pt-1">

@@ -404,7 +404,7 @@ export const Section28ResponsibilityLayer: React.FC = () => {
                 </div>
               </div>
               <p className="text-[10px] text-amber-200/90 font-serif italic pt-1 border-t border-white/5">
-                "The Merkle Root '909ab814' acts as the immutable cryptographic anchor for the #EP-SOVEREIGN-01 passport, guaranteeing signatory liability attribution and duty of care compliance under Section 28 (Thai Electronic Transactions Act B.E. 2544)."
+                &quot;The Merkle Root &apos;909ab814&apos; acts as the immutable cryptographic anchor for the #EP-SOVEREIGN-01 passport, guaranteeing signatory liability attribution and duty of care compliance under Section 28 (Thai Electronic Transactions Act B.E. 2544).&quot;
               </p>
             </div>
 

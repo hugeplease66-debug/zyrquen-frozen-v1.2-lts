@@ -140,7 +140,7 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
       }
       setAlarmEnabled(true);
     }
-  }, [chamber?.chamberId]);
+  }, [chamber]);
 
   // Sync entropy level with chamber status and simulate subtle quantum micro-fluctuations
   useEffect(() => {
@@ -173,10 +173,8 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
     return () => clearInterval(interval);
   }, [isOpen, chamber, isPurgingCircuit, isMassPurging, currentChamberHasAnomaly]);
 
-  if (!chamber) return null;
-
-  const isQuarantine = chamber.operationalMode === 'FORENSIC_QUARANTINE' || chamber.truthLevel === 'FORENSIC';
-  const chamberNum = parseInt(chamber.chamberNumber, 10) || 0;
+  const isQuarantine = chamber ? (chamber.operationalMode === 'FORENSIC_QUARANTINE' || chamber.truthLevel === 'FORENSIC') : false;
+  const chamberNum = chamber ? (parseInt(chamber.chamberNumber, 10) || 0) : 0;
   
   // Quantum Drift Warning triggers when entropy crosses safety threshold (0.85) or manual simulation
   const isQuantumDriftBreached = entropyLevel >= ENTROPY_SAFETY_THRESHOLD || isEntropyManualOverThreshold || currentChamberHasAnomaly;
@@ -184,12 +182,13 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
   // Circuitry telemetry calculation
   const subKelvinTemp = (14.98 + (chamberNum % 3) * 0.01).toFixed(2);
   const qOpsRate = (851.9 - (chamberNum % 4) * 0.4).toFixed(1);
-  const coherencePercent = chamber.currentCoherenceLevel?.includes('%') 
+  const coherencePercent = chamber?.currentCoherenceLevel?.includes('%') 
     ? chamber.currentCoherenceLevel 
     : '99.992%';
 
   // Toggle alarm for this chamber and persist to localStorage
   const handleToggleAlarm = () => {
+    if (!chamber) return;
     const nextState = !alarmEnabled;
     setAlarmEnabled(nextState);
     try {
@@ -209,6 +208,7 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
   };
 
   const handleCopyHash = () => {
+    if (!chamber) return;
     navigator.clipboard.writeText(chamber.hashAnchor);
     setCopiedHash(true);
     playTone(940, 0.06);
@@ -507,10 +507,11 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
       leafHash: '3f99b1a008272ea11bba8821...',
       status: 'VERIFIED'
     }
-  ], [chamberNum, chamber.hashAnchor]);
+  ], [chamberNum, chamber?.hashAnchor]);
 
   // Forensic CSV Blob Exporter for Seal Integrity Log
   const handleExportSealLogCSV = () => {
+    if (!chamber) return;
     setIsExportingCSV(true);
     playAuditChime();
 
@@ -587,7 +588,7 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isOpen && chamber && (
         <>
           {/* Backdrop overlay with subtle blur and smooth fade */}
           <motion.div
@@ -716,7 +717,7 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
                   <span>{chamber.name}</span>
                   {isComparisonMode && (
                     <span className="text-sm font-normal text-purple-300">
-                      // Compare Mode
+                      (Compare Mode)
                     </span>
                   )}
                 </h2>

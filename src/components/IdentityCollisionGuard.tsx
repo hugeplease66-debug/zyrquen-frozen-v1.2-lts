@@ -196,7 +196,7 @@ export const IdentityCollisionGuard: React.FC = () => {
         </div>
 
         <p className="text-[11px] text-amber-200/90 font-serif italic border-t border-white/5 pt-2">
-          "แม้ผู้ปฏิบัติการจะมีชื่อและนามสกุลคล้ายหรือเหมือนกันในระดับ Display Name แต่ระบบจะแยกแยะสิทธิและหน้าที่ด้วย Public-Key Fingerprint และ Merkle Leaf Hash เฉพาะตัวอย่างเด็ดขาดตามมาตรา ๙ และ ๒๖"
+          &quot;แม้ผู้ปฏิบัติการจะมีชื่อและนามสกุลคล้ายหรือเหมือนกันในระดับ Display Name แต่ระบบจะแยกแยะสิทธิและหน้าที่ด้วย Public-Key Fingerprint และ Merkle Leaf Hash เฉพาะตัวอย่างเด็ดขาดตามมาตรา ๙ และ ๒๖&quot;
         </p>
       </div>
 
