@@ -230,6 +230,7 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
 
   // Real-Time Cryptographic Hash Comparison vs Merkle Root
   const handleRunIntegrityVerify = () => {
+    if (!chamber) return;
     setIsVerifyingIntegrity(true);
     setIntegrityVerifyResult({ status: 'VERIFYING' });
     playTone(550, 0.06, 'sawtooth');
@@ -273,6 +274,7 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
 
   // Initialize Single Chamber Circuit Purge (Manual Circuit Coherence Reset)
   const handleInitializePurge = () => {
+    if (!chamber) return;
     setIsPurgingCircuit(true);
     setPurgeMessage('PHASE 1/3: FLUSHING DECOHERENCE LATTICE & SENSORY REGISTERS...');
     playTone(330, 0.1, 'sawtooth');
@@ -288,7 +290,7 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
       setEntropyLevel(0.082);
       setIsEntropyManualOverThreshold(false);
       playAuditChime();
-      if (onStabilizeChamber) {
+      if (onStabilizeChamber && chamber) {
         onStabilizeChamber(chamber.chamberId);
       }
       setTimeout(() => {
@@ -318,7 +320,7 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
       if (onMassPurge) {
         onMassPurge();
       }
-      if (onStabilizeChamber) {
+      if (onStabilizeChamber && chamber) {
         onStabilizeChamber(chamber.chamberId);
       }
 
