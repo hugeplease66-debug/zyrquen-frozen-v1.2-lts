@@ -20,8 +20,6 @@ import CustodianStatus from '@/components/CustodianStatus';
 import SentinelLedgerAI from '@/components/SentinelLedgerAI';
 import ComplianceDashboardFinal from '@/components/ComplianceDashboardFinal';
 import SandboxMasterHologram from '@/components/SandboxMasterHologram';
-import ShareProofQrModal from '@/components/ShareProofQrModal';
-import { QRCodeSVG } from 'qrcode.react';
 import {
   Layers,
   Cpu,
@@ -76,10 +74,7 @@ import {
   Fingerprint,
   Download,
   FileSpreadsheet,
-  FileText,
-  QrCode,
-  Share2,
-  Smartphone
+  FileText
 } from 'lucide-react';
 
 // HIGH-PRECISION METALLIC DIGITAL CERTIFICATE SEAL SVG DATA URI
@@ -588,7 +583,6 @@ export default function HomePage() {
   const [coherence, setCoherence] = useState(99.992);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [showSealModal, setShowSealModal] = useState(false);
-  const [showShareProofModal, setShowShareProofModal] = useState(false);
   const [notifications, setNotifications] = useState<{ id: number; msg: string; type: string }[]>([]);
   const [cryoTemp, setCryoTemp] = useState("14.98 mK");
   const [cliInput, setCliInput] = useState("");
@@ -692,7 +686,6 @@ export default function HomePage() {
         setShowCommandPalette(false);
         setSelectedPhaseIndex(null);
         setShowSealModal(false);
-        setShowShareProofModal(false);
         setSelectedAuditStage(null);
       }
     };
@@ -1431,17 +1424,6 @@ END OF AUDIT STREAM — SSoT IMMUTABLE Δ0
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
               <span>Sovereign World Engine</span>
-            </button>
-
-            {/* SHARE PROOF QR CODE HEADER QUICK ACTION */}
-            <button
-              onClick={() => setShowShareProofModal(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500/20 via-cyan-500/20 to-indigo-500/20 hover:brightness-125 border border-cyan-400/50 text-cyan-200 font-mono text-[10px] font-bold quantum-cyan-glow cursor-pointer transition shadow-sm"
-              title="แชร์หลักฐานการรับรอง Sovereign Proof QR Code & Merkle Root"
-            >
-              <QrCode className="w-3.5 h-3.5 text-amber-300" />
-              <span className="hidden sm:inline">แชร์หลักฐาน (Share Proof QR)</span>
-              <span className="sm:hidden">Proof QR</span>
             </button>
 
             {/* STANDALONE SINGLE HTML EXPORT QUICK LINK */}
@@ -2936,7 +2918,7 @@ END OF AUDIT STREAM — SSoT IMMUTABLE Δ0
 
           {/* CHAMBER 05: MASTER GATES 22/22 */}
           {activeChamber === "05" && (
-            <div className="space-y-4 font-mono text-xs">
+            <div className="space-y-6 font-mono text-xs">
               <div className="bg-[#0f172a]/90 border border-cyan-500/40 p-5 rounded-2xl backdrop-blur-xl shadow-2xl space-y-4">
                 <div className="flex justify-between items-center border-b border-slate-800 pb-3">
                   <div>
@@ -2968,6 +2950,9 @@ END OF AUDIT STREAM — SSoT IMMUTABLE Δ0
                   })}
                 </div>
               </div>
+
+              {/* REAL-TIME ENFORCEMENT LOG & SECURITY GATES INTEGRITY VERIFIER */}
+              <EnforcementLogSection onAddNotification={addNotification} />
             </div>
           )}
 
@@ -4364,18 +4349,17 @@ END OF AUDIT STREAM — SSoT IMMUTABLE Δ0
             </div>
           </div>
 
+          {/* REAL-TIME ENFORCEMENT LOG SECTION */}
+          <EnforcementLogSection onAddNotification={addNotification} />
+
           {/* DEDICATED SOVEREIGN GOLD SEAL LAYOUT WRAPPER (MT-8, GAP-8, RESPONSIVE HIERARCHY) */}
           <div className="mt-8 pt-6 border-t border-cyan-500/20 flex flex-col gap-8">
-            <div className="rounded-2xl border-2 border-cyan-500/50 bg-gradient-to-br from-[#0c182c] via-[#10223d] to-[#070e1a] p-6 sm:p-8 quantum-cyan-glow relative overflow-hidden shadow-2xl">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
+            <div className="rounded-2xl border border-cyan-500/40 bg-gradient-to-br from-[#0c182c] via-[#10223d] to-[#070e1a] p-6 sm:p-8 quantum-cyan-glow relative overflow-hidden shadow-2xl">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                 
-                {/* LEFT: CRISP VECTOR SEAL + MINI QR CODE BADGE WITH CLICK TO EXPAND */}
-                <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
-                  <div 
-                    onClick={() => setShowSealModal(true)}
-                    className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl border-2 border-cyan-400/60 p-2.5 bg-black/70 quantum-cyan-glow flex items-center justify-center shrink-0 hover:scale-105 transition-transform shadow-xl cursor-pointer group"
-                    title="คลิกเพื่อดูตราประทับทองคำขยายใหญ่"
-                  >
+                {/* LEFT: CRISP VECTOR SEAL WITH CLICK TO EXPAND */}
+                <div className="flex flex-col sm:flex-row items-center gap-5 cursor-pointer group text-center sm:text-left" onClick={() => setShowSealModal(true)}>
+                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl border border-cyan-400/50 p-2.5 bg-black/70 quantum-cyan-glow flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xl">
                     <SovereignSealSvg className="w-full h-full drop-shadow-2xl" />
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
                       <span className="text-[10px] font-mono text-cyan-300 font-bold flex items-center gap-1 bg-black/90 px-2.5 py-1 rounded-lg border border-cyan-400/60 shadow">
@@ -4384,54 +4368,23 @@ END OF AUDIT STREAM — SSoT IMMUTABLE Δ0
                     </div>
                   </div>
 
-                  {/* MINI INTERACTIVE QR CODE BADGE */}
-                  <div
-                    onClick={() => setShowShareProofModal(true)}
-                    className="relative p-2 bg-white rounded-2xl border-2 border-amber-400 shadow-xl flex flex-col items-center justify-center cursor-pointer group hover:scale-105 transition-transform shrink-0"
-                    title="สแกนด้วยมือถือเพื่อตรวจสอบ SSoT Proof / คลิกเพื่อแชร์"
-                  >
-                    <QRCodeSVG
-                      value="https://zyrquen.sovereign/verify?root=909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68&block=849202&arch=EP-SOVEREIGN-01&seals=14902"
-                      size={68}
-                      level="M"
-                      bgColor="#FFFFFF"
-                      fgColor="#050b18"
-                    />
-                    <div className="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex flex-col items-center justify-center text-white text-center p-1">
-                      <QrCode className="w-4 h-4 text-amber-300 mb-0.5" />
-                      <span className="text-[8px] font-mono font-bold text-amber-200 leading-tight">สแกน / แชร์ Proof</span>
-                    </div>
-                  </div>
-
                   <div className="space-y-1.5 font-mono">
-                    <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
-                      <ProvenanceBadge type="VERIFIED" size="xs" authority="Hardware Deca-Quorum" />
-                      <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[9px] font-bold">
-                        ✓ CANONICAL RATIFIED (Δ0.00%)
-                      </span>
+                    <div className="flex items-center justify-center sm:justify-start gap-2">
+                      <ProvenanceBadge type="UNVERIFIED" size="xs" authority="Hardware Roster" />
+                      <span className="text-rose-300 text-[10px] font-bold">UNVERIFIED — HSM EVIDENCE NOT PRESENT</span>
                     </div>
                     <h4 className="text-base sm:text-lg font-bold text-white text-cyan-gradient">Supreme Sovereign Gold Master Seal</h4>
-                    <div className="text-[11px] text-slate-200 leading-relaxed">
+                    <div className="text-[11px] text-slate-300 leading-relaxed">
                       สถาปนิกอธิปไตยสูงสุด: <strong className="text-cyan-200">นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01)</strong>
                     </div>
-                    <div className="text-[10px] text-slate-300">
-                      Yuththaphum Phakphian • Clearance: <span className="text-amber-300 font-bold">OMEGA-1 SUPREME</span>
-                    </div>
                     <div className="text-[10px] text-slate-400">
-                      Merkle Root: <span className="text-cyan-300 font-bold select-all">909ab814...fa4c68</span> • Block #849202 • 14,902 Seals (SSoT Δ0)
+                      Merkle Root: <span className="text-cyan-300 font-bold">909ab814...fa4c68</span> • Block #849202 • 14,902 Seals (SSoT Δ0)
                     </div>
                   </div>
                 </div>
 
-                {/* RIGHT: ACTION BUTTONS & SHARE PROOF QR TRIGGER */}
-                <div className="flex flex-wrap items-center gap-3 font-mono text-xs w-full lg:w-auto justify-center lg:justify-end">
-                  <button
-                    onClick={() => setShowShareProofModal(true)}
-                    className="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-cyan-400 to-indigo-500 hover:brightness-110 text-black font-bold flex items-center gap-2 shadow-xl transition cursor-pointer quantum-cyan-glow"
-                  >
-                    <QrCode className="w-4 h-4 fill-black" />
-                    <span>แชร์หลักฐาน (Share Proof QR)</span>
-                  </button>
+                {/* RIGHT: ACTION BUTTONS & CANONICAL RATIFICATION STATUS */}
+                <div className="flex flex-wrap items-center gap-3 font-mono text-xs w-full md:w-auto justify-center md:justify-end">
                   <button
                     onClick={() => setShowSealModal(true)}
                     className="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-600 hover:brightness-110 text-black font-bold flex items-center gap-2 shadow-lg transition cursor-pointer"
@@ -4585,18 +4538,6 @@ END OF AUDIT STREAM — SSoT IMMUTABLE Δ0
           </div>
         </div>
       )}
-
-      {/* SHARE SOVEREIGN PROOF & MERKLE ROOT QR MODAL */}
-      <ShareProofQrModal
-        isOpen={showShareProofModal}
-        onClose={() => setShowShareProofModal(false)}
-        merkleRoot="909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68"
-        blockHeight={849202}
-        sealsCount={14902}
-        architectName="นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01) / Yuththaphum Phakphian"
-        architectId="#EP-SOVEREIGN-01"
-        onCopySuccess={(msg) => addNotification(msg, "success")}
-      />
 
       {/* COMMAND PALETTE MODAL (CMD+K / CTRL+K) */}
       {showCommandPalette && (
