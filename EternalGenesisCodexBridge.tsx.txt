@@ -1,0 +1,474 @@
+"use client";
+
+import React, { useState, useMemo } from "react";
+import { 
+  BookOpen, 
+  Shield, 
+  Scroll, 
+  Lock, 
+  Search, 
+  CheckCircle2, 
+  Sparkles, 
+  Award, 
+  ExternalLink, 
+  KeyRound, 
+  Scale, 
+  Cpu, 
+  Fingerprint,
+  FileCheck,
+  Compass
+} from "lucide-react";
+import { SSOT } from "@/lib/ssot-data";
+
+export interface CodexEntry {
+  id: string;
+  code: string;
+  category: "STATUTORY_LAW" | "SOVEREIGN_INVARIANT" | "CHAMBER_DECREE" | "MULTIVERSE_TREATY" | "CRYPTO_DIRECTIVE";
+  title: string;
+  titleTh: string;
+  authority: string;
+  merkleSeal: string;
+  timestamp: string;
+  status: "CANONICAL_RATIFIED" | "IMMUTABLE_FROZEN" | "ENFORCED_SSOT";
+  summaryTh: string;
+  fullDecree: string;
+  legalArticles: string[];
+  quantumHash: string;
+}
+
+const INITIAL_CODEX_ENTRIES: CodexEntry[] = [
+  {
+    id: "CDX-001",
+    code: "GENESIS-INVARIANT-Δ0",
+    category: "SOVEREIGN_INVARIANT",
+    title: "Sovereign Invariant Δ0 Core Immutability",
+    titleTh: "ธรรมนูญอธิปไตย SSoT Δ0 และค่าคงที่นิรันดร์",
+    authority: "นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01)",
+    merkleSeal: "0x909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+    timestamp: "2026-08-31 23:00:00 UTC",
+    status: "IMMUTABLE_FROZEN",
+    summaryTh: "การตรึงจำนวน 14,902 Canonical Seals, Genesis Block #849202, และ Mutation Authority = 0 แบบเด็ดขาด",
+    fullDecree: "บัญญัติให้ระบบ ZYRQUEN Ω∞ ดำเนินการในโหมด Read Only / No Unauthorized Mutation โดยมีสถาปนิกสูงสุด นายยุทธภูมิ พากเพียร ถือครองสิทธิ์ OMEGA-1 SUPREME CLEARANCE แต่เพียงผู้เดียว ห้ามมิให้มีการแก้ไข Genesis Merkle Root หรือทำลายสมดุล SSoT Δ0 โดยเด็ดขาด",
+    legalArticles: ["พ.ร.บ. ธุรกรรมทางอิเล็กทรอนิกส์ มาตรา ๒๖ (การคุ้มครองข้อมูลและระบบ)", "ข้อกำหนดทางวิศวกรรม SSoT Δ0"],
+    quantumHash: "PQC-DILITHIUM5-0x9F44...A81C"
+  },
+  {
+    id: "CDX-002",
+    code: "ETDA-SEC9-SIGNATURE",
+    category: "STATUTORY_LAW",
+    title: "Electronic Transactions Act Section 9 Admissibility",
+    titleTh: "การรับรองลายมือชื่ออิเล็กทรอนิกส์ มาตรา ๙ (สพธอ. ETDA)",
+    authority: "ราชกิจจานุเบกษา / สพธอ. (ETDA)",
+    merkleSeal: "0x7a22ef41b6c0891d4e5f32a7681c19b6e8f47021d3ab98c09a88e5d1209bca33",
+    timestamp: "2026-08-31 23:02:15 UTC",
+    status: "CANONICAL_RATIFIED",
+    summaryTh: "ผลผูกพันทางกฎหมายของลายมือชื่ออิเล็กทรอนิกส์ที่มีการระบุตัวตนเจ้าของลายมือชื่อและความตั้งใจในการลงนาม",
+    fullDecree: "ลายมือชื่ออิเล็กทรอนิกส์ที่สร้างขึ้นภายใต้กระบวนการของ ZYRQUEN Ω∞ โดยใช้ Post-Quantum Cryptography ถือเป็นลายมือชื่อที่ระบุตัวตนของเจ้าของลายมือชื่อและแสดงว่าเจ้าของลายมือชื่อยอมรับข้อความในข้อมูลอิเล็กทรอนิกส์นั้นตามมาตรา ๙",
+    legalArticles: ["พ.ร.บ. ธุรกรรมทางอิเล็กทรอนิกส์ พ.ศ. ๒๕๔๔ มาตรา ๙"],
+    quantumHash: "ETDA-COMPLIANT-FIPS204-ML-DSA"
+  },
+  {
+    id: "CDX-003",
+    code: "ETDA-SEC26-RELIABILITY",
+    category: "STATUTORY_LAW",
+    title: "Electronic Signature Reliability Criteria Section 26",
+    titleTh: "เกณฑ์ความน่าเชื่อถือของลายมือชื่ออิเล็กทรอนิกส์ มาตรา ๒๖",
+    authority: "สพธอ. (ETDA) & NIST PQC",
+    merkleSeal: "0x4b89dc127814e5a9f201083bc7491d9047192803bba519cc2094851baee49102",
+    timestamp: "2026-08-31 23:04:40 UTC",
+    status: "ENFORCED_SSOT",
+    summaryTh: "ข้อมูลสำหรับสร้างลายมือชื่อเชื่อมโยงกับเจ้าของ และการตรวจพบการเปลี่ยนแปลงใดๆ หลังการลงนาม (Tamper Evidence)",
+    fullDecree: "รับรองว่าข้อมูลสำหรับใช้สร้างลายมือชื่ออิเล็กทรอนิกส์ได้เชื่อมโยงไปยังผู้มีอำนาจลงนามโดยตรง และการเปลี่ยนแปลงใดๆ ของลายมือชื่อหรือข้อมูลภายหลังการลงนามสามารถตรวจพบได้ผ่าน Merkle Verification",
+    legalArticles: ["พ.ร.บ. ธุรกรรมทางอิเล็กทรอนิกส์ พ.ศ. ๒๕๔๔ มาตรา ๒๖", "FIPS 203/204 Post-Quantum Criteria"],
+    quantumHash: "ML-DSA-87-SPHINCS+-0x3D9A"
+  },
+  {
+    id: "CDX-004",
+    code: "ETDA-SEC28-PRESUMPTION",
+    category: "STATUTORY_LAW",
+    title: "Presumption of Integrity and Reliability Section 28",
+    titleTh: "ข้อสันนิษฐานความถูกต้องสมบูรณ์แห่งพยานหลักฐาน มาตรา ๒๘",
+    authority: "ศาลยุติธรรม / สพธอ. (ETDA)",
+    merkleSeal: "0x89c091ad5b78f441029cba47e90146bbfa710925c4019a823edfa70198ca1209",
+    timestamp: "2026-08-31 23:05:50 UTC",
+    status: "CANONICAL_RATIFIED",
+    summaryTh: "สันนิษฐานไว้ก่อนว่าเป็นลายมือชื่อที่เชื่อถือได้และข้อความไม่ถูกเปลี่ยนแปลงนับแต่สร้างขึ้น",
+    fullDecree: "ลายมือชื่อที่ใช้ใบรับรองที่ออกโดยผู้ให้บริการออกใบรับรองที่น่าเชื่อถือ หรือใช้กระบวนการเข้ารหัสต้านทานควอนตัม ให้สันนิษฐานว่าเป็นลายมือชื่ออิเล็กทรอนิกส์ที่เชื่อถือได้ และข้อความไม่ถูกเปลี่ยนแปลง",
+    legalArticles: ["พ.ร.บ. ธุรกรรมทางอิเล็กทรอนิกส์ พ.ศ. ๒๕๔๔ มาตรา ๒๘"],
+    quantumHash: "NIST-SPHINCS-SHAKE-256F"
+  },
+  {
+    id: "CDX-005",
+    code: "PDPA-2019-COMPLIANCE",
+    category: "STATUTORY_LAW",
+    title: "Personal Data Protection Act B.E. 2562 (2019)",
+    titleTh: "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. ๒๕๖๒ (PDPA)",
+    authority: "คณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (สคส.)",
+    merkleSeal: "0x15a99042b3ef7719d20c541b089c193f44192b09cfa3841aee894109db891102",
+    timestamp: "2026-08-31 23:06:10 UTC",
+    status: "ENFORCED_SSOT",
+    summaryTh: "การคุ้มครองข้อมูลระบุตัวตนด้วย Zero-Knowledge Proofs และ Quantum-Safe Anonymization",
+    fullDecree: "ข้อมูลส่วนบุคคลทั้งหมดใน ZYRQUEN Ω∞ ได้รับการเข้ารหัสแบบ Zero-Knowledge และไม่มีการเปิดเผยข้อมูลดิบแก่ภายนอก โดยเป็นไปตามหลักการ Data Minimization และ Purpose Limitation ตามกฎหมาย PDPA",
+    legalArticles: ["พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. ๒๕๖๒ มาตรา ๒๗, ๓๗"],
+    quantumHash: "ZKP-PDPA-ENCLAVE-0x55E9"
+  },
+  {
+    id: "CDX-006",
+    code: "MULTIVERSE-TREATY-Ω601",
+    category: "MULTIVERSE_TREATY",
+    title: "Multiverse Navigation Grid Treaty Ω601–Ω21000",
+    titleTh: "สนธิสัญญาการเดินเครื่องข้ามมิติพหุภพ Ω601–Ω21000",
+    authority: "Sovereign High Council (Council Chambers 00–17)",
+    merkleSeal: "0x98103ba489f0119280ab4417c8019a4198ec4801da998120fa893019bcfa1902",
+    timestamp: "2026-08-31 23:06:40 UTC",
+    status: "CANONICAL_RATIFIED",
+    summaryTh: "กำหนดขอบเขตพิกัดพหุภพที่เสถียร (Ω601 ถึง Ω21000) และการควบคุม Warp Phase Lock",
+    fullDecree: "กำหนดให้การเดินทางและการคำนวณใน Multiverse Grid ถูกจำกัดให้อยู่ในขอบเขตความเสถียรระหว่างมิติ Ω601 ถึง Ω21000 เท่านั้น หากเกิด Warp Coherence Drop ต่ำกว่า 99.0% ให้ระบบ Fail-Closed กักกันทันที",
+    legalArticles: ["Multiverse Sovereign Charter Protocol v4.16", "Inviolable Quantum Coherence Act"],
+    quantumHash: "WARP-TREATY-COHERENCE-99.992"
+  },
+  {
+    id: "CDX-007",
+    code: "FAIL-CLOSED-CRYPTO-TRIGGER",
+    category: "CRYPTO_DIRECTIVE",
+    title: "Fail-Closed Automatic Threat Quarantine Protocol",
+    titleTh: "ระเบียบคุมเข้มระบบตัดการทำงานอัตโนมัติ Fail-Closed",
+    authority: "Apex Threat Analyzer / Chamber 00",
+    merkleSeal: "0x33b89012a9ef410984ba019374019a820bcf84019ab012903847a19283bcca90",
+    timestamp: "2026-08-31 23:07:00 UTC",
+    status: "ENFORCED_SSOT",
+    summaryTh: "กักกันภัยคุกคามทันทีเมื่ออุณหภูมิคอร์ > 85.0°C หรือแบนด์วิดท์หน่วยความจำ < 15.0 GB/s",
+    fullDecree: "เมื่อเซ็นเซอร์ตรวจวัดพบสภาวะอุณหภูมิคอร์สูงเกิน 85.0 องศาเซลเซียส หรือแบนด์วิดท์ลดต่ำกว่า 15.0 GB/s ระบบจะตัดวงจรและถ่ายเทความร้อน (Cryo Flush) พร้อมกักกันโหนดที่ผิดปกติเป็นความลับทันที",
+    legalArticles: ["Inviolable SSoT Invariant Directive #04", "Cryogenic Coherence Mandate"],
+    quantumHash: "FAIL-CLOSED-LOCKDOWN-85C-15GBS"
+  }
+];
+
+export const EternalGenesisCodexBridge: React.FC = () => {
+  const [entries, setEntries] = useState<CodexEntry[]>(INITIAL_CODEX_ENTRIES);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+  const [selectedEntry, setSelectedEntry] = useState<CodexEntry | null>(INITIAL_CODEX_ENTRIES[0]);
+  const [newDecreeText, setNewDecreeText] = useState("");
+  const [newDecreeTitle, setNewDecreeTitle] = useState("");
+  const [isNotarizing, setIsNotarizing] = useState(false);
+  const [notarizedSuccess, setNotarizedSuccess] = useState(false);
+
+  const filteredEntries = useMemo(() => {
+    return entries.filter(entry => {
+      const matchesSearch = 
+        entry.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        entry.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        entry.titleTh.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        entry.fullDecree.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCat = selectedCategory === "ALL" || entry.category === selectedCategory;
+      return matchesSearch && matchesCat;
+    });
+  }, [entries, searchTerm, selectedCategory]);
+
+  const handleNotarizeDecree = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newDecreeTitle.trim() || !newDecreeText.trim()) return;
+
+    setIsNotarizing(true);
+    setTimeout(() => {
+      const newEntry: CodexEntry = {
+        id: `CDX-00${entries.length + 1}`,
+        code: `CODEX-DECREE-Ω${Math.floor(Math.random() * 9000 + 1000)}`,
+        category: "CHAMBER_DECREE",
+        title: newDecreeTitle,
+        titleTh: `ประกาศิตอธิปไตย: ${newDecreeTitle}`,
+        authority: SSOT.sovereignPrincipal,
+        merkleSeal: `0x${Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join('')}`,
+        timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC',
+        status: "CANONICAL_RATIFIED",
+        summaryTh: newDecreeText.substring(0, 80) + '...',
+        fullDecree: newDecreeText,
+        legalArticles: ["พ.ร.บ. ธุรกรรมทางอิเล็กทรอนิกส์ พ.ศ. ๒๕๔๔", "PDPA พ.ศ. ๒๕๖๒"],
+        quantumHash: `PQC-ML-DSA-87-${Math.random().toString(36).substring(2, 10).toUpperCase()}`
+      };
+
+      setEntries([newEntry, ...entries]);
+      setSelectedEntry(newEntry);
+      setNewDecreeTitle("");
+      setNewDecreeText("");
+      setIsNotarizing(false);
+      setNotarizedSuccess(true);
+      setTimeout(() => setNotarizedSuccess(false), 4000);
+    }, 1200);
+  };
+
+  return (
+    <div className="bg-zinc-950 border border-yellow-500/40 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-6 text-zinc-100 font-sans">
+      {/* Header Deck */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-5">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-2xl bg-yellow-500/15 border border-yellow-500/60 flex items-center justify-center text-yellow-400">
+            <BookOpen className="w-6 h-6" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-yellow-400">
+                ETERNAL GENESIS CODEX BRIDGE
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-yellow-950/80 text-yellow-300 border border-yellow-700/60 text-[10px] font-mono font-bold">
+                GENESIS MERKLE CODEX
+              </span>
+            </div>
+            <h2 className="text-lg sm:text-xl font-bold font-mono text-zinc-100 mt-0.5 flex items-center gap-2">
+              <span>ประมวลบทบัญญัติและบันทึกข้อตกลงอธิปไตยดิจิทัล</span>
+              <Sparkles className="w-4 h-4 text-yellow-400" />
+            </h2>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-zinc-400">
+          <div className="px-3 py-1.5 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center gap-2">
+            <Shield className="w-4 h-4 text-yellow-400" />
+            <span>Root: {SSOT.genesisMerkleRoot.substring(0, 10)}...</span>
+          </div>
+          <div className="px-3 py-1.5 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center gap-2 text-cyan-300">
+            <KeyRound className="w-4 h-4" />
+            <span>{entries.length} Ratified Treaties</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Control Bar: Search & Filter Categories */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="relative w-full sm:w-80">
+          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <input 
+            type="text"
+            placeholder="ค้นหาข้อบัญญัติ / กฎหมาย / กฎเกณฑ์..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-10 pr-4 py-2 text-xs font-mono text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-yellow-500 transition-colors"
+          />
+        </div>
+
+        <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto">
+          {[
+            { id: "ALL", label: "ทั้งหมด" },
+            { id: "STATUTORY_LAW", label: "พ.ร.บ. & กฎหมาย (ETDA/PDPA)" },
+            { id: "SOVEREIGN_INVARIANT", label: "SSoT Invariants" },
+            { id: "MULTIVERSE_TREATY", label: "Multiverse Grid" },
+            { id: "CHAMBER_DECREE", label: "ประกาศิต 18 Chambers" },
+          ].map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCategory(cat.id)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-mono font-medium transition-all ${
+                selectedCategory === cat.id
+                  ? "bg-yellow-950 text-yellow-300 border border-yellow-600/80 shadow-sm"
+                  : "bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-zinc-200"
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Split Interface */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left Column: Codex Ledger List (5 cols) */}
+        <div className="lg:col-span-5 space-y-3 max-h-[580px] overflow-y-auto pr-1">
+          {filteredEntries.map((item) => {
+            const isSelected = selectedEntry?.id === item.id;
+            return (
+              <div
+                key={item.id}
+                onClick={() => setSelectedEntry(item)}
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                  isSelected
+                    ? "bg-zinc-900/90 border-yellow-500/80 shadow-lg shadow-yellow-950/20"
+                    : "bg-zinc-900/40 border-zinc-800/80 hover:bg-zinc-900/70 hover:border-zinc-700"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <span className="px-2 py-0.5 rounded-md bg-zinc-800 text-[10px] font-mono font-bold text-yellow-400 border border-zinc-700">
+                    {item.code}
+                  </span>
+                  <span className="text-[10px] font-mono text-zinc-500">
+                    {item.timestamp.split(' ')[0]}
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold font-mono text-zinc-100 group-hover:text-yellow-300">
+                  {item.titleTh}
+                </h4>
+                <p className="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+                  {item.summaryTh}
+                </p>
+                <div className="flex items-center justify-between gap-2 mt-3 pt-2 border-t border-zinc-800/60 font-mono text-[10px] text-zinc-400">
+                  <span className="flex items-center gap-1 text-emerald-400">
+                    <CheckCircle2 className="w-3 h-3" />
+                    <span>{item.status}</span>
+                  </span>
+                  <span className="text-zinc-500">
+                    {item.quantumHash.substring(0, 16)}...
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Right Column: Codex Inspector & Post-Quantum Seal Viewer (7 cols) */}
+        <div className="lg:col-span-7 space-y-4">
+          {selectedEntry ? (
+            <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-5 sm:p-6 space-y-5">
+              {/* Decree Header */}
+              <div className="border-b border-zinc-800 pb-4">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <span className="px-2.5 py-1 rounded-lg bg-yellow-950/80 text-yellow-300 border border-yellow-700/60 text-xs font-mono font-bold">
+                    {selectedEntry.code}
+                  </span>
+                  <span className="px-2.5 py-1 rounded-lg bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 text-xs font-mono font-bold flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>{selectedEntry.status}</span>
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold font-mono text-zinc-100">
+                  {selectedEntry.titleTh}
+                </h3>
+                <p className="text-xs text-zinc-400 font-mono mt-0.5">
+                  {selectedEntry.title}
+                </p>
+              </div>
+
+              {/* Authority & Legal Grounding */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs">
+                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800 space-y-1">
+                  <span className="text-zinc-500 text-[10px] uppercase">ผู้ประกาศิต / ผู้มีอำนาจออกกฎ (Authority)</span>
+                  <div className="text-yellow-400 font-bold flex items-center gap-1.5">
+                    <Award className="w-3.5 h-3.5" />
+                    <span>{selectedEntry.authority}</span>
+                  </div>
+                </div>
+                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800 space-y-1">
+                  <span className="text-zinc-500 text-[10px] uppercase">ประทับเวลาทางนิติวิทยาศาสตร์ (Forensic Time)</span>
+                  <div className="text-cyan-300 font-bold">
+                    {selectedEntry.timestamp}
+                  </div>
+                </div>
+              </div>
+
+              {/* Full Text Decree */}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-xs font-mono text-zinc-300 font-bold">
+                  <Scroll className="w-4 h-4 text-yellow-400" />
+                  <span>ตัวบทคำประกาศิต / กฎเกณฑ์ที่บังคับใช้ (Binding Decree Text)</span>
+                </div>
+                <div className="p-4 rounded-xl bg-black/70 border border-zinc-800/90 text-sm leading-relaxed text-zinc-200 font-serif">
+                  &ldquo;{selectedEntry.fullDecree}&rdquo;
+                </div>
+              </div>
+
+              {/* Legal Reference Badges */}
+              <div className="space-y-2">
+                <span className="text-[11px] font-mono text-zinc-400 font-bold">
+                  บทบัญญัติทางกฎหมายและมาตรฐานที่อ้างอิง:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {selectedEntry.legalArticles.map((art, idx) => (
+                    <span 
+                      key={idx}
+                      className="px-2.5 py-1 rounded-lg bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono flex items-center gap-1"
+                    >
+                      <Scale className="w-3 h-3 text-yellow-400" />
+                      <span>{art}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Cryptographic Seal Box */}
+              <div className="p-3.5 rounded-xl bg-zinc-950 border border-cyan-900/40 space-y-2 font-mono text-xs">
+                <div className="flex items-center justify-between text-cyan-400 font-bold text-[11px]">
+                  <span className="flex items-center gap-1.5">
+                    <Fingerprint className="w-3.5 h-3.5" />
+                    <span>Genesis Merkle Seal</span>
+                  </span>
+                  <span className="text-[10px] text-zinc-500">NIST PQC Verified</span>
+                </div>
+                <div className="p-2 bg-black rounded-lg border border-zinc-800 text-[11px] text-yellow-300/90 break-all select-all font-mono">
+                  {selectedEntry.merkleSeal}
+                </div>
+                <div className="flex items-center justify-between text-[10px] text-zinc-400">
+                  <span>Quantum Scheme: {selectedEntry.quantumHash}</span>
+                  <span className="text-emerald-400">SSoT Validated &#10004;</span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="h-64 flex flex-col items-center justify-center text-zinc-500 font-mono text-xs border border-zinc-800 rounded-2xl">
+              <BookOpen className="w-8 h-8 mb-2 opacity-40" />
+              <span>เลือกข้อบัญญัติจากรายการด้านซ้ายเพื่อตรวจสอบ</span>
+            </div>
+          )}
+
+          {/* Notarization Form: Sovereign Architect Decree Proclamation */}
+          <form onSubmit={handleNotarizeDecree} className="p-4 rounded-2xl bg-zinc-900/60 border border-yellow-900/40 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-yellow-400">
+                <Sparkles className="w-4 h-4" />
+                <span>ตราประกาศิตใหม่ลงสู่ Eternal Genesis Codex</span>
+              </div>
+              <span className="text-[10px] font-mono text-zinc-400">
+                Authorized: {SSOT.sovereignPrincipal}
+              </span>
+            </div>
+
+            <input 
+              type="text"
+              placeholder="หัวข้อประกาศิต หรือ คำวินิจฉัยอธิปไตย..."
+              value={newDecreeTitle}
+              onChange={(e) => setNewDecreeTitle(e.target.value)}
+              className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2 text-xs font-mono text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-yellow-500"
+            />
+
+            <textarea 
+              rows={2}
+              placeholder="ระบุเนื้อหาคำสั่ง / ข้อตกลงที่จะประทับตรา Merkle และ Post-Quantum Seal..."
+              value={newDecreeText}
+              onChange={(e) => setNewDecreeText(e.target.value)}
+              className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-xs font-mono text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-yellow-500"
+            />
+
+            <div className="flex items-center justify-between">
+              {notarizedSuccess ? (
+                <span className="text-xs font-mono text-emerald-400 flex items-center gap-1.5 font-bold">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>ประทับตรา Merkle Root และบันทึกลง Codex สำเร็จ!</span>
+                </span>
+              ) : (
+                <span className="text-[11px] font-mono text-zinc-500">
+                  รองรับ ETDA Sec 9/26/28 และ PDPA 2019 อัตโนมัติ
+                </span>
+              )}
+
+              <button
+                type="submit"
+                disabled={isNotarizing || !newDecreeTitle || !newDecreeText}
+                className="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 disabled:opacity-50 text-black font-bold font-mono text-xs rounded-xl transition flex items-center gap-2 cursor-pointer shadow-lg shadow-yellow-950/40"
+              >
+                {isNotarizing ? (
+                  <>
+                    <Cpu className="w-3.5 h-3.5 animate-spin" />
+                    <span>กำลังประทับตรา PQC...</span>
+                  </>
+                ) : (
+                  <>
+                    <Lock className="w-3.5 h-3.5" />
+                    <span>ประทับตรา Genesis Seal</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};

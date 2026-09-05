@@ -1,0 +1,453 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import * as d3 from "d3";
+import { CitadelNode } from "./NodeMetrics";
+import { 
+  Globe, 
+  Activity, 
+  Zap, 
+  ShieldCheck, 
+  AlertTriangle, 
+  Layers, 
+  RotateCcw, 
+  Crosshair, 
+  Radio, 
+  Maximize2 
+} from "lucide-react";
+
+export interface GeoCitadelNode extends CitadelNode {
+  lat: number;
+  lon: number;
+  country: string;
+  countryName: string;
+}
+
+export const ALL_12_CITADEL_NODES: GeoCitadelNode[] = [
+  { id: 'bkk', name: 'Bangkok Sovereign Root', region: 'TH', country: 'TH', countryName: 'Thailand (Genesis Root #01)', throughput: 9940, latency: 12, confidence: 99.98, lat: 13.7563, lon: 100.5018 },
+  { id: 'tyo', name: 'Tokyo Citadel', region: 'JP', country: 'JP', countryName: 'Japan', throughput: 9120, latency: 45, confidence: 99.4, lat: 35.6762, lon: 139.6503 },
+  { id: 'sin', name: 'Singapore Citadel', region: 'SG', country: 'SG', countryName: 'Singapore', throughput: 8980, latency: 28, confidence: 99.6, lat: 1.3521, lon: 103.8198 },
+  { id: 'sel', name: 'Seoul Citadel', region: 'KR', country: 'KR', countryName: 'South Korea', throughput: 8750, latency: 62, confidence: 99.1, lat: 37.5665, lon: 126.9780 },
+  { id: 'lon', name: 'London Citadel', region: 'UK', country: 'UK', countryName: 'United Kingdom', throughput: 8050, latency: 142, confidence: 98.7, lat: 51.5074, lon: -0.1278 },
+  { id: 'fra', name: 'Frankfurt Citadel', region: 'DE', country: 'DE', countryName: 'Germany', throughput: 8340, latency: 138, confidence: 98.9, lat: 50.1109, lon: 8.6821 },
+  { id: 'zrh', name: 'Zurich Citadel', region: 'CH', country: 'CH', countryName: 'Switzerland', throughput: 8610, latency: 135, confidence: 99.2, lat: 47.3769, lon: 8.5417 },
+  { id: 'dxb', name: 'Dubai Citadel', region: 'AE', country: 'AE', countryName: 'United Arab Emirates', throughput: 8190, latency: 98, confidence: 98.8, lat: 25.2048, lon: 55.2708 },
+  { id: 'sfo', name: 'San Francisco Citadel', region: 'US-W', country: 'US', countryName: 'United States (West)', throughput: 7890, latency: 182, confidence: 98.2, lat: 37.7749, lon: -122.4194 },
+  { id: 'nyc', name: 'New York Citadel', region: 'US-E', country: 'US', countryName: 'United States (East)', throughput: 8250, latency: 198, confidence: 98.4, lat: 40.7128, lon: -74.0060 },
+  { id: 'sao', name: 'São Paulo Citadel', region: 'BR', country: 'BR', countryName: 'Brazil', throughput: 7420, latency: 275, confidence: 97.8, lat: -23.5505, lon: -46.6333 },
+  { id: 'syd', name: 'Sydney Citadel', region: 'AU', country: 'AU', countryName: 'Australia', throughput: 8210, latency: 110, confidence: 98.9, lat: -33.8688, lon: 151.2093 },
+];
+
+interface CitadelHealthHeatmapProps {
+  nodes?: GeoCitadelNode[];
+  onSelectNode?: (node: GeoCitadelNode) => void;
+  isRealtimeActive?: boolean;
+}
+
+export const CitadelHealthHeatmap: React.FC<CitadelHealthHeatmapProps> = ({
+  nodes = ALL_12_CITADEL_NODES,
+  onSelectNode,
+  isRealtimeActive = true
+}) => {
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [selectedNode, setSelectedNode] = useState<GeoCitadelNode | null>(nodes[0] || null);
+  const [heatMetric, setHeatMetric] = useState<"latency" | "confidence" | "throughput">("latency");
+  const [showNetworkMesh, setShowNetworkMesh] = useState(true);
+  const [showHeatContours, setShowHeatContours] = useState(true);
+  const [liveNodes, setLiveNodes] = useState<GeoCitadelNode[]>(nodes);
+
+  // Periodic real-time slight jitter simulation (respects global telemetry toggle)
+  useEffect(() => {
+    if (!isRealtimeActive) return;
+    const timer = setInterval(() => {
+      setLiveNodes(prev => prev.map(node => {
+        const latencyJitter = (Math.random() - 0.5) * 6;
+        const confidenceJitter = (Math.random() - 0.5) * 0.1;
+        const throughputJitter = (Math.random() - 0.5) * 50;
+
+        return {
+          ...node,
+          latency: Math.max(8, Math.round(node.latency + latencyJitter)),
+          confidence: Number(Math.min(99.99, Math.max(96.0, node.confidence + confidenceJitter)).toFixed(2)),
+          throughput: Math.round(node.throughput + throughputJitter)
+        };
+      }));
+    }, 2500);
+
+    return () => clearInterval(timer);
+  }, [isRealtimeActive]);
+
+  // Render D3.js Geo Heatmap
+  useEffect(() => {
+    if (!svgRef.current || !containerRef.current) return;
+
+    const width = containerRef.current.clientWidth || 900;
+    const height = 480;
+
+    const svg = d3.select(svgRef.current);
+    svg.selectAll("*").remove();
+
+    svg
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", `0 0 ${width} ${height}`);
+
+    // Definitions for gradients & glow filters
+    const defs = svg.append("defs");
+
+    // Glow Filter
+    const filter = defs.append("filter").attr("id", "glow").attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+    filter.append("feGaussianBlur").attr("stdDeviation", "3").attr("result", "coloredBlur");
+    const feMerge = filter.append("feMerge");
+    feMerge.append("feMergeNode").attr("in", "coloredBlur");
+    feMerge.append("feMergeNode").attr("in", "SourceGraphic");
+
+    // Pulse Core Radial Gradient
+    const rootGrad = defs.append("radialGradient").attr("id", "rootGlow");
+    rootGrad.append("stop").attr("offset", "0%").attr("stop-color", "#FACC15").attr("stop-opacity", 1);
+    rootGrad.append("stop").attr("offset", "70%").attr("stop-color", "#D4AF37").attr("stop-opacity", 0.4);
+    rootGrad.append("stop").attr("offset", "100%").attr("stop-color", "#EAB308").attr("stop-opacity", 0);
+
+    // Main Group
+    const g = svg.append("g").attr("class", "map-group");
+
+    // D3 Geo Projection (Equirectangular or Natural Earth)
+    const projection = d3.geoEquirectangular()
+      .scale((width / 640) * 105)
+      .center([15, 10])
+      .translate([width / 2, height / 2]);
+
+    const path = d3.geoPath().projection(projection);
+
+    // 1. Background Grid / Graticule
+    const graticule = d3.geoGraticule().step([30, 30]);
+    g.append("path")
+      .datum(graticule)
+      .attr("class", "graticule")
+      .attr("d", path)
+      .attr("fill", "none")
+      .attr("stroke", "#1E293B")
+      .attr("stroke-width", 0.6)
+      .attr("stroke-dasharray", "3,3")
+      .attr("opacity", 0.8);
+
+    // 2. Heatmap Density Rings under each Node
+    if (showHeatContours) {
+      const heatGroup = g.append("g").attr("class", "heat-layer");
+
+      liveNodes.forEach(node => {
+        const coords = projection([node.lon, node.lat]);
+        if (!coords) return;
+
+        // Color Scale based on Metric
+        let heatColor = "#06B6D4"; // cyan
+        let heatRadius = 45;
+
+        if (heatMetric === "latency") {
+          // Green/Cyan for low latency (<60ms), Yellow for medium (<160ms), Red for high (>200ms)
+          if (node.latency < 60) {
+            heatColor = "#10B981"; // emerald
+            heatRadius = 35;
+          } else if (node.latency < 160) {
+            heatColor = "#06B6D4"; // cyan
+            heatRadius = 50;
+          } else if (node.latency < 220) {
+            heatColor = "#F59E0B"; // amber
+            heatRadius = 65;
+          } else {
+            heatColor = "#EF4444"; // rose
+            heatRadius = 80;
+          }
+        } else if (heatMetric === "confidence") {
+          heatColor = node.confidence >= 99.0 ? "#8B5CF6" : node.confidence >= 98.0 ? "#06B6D4" : "#F59E0B";
+          heatRadius = 40 + (100 - node.confidence) * 15;
+        } else {
+          // Throughput
+          heatColor = "#FACC15";
+          heatRadius = 25 + (node.throughput / 10000) * 35;
+        }
+
+        // Multi-tier Gaussian Blur Rings for D3 Heatmap Simulation
+        [heatRadius, heatRadius * 0.6, heatRadius * 0.3].forEach((r, idx) => {
+          heatGroup.append("circle")
+            .attr("cx", coords[0])
+            .attr("cy", coords[1])
+            .attr("r", r)
+            .attr("fill", heatColor)
+            .attr("opacity", idx === 0 ? 0.08 : idx === 1 ? 0.18 : 0.35)
+            .attr("filter", "url(#glow)");
+        });
+      });
+    }
+
+    // 3. Network Arcs Connecting all Nodes to Bangkok Genesis Root
+    const rootNode = liveNodes.find(n => n.id === 'bkk') || liveNodes[0];
+    const rootCoords = projection([rootNode.lon, rootNode.lat]);
+
+    if (showNetworkMesh && rootCoords) {
+      const meshGroup = g.append("g").attr("class", "network-mesh");
+
+      liveNodes.forEach(node => {
+        if (node.id === rootNode.id) return;
+        const targetCoords = projection([node.lon, node.lat]);
+        if (!targetCoords) return;
+
+        const [targetX, targetY] = targetCoords;
+        const [rootX, rootY] = rootCoords;
+
+        // Quadratic Bezier Arc
+        const dx = targetX - rootX;
+        const dy = targetY - rootY;
+        const dr = Math.sqrt(dx * dx + dy * dy);
+        const midX = (rootX + targetX) / 2;
+        const midY = (rootY + targetY) / 2 - dr * 0.18;
+
+        const pathData = `M ${rootX},${rootY} Q ${midX},${midY} ${targetX},${targetY}`;
+
+        // Base Arc
+        meshGroup.append("path")
+          .attr("d", pathData)
+          .attr("fill", "none")
+          .attr("stroke", node.latency > 200 ? "#F59E0B" : "#06B6D4")
+          .attr("stroke-width", 1.2)
+          .attr("stroke-dasharray", "4,4")
+          .attr("opacity", 0.45);
+
+        // Animated Signal Pulse along Path
+        const pulseCircle = meshGroup.append("circle")
+          .attr("r", 2.5)
+          .attr("fill", "#FDE68A")
+          .attr("filter", "url(#glow)");
+
+        // Repeat animation
+        function animatePulse() {
+          pulseCircle
+            .attr("cx", rootX)
+            .attr("cy", rootY)
+            .transition()
+            .duration(1500 + node.latency * 4)
+            .ease(d3.easeSinInOut)
+            .attrTween("transform", function() {
+              return function(t: number) {
+                const qx = (1 - t) * (1 - t) * rootX + 2 * (1 - t) * t * midX + t * t * targetX;
+                const qy = (1 - t) * (1 - t) * rootY + 2 * (1 - t) * t * midY + t * t * targetY;
+                return `translate(${qx - rootX}, ${qy - rootY})`;
+              };
+            })
+            .on("end", animatePulse);
+        }
+        animatePulse();
+      });
+    }
+
+    // 4. Citadel Nodes Pins & Interactive Points
+    const nodesGroup = g.append("g").attr("class", "citadel-nodes");
+
+    liveNodes.forEach(node => {
+      const coords = projection([node.lon, node.lat]);
+      if (!coords) return;
+
+      const isRoot = node.id === 'bkk';
+      const isSelected = selectedNode?.id === node.id;
+
+      const nodeG = nodesGroup.append("g")
+        .attr("transform", `translate(${coords[0]}, ${coords[1]})`)
+        .attr("class", "cursor-pointer")
+        .on("click", () => {
+          setSelectedNode(node);
+          if (onSelectNode) onSelectNode(node);
+        });
+
+      // Outer Ripple
+      nodeG.append("circle")
+        .attr("r", isRoot ? 14 : isSelected ? 11 : 7)
+        .attr("fill", isRoot ? "#FACC15" : isSelected ? "#06B6D4" : "#38BDF8")
+        .attr("opacity", 0.25)
+        .attr("class", "animate-ping");
+
+      // Solid Node Badge Outer Border
+      nodeG.append("circle")
+        .attr("r", isRoot ? 8 : isSelected ? 6.5 : 5)
+        .attr("fill", isRoot ? "#D4AF37" : isSelected ? "#06B6D4" : "#0284C7")
+        .attr("stroke", "#FFFFFF")
+        .attr("stroke-width", isSelected ? 2 : 1.2)
+        .attr("filter", "url(#glow)");
+
+      // Core Dot
+      nodeG.append("circle")
+        .attr("r", isRoot ? 3.5 : 2.5)
+        .attr("fill", isRoot ? "#000000" : "#FFFFFF");
+
+      // Label Text
+      nodeG.append("text")
+        .text(`${node.name.replace(" Citadel", "").replace(" Sovereign Root", "")}`)
+        .attr("x", 8)
+        .attr("y", 3)
+        .attr("font-size", isRoot ? "11px" : "9.5px")
+        .attr("font-family", "monospace")
+        .attr("font-weight", isRoot || isSelected ? "bold" : "normal")
+        .attr("fill", isRoot ? "#FDE68A" : isSelected ? "#67E8F9" : "#94A3B8")
+        .attr("filter", "drop-shadow(0 1px 2px rgba(0,0,0,0.8))");
+
+      // Latency Badge under name
+      nodeG.append("text")
+        .text(`${node.latency}ms`)
+        .attr("x", 8)
+        .attr("y", 13)
+        .attr("font-size", "8.5px")
+        .attr("font-family", "monospace")
+        .attr("fill", node.latency < 60 ? "#34D399" : node.latency < 160 ? "#38BDF8" : "#FBBF24");
+    });
+
+  }, [liveNodes, heatMetric, showNetworkMesh, showHeatContours, selectedNode, onSelectNode]);
+
+  // Overall Statistics
+  const avgLatency = Math.round(liveNodes.reduce((acc, n) => acc + n.latency, 0) / liveNodes.length);
+  const avgConfidence = (liveNodes.reduce((acc, n) => acc + n.confidence, 0) / liveNodes.length).toFixed(2);
+  const totalThroughput = liveNodes.reduce((acc, n) => acc + n.throughput, 0);
+
+  return (
+    <div className="bg-zinc-950 border border-cyan-500/50 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-5">
+      {/* Header HUD */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-cyan-500/15 border border-cyan-500/60 flex items-center justify-center text-cyan-400">
+            <Globe className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400">
+                D3.JS CITADEL HEALTH HEATMAP
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 text-[10px] font-mono font-bold">
+                12/12 NODES SYNCHRONIZED
+              </span>
+            </div>
+            <h2 className="text-base sm:text-lg font-bold font-mono text-zinc-100 mt-0.5">
+              Global Citadel Latency Health &amp; Topology Matrix
+            </h2>
+          </div>
+        </div>
+
+        {/* Heatmap Layer & Metric Controls */}
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="bg-zinc-900 border border-zinc-800 p-1 rounded-xl flex items-center gap-1 font-mono text-xs">
+            <button
+              onClick={() => setHeatMetric("latency")}
+              className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                heatMetric === "latency" ? "bg-cyan-500 text-black font-bold" : "text-zinc-400 hover:text-zinc-200"
+              }`}
+            >
+              Latency Heat
+            </button>
+            <button
+              onClick={() => setHeatMetric("confidence")}
+              className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                heatMetric === "confidence" ? "bg-purple-500 text-white font-bold" : "text-zinc-400 hover:text-zinc-200"
+              }`}
+            >
+              PQC Confidence
+            </button>
+            <button
+              onClick={() => setHeatMetric("throughput")}
+              className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                heatMetric === "throughput" ? "bg-[#D4AF37] text-black font-bold" : "text-zinc-400 hover:text-zinc-200"
+              }`}
+            >
+              Throughput
+            </button>
+          </div>
+
+          <button
+            onClick={() => setShowNetworkMesh(prev => !prev)}
+            className={`px-3 py-1.5 rounded-xl border text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer ${
+              showNetworkMesh ? "bg-cyan-950/80 border-cyan-500 text-cyan-300" : "bg-zinc-900 border-zinc-800 text-zinc-500"
+            }`}
+          >
+            <Radio className="w-3.5 h-3.5" />
+            <span>Arcs Mesh</span>
+          </button>
+
+          <button
+            onClick={() => setShowHeatContours(prev => !prev)}
+            className={`px-3 py-1.5 rounded-xl border text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer ${
+              showHeatContours ? "bg-amber-950/80 border-amber-500 text-amber-300" : "bg-zinc-900 border-zinc-800 text-zinc-500"
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>Heatmap Contours</span>
+          </button>
+        </div>
+      </div>
+
+      {/* D3.js Interactive Map Container */}
+      <div 
+        ref={containerRef} 
+        className="relative w-full rounded-2xl overflow-hidden border border-zinc-800 bg-[#030712] flex flex-col items-center justify-center"
+      >
+        <svg ref={svgRef} className="w-full h-[360px] sm:h-[480px]" />
+
+        {/* Selected Node Floating Details HUD */}
+        {selectedNode && (
+          <div className="absolute bottom-4 left-4 p-3.5 bg-black/85 backdrop-blur-md rounded-2xl border border-cyan-500/50 font-mono text-xs space-y-1.5 z-10 max-w-xs shadow-2xl">
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-bold text-zinc-100 flex items-center gap-1.5">
+                <Crosshair className="w-3.5 h-3.5 text-cyan-400" />
+                {selectedNode.name}
+              </span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-cyan-300 font-bold">
+                {selectedNode.region}
+              </span>
+            </div>
+            <div className="text-[11px] text-zinc-400">{selectedNode.countryName}</div>
+            
+            <div className="grid grid-cols-3 gap-2 pt-1 border-t border-zinc-800 text-[11px]">
+              <div>
+                <span className="text-zinc-500 block text-[9px]">LATENCY</span>
+                <span className={`font-bold ${selectedNode.latency < 60 ? "text-emerald-400" : selectedNode.latency < 160 ? "text-cyan-400" : "text-amber-400"}`}>
+                  {selectedNode.latency} ms
+                </span>
+              </div>
+              <div>
+                <span className="text-zinc-500 block text-[9px]">CONFIDENCE</span>
+                <span className="text-purple-400 font-bold">{selectedNode.confidence}%</span>
+              </div>
+              <div>
+                <span className="text-zinc-500 block text-[9px]">THROUGHPUT</span>
+                <span className="text-[#FACC15] font-bold">{selectedNode.throughput} QPS</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Global Summary Legend */}
+        <div className="absolute top-4 right-4 p-3 bg-black/85 backdrop-blur-md rounded-2xl border border-zinc-800 font-mono text-xs space-y-1 z-10 text-right">
+          <div className="text-zinc-400 text-[10px]">GLOBAL 12 NODES AVERAGE</div>
+          <div className="text-cyan-300 font-bold">{avgLatency} ms RTT • {avgConfidence}% PQC Trust</div>
+          <div className="text-yellow-400 text-[11px] font-bold">{totalThroughput.toLocaleString()} Total QPS</div>
+        </div>
+      </div>
+
+      {/* Footer Metrics */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+        <div className="p-3 bg-zinc-900/60 border border-zinc-800 rounded-xl space-y-1">
+          <span className="text-zinc-500 text-[10px] block">GENESIS ROOT CITADEL</span>
+          <div className="text-[#FACC15] font-bold">Bangkok (#01 Root)</div>
+        </div>
+        <div className="p-3 bg-zinc-900/60 border border-zinc-800 rounded-xl space-y-1">
+          <span className="text-zinc-500 text-[10px] block">POST-QUANTUM CRYPTO</span>
+          <div className="text-purple-400 font-bold">FIPS 204 ML-DSA-87</div>
+        </div>
+        <div className="p-3 bg-zinc-900/60 border border-zinc-800 rounded-xl space-y-1">
+          <span className="text-zinc-500 text-[10px] block">LEGAL COMPLIANCE</span>
+          <div className="text-emerald-400 font-bold">ETA Sec. 9/26/28 • PDPA</div>
+        </div>
+        <div className="p-3 bg-zinc-900/60 border border-zinc-800 rounded-xl space-y-1">
+          <span className="text-zinc-500 text-[10px] block">HEATMAP ENGINE</span>
+          <div className="text-cyan-400 font-bold">D3.js v7 Geo Projection</div>
+        </div>
+      </div>
+    </div>
+  );
+};

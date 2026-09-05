@@ -74,9 +74,20 @@ export interface CanonicalModule {
   subModules: CanonicalSubModule[];
 }
 
+export interface HSMNodeVitality {
+  connectivityPct: number;
+  lastPingMs: number;
+  subKelvinTempK: number;
+  activeEntropyRateKBps: number;
+  jitterMs: number;
+  busBandwidthGbps: number;
+  hsmCoreStatus?: string;
+}
+
 export interface ThaiCustodian {
   id: string;
   passportNumber: string;
+  passportId?: string;
   nameTh: string;
   nameEn: string;
   roleTh: string;
@@ -84,8 +95,20 @@ export interface ThaiCustodian {
   clearanceLevel: string;
   signedDate: string;
   keyFingerprint: string;
+  councilCode: string;
+  slotNumber: number;
+  slotId?: number;
+  hardwareEnclave: string;
+  fipsCertification?: string;
+  pqcAlgorithm: string;
+  cryptoSignature: string;
+  certificateSerial?: string;
+  verificationStatus?: string;
   status: 'ACTIVE' | 'SOVEREIGN' | 'FROZEN' | 'REAL_HSM_SIGNED';
+  vitality: HSMNodeVitality;
 }
+
+export type HSMNode = ThaiCustodian;
 
 export interface IntakeArtifact {
   evidenceId: string;
@@ -295,3 +318,53 @@ export interface MultiverseNavigationState {
   blockId: string;
   status: 'ONLINE' | 'ENGAGED' | 'STANDBY';
 }
+
+export interface ForensicStage {
+  stageNumber: number;
+  code: string;
+  nameTh: string;
+  nameEn: string;
+  descriptionTh: string;
+  descriptionEn: string;
+  durationMs: number;
+  cumulativeMs: number;
+  targetChamber: string;
+  evidenceTag: string;
+  verificationRule: string;
+}
+
+export interface PhaseInfo {
+  phase_id: string;
+  name: string;
+  domain: 'Foundation' | 'Governance' | 'Operations' | 'Extension';
+  seals_verified: number;
+  block_anchor: number;
+  status: string;
+}
+
+export interface SimulatedTransaction {
+  auth_id: string;
+  vendor: string;
+  amount: number;
+  signature_scheme: string;
+  hsm_quorum_count: number;
+  isReplay: boolean;
+}
+
+export interface InterceptResult {
+  computed_risk_score: number;
+  evaluation_timestamp: string;
+  status: 'SETTLED_COMMITTED' | 'ESCROW_PENDING' | 'BLOCKED_FRAUD';
+  mitigation_action: string;
+  chamber: string;
+  thai_legal_compliance: {
+    section_09_enforceable: boolean;
+    section_26_trustworthy: boolean;
+    section_28_ca_backed: boolean;
+    court_admissible: 'FORENSIC_READY_MAXIMUM_ASSURANCE' | 'ADMISSIBLE_GENERAL_TRANSACTION' | 'NOT_ADMISSIBLE_FRAUD_SUSPECTED';
+  };
+  details: string[];
+}
+
+
+

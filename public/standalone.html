@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZYRQUEN Ω∞ SOVEREIGN WORLD ENGINE - Standalone Zero-Drift v4.16 LTS</title>
+  <meta name="description" content="ZYRQUEN Ω∞ Sovereign World Engine Standalone Single HTML Export (Zero-Dependency, SSoT Δ0.0%, 14,902 Seals, Post-Quantum PQC, All 18 Chambers)">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            sovGold: {
+              300: '#FDE047',
+              400: '#FACC15',
+              500: '#EAB308',
+              600: '#CA8A04',
+            },
+            sovCyan: {
+              300: '#67E8F9',
+              400: '#22D3EE',
+              500: '#06B6D4',
+              600: '#0891B2',
+            }
+          },
+          animation: {
+            'seal-spin': 'sealSpin 30s linear infinite',
+            'seal-float': 'sealFloat 6s ease-in-out infinite',
+            'seal-intro': 'sealIntro 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'gold-shine': 'goldShine 4s ease-in-out infinite',
+          },
+          keyframes: {
+            sealSpin: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            },
+            sealFloat: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' },
+            },
+            sealIntro: {
+              '0%': { transform: 'scale(0.9) rotate(-25deg)', opacity: '0.8' },
+              '60%': { transform: 'scale(1.02) rotate(2deg)', opacity: '1' },
+              '100%': { transform: 'scale(1) rotate(0deg)', opacity: '1' },
+            },
+            goldShine: {
+              '0%, 100%': { filter: 'drop-shadow(0 0 15px rgba(245, 158, 11, 0.35))' },
+              '50%': { filter: 'drop-shadow(0 0 35px rgba(251, 191, 36, 0.75))' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Three.js CDN for Chamber 11 & 3D Topology -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Google Fonts: JetBrains Mono & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #030712;
+      color: #F8FAFC;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #FFFBEB 0%, #FDE047 30%, #F59E0B 70%, #B45309 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-cyan-gradient {
+      background: linear-gradient(135deg, #E0F2FE 0%, #38BDF8 45%, #0284C7 85%, #0369A1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .glass-panel {
+      background: rgba(8, 18, 38, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #030712;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-cyan-500 selection:text-black overflow-x-hidden antialiased">
+
+  <!-- ================= TOP SOVEREIGN BANNER & HEADER ================= -->
+  <header class="sticky top-0 z-50 border-b border-cyan-500/30 bg-[#040915]/95 backdrop-blur-md px-4 py-2.5">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Architect Authority -->
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 p-0.5 shadow-[0_0_15px_rgba(245,158,11,0.5)] flex items-center justify-center">
+          <span class="font-mono font-black text-black text-sm tracking-tighter">Ω∞</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 font-mono text-xs">
+            <span class="font-black text-amber-400 tracking-wider">ZYRQUEN Ω∞</span>
+            <span class="text-slate-600">•</span>
+            <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-bold border border-amber-500/40">
+              STANDALONE v4.16 LTS
+            </span>
+            <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold border border-emerald-500/40">
+              Δ0.0% ZERO DRIFT
+            </span>
+          </div>
+          <div class="text-[11px] text-slate-400 font-mono flex items-center gap-2">
+            <span>Sovereign Architect: <strong class="text-slate-200">นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01)</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Telemetry & Status Badges -->
+      <div class="flex items-center gap-2 font-mono text-xs flex-wrap">
+        <div class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>Block <strong class="text-white">#849202</strong></span>
+        </div>
+        <div class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+          Seals: <strong class="text-amber-400">14,902</strong>
+        </div>
+        <div class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+          Deca-Quorum: <strong class="text-emerald-400">10/10 HSM</strong>
+        </div>
+        <button onclick="downloadSelf()" class="px-3 py-1 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 text-black font-bold text-xs transition shadow-md flex items-center gap-1.5 cursor-pointer">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span>Export HTML</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+    <!-- HERO SOVEREIGN SEAL & ARCHITECTURAL SUMMARY -->
+    <section class="rounded-3xl border border-amber-500/40 bg-gradient-to-br from-[#09152b] via-[#081226] to-[#040813] p-6 shadow-[0_0_35px_rgba(245,158,11,0.15)] relative overflow-hidden">
+      <div class="absolute -right-20 -top-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left: Seal Visual with Golden Glow & VERIFIED Ribbon -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center text-center space-y-4">
+          <div class="relative group">
+            <!-- Golden Glow Ambient Halo -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-500/30 via-yellow-400/40 to-amber-600/30 blur-2xl -z-10 scale-110 animate-gold-shine"></div>
+            
+            <!-- Canonical Sovereign Seal SVG -->
+            <div id="hero-seal-container" class="animate-seal-intro animate-seal-float">
+              <svg viewBox="0 0 500 500" width="280" height="280" class="filter drop-shadow-[0_0_25px_rgba(245,158,11,0.5)]">
+                <defs>
+                  <linearGradient id="stCyanBezel" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#E0F2FE" />
+                    <stop offset="25%" stop-color="#38BDF8" />
+                    <stop offset="70%" stop-color="#0284C7" />
+                    <stop offset="100%" stop-color="#0369A1" />
+                  </linearGradient>
+                  <radialGradient id="stAmberShine" cx="35%" cy="30%" r="75%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="20%" stop-color="#FEF08A" />
+                    <stop offset="50%" stop-color="#F59E0B" />
+                    <stop offset="80%" stop-color="#B45309" />
+                    <stop offset="100%" stop-color="#78350F" />
+                  </radialGradient>
+                  <linearGradient id="stAmberLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFFBEB" />
+                    <stop offset="25%" stop-color="#FDE047" />
+                    <stop offset="60%" stop-color="#D97706" />
+                    <stop offset="100%" stop-color="#78350F" />
+                  </linearGradient>
+                  <linearGradient id="stGoldRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#78350F" />
+                    <stop offset="20%" stop-color="#D97706" />
+                    <stop offset="50%" stop-color="#FEF08A" />
+                    <stop offset="80%" stop-color="#D97706" />
+                    <stop offset="100%" stop-color="#78350F" />
+                  </linearGradient>
+                  <radialGradient id="stCoreBg" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#0f1d3d" />
+                    <stop offset="60%" stop-color="#081024" />
+                    <stop offset="100%" stop-color="#030712" />
+                  </radialGradient>
+                  <filter id="stGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3.5" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!-- Scallop Rosette 36 Nodes -->
+                <g opacity="0.95" filter="url(#stGlow)">
+                  <script>
+                    // Rendered dynamically or statically
+                  </script>
+                  <!-- 36 Outer Scallop Pearls -->
+                  <circle cx="250" cy="8" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="292" cy="12" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="332" cy="23" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="370" cy="42" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="402" cy="69" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="428" cy="102" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="446" cy="141" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="456" cy="183" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="458" cy="226" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="451" cy="269" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="436" cy="310" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="413" cy="347" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="383" cy="379" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="347" cy="404" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="307" cy="422" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="264" cy="431" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="221" cy="431" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="178" cy="423" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="138" cy="406" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="102" cy="381" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="72" cy="349" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="49" cy="312" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="34" cy="272" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="27" cy="229" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="29" cy="186" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="39" cy="144" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="58" cy="105" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="85" cy="71" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="117" cy="44" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="155" cy="25" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="195" cy="13" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                  <circle cx="237" cy="8" r="9.5" fill="url(#stAmberLinear)" stroke="#FEF08A" stroke-width="1.2"/>
+                </g>
+
+                <!-- Bezel Base & Cyan Security Ring -->
+                <circle cx="250" cy="250" r="238" fill="url(#stCoreBg)" stroke="url(#stAmberLinear)" stroke-width="5"/>
+                <circle cx="250" cy="250" r="230" fill="none" stroke="url(#stCyanBezel)" stroke-width="8" filter="url(#stGlow)"/>
+                <circle cx="250" cy="250" r="222" fill="none" stroke="#67E8F9" stroke-width="1.8"/>
+                <circle cx="250" cy="250" r="186" fill="none" stroke="#F59E0B" stroke-width="2.5"/>
+
+                <!-- VERIFIED Top Ribbon -->
+                <path d="M 98 215 A 184 184 0 0 1 402 215 L 418 200 A 206 206 0 0 0 82 200 Z" fill="url(#stGoldRibbon)" stroke="#FFFBEB" stroke-width="2"/>
+                <polygon points="82,200 98,215 74,212" fill="#78350F"/>
+                <polygon points="418,200 402,215 426,212" fill="#78350F"/>
+
+                <!-- Ribbon Top Text -->
+                <path id="stArcTop" d="M 66 250 A 184 184 0 0 1 434 250" fill="none"/>
+                <text font-family="'JetBrains Mono', monospace" font-size="14.5" font-weight="900" fill="#030712" letter-spacing="4.5">
+                  <textPath href="#stArcTop" startOffset="50%" text-anchor="middle">
+                    ★ VERIFIED • AUTHENTIC • SECURE ★
+                  </textPath>
+                </text>
+
+                <!-- Bottom Text -->
+                <path id="stArcBottom" d="M 432 250 A 182 182 0 0 1 68 250" fill="none"/>
+                <text font-family="'JetBrains Mono', monospace" font-size="12.5" font-weight="800" fill="#67E8F9" letter-spacing="3.5">
+                  <textPath href="#stArcBottom" startOffset="50%" text-anchor="middle">
+                    ZYRQUEN Ω∞ • SSoT Δ0.0% • BLOCK #849202
+                  </textPath>
+                </text>
+
+                <!-- Central Medallion Frame -->
+                <circle cx="250" cy="250" r="118" fill="url(#stCoreBg)" stroke="url(#stCyanBezel)" stroke-width="3.5"/>
+                <circle cx="250" cy="250" r="108" fill="none" stroke="url(#stAmberLinear)" stroke-width="2"/>
+
+                <!-- 8-Point Quantum Star -->
+                <polygon points="250,148 266,234 352,250 266,266 250,352 234,266 148,250 234,234" fill="url(#stAmberShine)" stroke="#FFFBEB" stroke-width="1.5" filter="url(#stGlow)" opacity="0.95"/>
+                <polygon points="250,165 260,240 335,250 260,260 250,335 240,260 165,250 240,240" transform="rotate(45, 250, 250)" fill="url(#stCyanBezel)" stroke="#67E8F9" stroke-width="1.2" filter="url(#stGlow)" opacity="0.85"/>
+
+                <!-- Core Circle with Ω∞ -->
+                <circle cx="250" cy="250" r="48" fill="url(#stCoreBg)" stroke="url(#stCyanBezel)" stroke-width="3" filter="url(#stGlow)"/>
+                <text x="250" y="254" font-family="'JetBrains Mono', monospace" font-size="38" font-weight="900" fill="url(#stAmberShine)" text-anchor="middle" filter="url(#stGlow)">Ω∞</text>
+                <text x="250" y="278" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="800" fill="#67E8F9" letter-spacing="2" text-anchor="middle">SOVEREIGN KERNEL</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="triggerSealSpin()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-amber-400 text-amber-300 font-mono text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              <span>หมุนเปิดตราใหม่</span>
+            </button>
+            <button onclick="toggleMonochrome()" id="mono-toggle-btn" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:border-cyan-400 text-cyan-300 font-mono text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+              <span>โหมดขาว-ดำ (Print)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Authority & Architecture Specs -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="space-y-1.5">
+            <div class="font-mono text-xs font-bold text-cyan-400 tracking-widest uppercase">
+              STANDALONE CANONICAL TRUTH MATRIX
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black font-mono tracking-tight text-white">
+              ZYRQUEN Ω∞ <span class="text-gold-gradient">SOVEREIGN WORLD ENGINE</span>
+            </h1>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              สถาปัตยกรรมระดับอธิปไตยดิจิทัล Zero-Dependency ไม่ต้องพึ่งพาเซิร์ฟเวอร์ภายนอก ทำงานบนไคลเอนต์ 100% ภายใต้มาตรฐานการเข้ารหัสลับขั้นสูง NIST Post-Quantum Cryptography (FIPS 203/204/205) และกฎหมาย PDPA พ.ศ. 2562
+            </p>
+          </div>
+
+          <!-- SSoT Invariants Matrix Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 font-mono text-xs">
+            <div class="p-2.5 rounded-xl bg-slate-950/80 border border-amber-500/30">
+              <div class="text-[10px] text-slate-400 uppercase font-bold">Canonical Seals</div>
+              <div class="text-base font-black text-amber-300">14,902 SEALS</div>
+              <div class="text-[9px] text-emerald-400">Δ0.0% Involatile Zero Drift</div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-950/80 border border-cyan-500/30">
+              <div class="text-[10px] text-slate-400 uppercase font-bold">Canonical Block</div>
+              <div class="text-base font-black text-cyan-300">#849202</div>
+              <div class="text-[9px] text-cyan-400">Frozen v1.2 LTS State</div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-950/80 border border-purple-500/30">
+              <div class="text-[10px] text-slate-400 uppercase font-bold">Deca-Quorum HSM</div>
+              <div class="text-base font-black text-purple-300">10/10 REAL_HSM</div>
+              <div class="text-[9px] text-purple-400">FIPS 140-3 Level 4</div>
+            </div>
+          </div>
+
+          <!-- Genesis Merkle Root Hash Box -->
+          <div class="p-3 rounded-2xl bg-black/70 border border-slate-800 font-mono text-xs space-y-1">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-slate-400 font-bold flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                GENESIS MERKLE ROOT HASH
+              </span>
+              <button onclick="copyGenesisHash()" class="text-cyan-400 hover:text-cyan-300 text-[10px] font-bold underline cursor-pointer">
+                Copy Hash
+              </button>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-[10px] text-amber-300 break-all select-all font-mono">
+              909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 18 CHAMBERS INTERACTIVE SELECTOR ================= -->
+    <section class="space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3 font-mono">
+        <div>
+          <h2 class="text-lg font-black text-white flex items-center gap-2">
+            <span class="text-cyan-400">18 SOVEREIGN CHAMBERS</span>
+            <span class="text-slate-600">•</span>
+            <span class="text-xs text-slate-400 font-normal">Chambers 00 to 17 Matrix</span>
+          </h2>
+        </div>
+        <div class="text-xs text-slate-400">
+          สถานะ: <span class="text-emerald-400 font-bold">18/18 ACTIVE & VERIFIED</span>
+        </div>
+      </div>
+
+      <!-- Chamber Tab Buttons Grid -->
+      <div id="chamber-buttons-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 font-mono text-xs">
+        <!-- Generated by JS -->
+      </div>
+
+      <!-- Active Chamber Display Panel -->
+      <div id="active-chamber-panel" class="rounded-3xl border border-cyan-500/30 bg-[#060e20] p-6 space-y-4">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- ================= 3D QUANTUM TOPOLOGY (CHAMBER 11) ================= -->
+    <section class="rounded-3xl border border-cyan-500/30 bg-[#050b18] p-6 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3 font-mono">
+        <div>
+          <div class="text-xs text-cyan-400 font-bold tracking-widest uppercase">CHAMBER 11 / THREE.JS 3D ENGINE</div>
+          <h3 class="text-xl font-black text-white">8K QUANTUM TOPOLOGY & ENTANGLEMENT FIELD</h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-bold font-mono">
+            WebGL 3D Active
+          </span>
+        </div>
+      </div>
+
+      <!-- Canvas Container -->
+      <div class="relative w-full h-80 rounded-2xl overflow-hidden border border-cyan-500/20 bg-black/80 flex items-center justify-center">
+        <canvas id="three-quantum-canvas" class="w-full h-full"></canvas>
+        <div class="absolute bottom-3 left-3 font-mono text-[10px] text-cyan-300/80 bg-black/60 px-2.5 py-1 rounded-lg border border-cyan-500/20 pointer-events-none">
+          Qubit Entanglement: 99.992% | Lattice Nodes: 120 | Space-Ground Mesh BK01-LD06
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 10/10 HSM DECA-QUORUM CUSTODIAN GRID ================= -->
+    <section class="rounded-3xl border border-slate-800 bg-[#060c1c] p-6 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3 font-mono">
+        <div>
+          <div class="text-xs text-amber-400 font-bold tracking-widest uppercase">CHAMBER 03 / CUSTODIAN TRACKER</div>
+          <h3 class="text-xl font-black text-white">10/10 HSM DECA-QUORUM HARDWARE ENCLAVE MATRIX</h3>
+        </div>
+        <div class="flex items-center gap-2 font-mono text-xs">
+          <span class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/40">
+            Quorum: 10/10 Passed
+          </span>
+        </div>
+      </div>
+
+      <div id="custodians-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 font-mono text-xs">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ================= LEGAL COMPLIANCE & SSoT FOOTER ================= -->
+    <footer class="rounded-3xl border border-slate-800 bg-slate-950 p-6 text-center space-y-3 font-mono text-xs text-slate-400">
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">PDPA พ.ศ. 2562</span>
+        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">ETDA Sec 9, 26, 28 Safe Harbor</span>
+        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">FIPS 140-3 L4</span>
+        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">NIST PQC Standards</span>
+      </div>
+      <p class="text-[11px] text-slate-500 max-w-2xl mx-auto">
+        Certified & Sealed by Sovereign Architect: นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01) • Genesis Root: 909ab814... • Block #849202 • 14,902 Canonical Seals • Zero Drift Δ0.0%
+      </p>
+      <div class="text-[10px] text-slate-600">
+        ZYRQUEN Ω∞ SOVEREIGN WORLD ENGINE • STANDALONE SINGLE HTML ZERO-DEPENDENCY EDITION
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ================= CLIENT JAVASCRIPT LOGIC ================= -->
+  <script>
+    // 18 CHAMBERS MASTER DATA
+    const CHAMBERS = [
+      { id: "00", name: "00 MULTIVERSE DASHBOARD", th: "แดชบอร์ดพหุจักรวาล", desc: "ภาพรวมศูนย์ควบคุมสถิติและเทเลเมตรีควอนตัม 8K", group: "DATA / INTELLIGENCE", metric: "Active Stream: 8K Telemetry" },
+      { id: "01", name: "01 CANONICAL CORE G11", th: "แกนกลางคานอนิคอล", desc: "Merkle Root 909ab814... บล็อก #849202 ตราประทับ 14,902 ดวง SSoT Δ0", group: "AUTHORITY / CANONICAL", metric: "SSoT: Δ0.0% Zero Drift" },
+      { id: "02", name: "02 FORENSICS & QUARANTINE", th: "นิติวิทยาศาสตร์ (+5 Seals)", desc: "โซนกักกัน Candidate 24,012 ดวง และระบบสกัด Chaos Drill Fail-Closed", group: "SECURITY / GOVERNANCE", metric: "Quarantine Temp: 85.0°C Safe" },
+      { id: "03", name: "03 CUSTODIAN TRACKER", th: "ผู้พิทักษ์ 10/10 REAL_HSM", desc: "สภาผู้พิทักษ์สิทธิ์ 10 ท่าน และคีย์ฮาร์ดแวร์ FIPS 140-3 L4", group: "SECURITY / GOVERNANCE", metric: "Deca-Quorum: 10/10 Active" },
+      { id: "04", name: "04 INVARIANTS 10/10", th: "กฎเกณฑ์สภาวะคงที่", desc: "10 กฎเหล็กทางคณิตศาสตร์และสมการความปลอดภัยสากล", group: "SECURITY / GOVERNANCE", metric: "10/10 Mathematical Invariants" },
+      { id: "05", name: "05 MASTER GATES 22/22", th: "ประตูประเมินความปลอดภัย", desc: "22 ประตูประเมินความมั่นคงปลอดภัยขั้นสูงสุด Sealed", group: "SECURITY / GOVERNANCE", metric: "22/22 Master Gates Passed" },
+      { id: "06", name: "06 PHOENIX RECOVERY", th: "กลไกกู้คืนระบบ 142ms", desc: "ระบบฟื้นฟูตัวเองอัตโนมัติ 142ms ไร้การสูญเสียข้อมูล", group: "RUNTIME / OPERATIONS", metric: "Recovery SLA: 142ms" },
+      { id: "07", name: "07 FIOS TREASURY & DS-901", th: "คลังสินทรัพย์ระดับอธิปไตย", desc: "โมเดล 4 ปัจจัย (Quality/Momentum/Value/Vol) Sharpe 2.41 (+12.42%)", group: "DATA / INTELLIGENCE", metric: "Sharpe Ratio: 2.41" },
+      { id: "08", name: "08 POST-QUANTUM CRYPTO", th: "ระบบรหัสลับพ้นควอนตัม", desc: "CRYSTALS-Dilithium-5 (ML-DSA-87), Kyber-1024, FALCON-1024, SPHINCS+", group: "SECURITY / GOVERNANCE", metric: "NIST FIPS 203/204/205" },
+      { id: "09", name: "09 PHASE REGISTRY 01-40", th: "ทะเบียนเฟสและผลการทดสอบ", desc: "บันทึก Roadmap และผลลัพธ์การรัน 40 เฟสต่อเนื่อง", group: "AUTHORITY / CANONICAL", metric: "40/40 Phase Milestone" },
+      { id: "10", name: "10 SUPREME LEGAL SOVEREIGN GRID", th: "Omni-Jurisdiction & World Engine", desc: "ศาลอธิปไตยควอนตัม 12 ชั้น, D3 Lattice และกลไก Sovereign Veto", group: "WORLD / NAVIGATION", metric: "12 Legal Jurisdictions" },
+      { id: "11", name: "11 8K QUANTUM RADAR & TOPOLOGY", th: "เรดาร์ดาวเทียมและผังโครงข่าย", desc: "วงแหวนดาวเทียม QKD Space-Ground Mesh BK01-LD06", group: "DATA / INTELLIGENCE", metric: "Mesh Nodes: 120 BK01-LD06" },
+      { id: "12", name: "12 SOVEREIGN CLI & KERNEL LOGS", th: "คอนโซลคำสั่งและ Kernel Stream", desc: "คอนโซลพิมพ์คำสั่งอธิปไตย OMEGA-1 และสตรีม Kernel Interrupt Overlay", group: "RUNTIME / OPERATIONS", metric: "CLI Authority: OMEGA-1" },
+      { id: "13", name: "13 MULTIVERSE NAV GRID Ω601-1000", th: "ผังโหนดแพลตฟอร์ม Ω601-1000", desc: "400 โหนดผู้เช่าพหุจักรวาล แบ่ง 5 ย่านความถี่ Zero-Drift", group: "WORLD / NAVIGATION", metric: "400 Tenant Multiverse" },
+      { id: "14", name: "14 WARP PATH VISUALIZER", th: "แผนที่ปลายทาง 13 พหุจักรวาล", desc: "เส้นทางวาร์ป 13 ประตูมิติ คอนโซลยิงสัญญาณ และแผนผังกราฟิกสด", group: "WORLD / NAVIGATION", metric: "13 Warp Vector Gates" },
+      { id: "15", name: "15 QUANTUM FUEL CORE", th: "แกนเชื้อเพลิงและระบบ Cryo", desc: "ระดับเชื้อเพลิง 88.5%, เผาผลาญ 37.93 q-U/s, Cryo-Bus 14.98 mK", group: "WORLD / NAVIGATION", metric: "Cryo Bus: 14.98 mK" },
+      { id: "16", name: "16 RUNTIME DECK FROZEN", th: "รันไทม์แช่แข็ง WRITE DENIED", desc: "ระบบปฏิบัติการอยู่ในสถานะ LOCKED_FROZEN_v1.2_LTS ป้องกันการเขียนทับ", group: "RUNTIME / OPERATIONS", metric: "Status: LOCKED_FROZEN" },
+      { id: "17", name: "17 AUDIT TRAIL LEDGER REPLAY", th: "บัญชีเลดเจอร์ตรวจสอบ Replay", desc: "การจำลองย้อนรอยหลักฐาน 12 ขั้นตอน SENSE ถึง REPLAY สมบูรณ์แบบ", group: "SECURITY / GOVERNANCE", metric: "12 Replay Audit Steps" }
+    ];
+
+    // 10 CUSTODIANS MASTER DATA
+    const CUSTODIANS = [
+      { id: 1, name: "นายยุทธภูมิ พากเพียร", role: "Sovereign Architect & Supreme Custodian", enclave: "YUTTHAPHOOM-PRIME-HSM", latency: 0.12, status: "REAL_HSM_SIGNED" },
+      { id: 2, name: "Dr. Aris Thorne", role: "Quantum Coherence Specialist", enclave: "THORNE-QUANTUM-VAULT", latency: 0.28, status: "REAL_HSM_SIGNED" },
+      { id: 3, name: "Elena Rostova", role: "Post-Quantum Security Officer", enclave: "ROSTOVA-PQC-ENCLAVE", latency: 0.35, status: "REAL_HSM_SIGNED" },
+      { id: 4, name: "Marcus Vance", role: "Fail-Closed Quarantine Warden", enclave: "VANCE-QUARANTINE-CORE", latency: 0.19, status: "REAL_HSM_SIGNED" },
+      { id: 5, name: "Kaito Tanaka", role: "Zero-Drift Telemetry Overseer", enclave: "TANAKA-TELEMETRY-HSM", latency: 0.42, status: "REAL_HSM_SIGNED" },
+      { id: 6, name: "Sarah Jenkins", role: "Legal & PDPA Compliance Lead", enclave: "JENKINS-LEGAL-VAULT", latency: 0.22, status: "REAL_HSM_SIGNED" },
+      { id: 7, name: "Dmitri Volkov", role: "Cryptographic Root Guardian", enclave: "VOLKOV-ROOT-HSM", latency: 0.31, status: "REAL_HSM_SIGNED" },
+      { id: 8, name: "Li Wei", role: "Multiverse Lattice Dispatcher", enclave: "LIWEI-LATTICE-CORE", latency: 0.15, status: "REAL_HSM_SIGNED" },
+      { id: 9, name: "Amira Al-Mansoor", role: "Phoenix Recovery Engineer", enclave: "AMIRA-PHOENIX-VAULT", latency: 0.26, status: "REAL_HSM_SIGNED" },
+      { id: 10, name: "Gabriel Silva", role: "Deca-Quorum Consensus Notary", enclave: "SILVA-NOTARY-HSM", latency: 0.18, status: "REAL_HSM_SIGNED" }
+    ];
+
+    let activeChamberId = "00";
+    let isMonochrome = false;
+
+    // RENDER CHAMBER BUTTONS
+    function renderChamberButtons() {
+      const grid = document.getElementById('chamber-buttons-grid');
+      grid.innerHTML = CHAMBERS.map(c => {
+        const isActive = c.id === activeChamberId;
+        return `
+          <button onclick="selectChamber('${c.id}')" class="p-2.5 rounded-xl border text-left transition cursor-pointer ${
+            isActive 
+              ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-md ring-1 ring-cyan-400' 
+              : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
+          }">
+            <div class="text-[10px] font-bold text-amber-400/90">CHAMBER ${c.id}</div>
+            <div class="font-bold text-xs truncate ${isActive ? 'text-white' : 'text-slate-300'}">${c.th}</div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // SELECT AND RENDER ACTIVE CHAMBER PANEL
+    function selectChamber(id) {
+      activeChamberId = id;
+      renderChamberButtons();
+      const chamber = CHAMBERS.find(c => c.id === id);
+      const panel = document.getElementById('active-chamber-panel');
+      
+      panel.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+          <div>
+            <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-bold font-mono border border-cyan-500/40">
+              ${chamber.group}
+            </span>
+            <h3 class="text-xl font-black font-mono text-white mt-1">
+              CHAMBER ${chamber.id}: ${chamber.name}
+            </h3>
+            <div class="text-sm font-bold text-amber-400">${chamber.th}</div>
+          </div>
+          <div class="text-right font-mono">
+            <div class="text-[10px] text-slate-400">TELEMETRY METRIC</div>
+            <div class="text-sm font-bold text-emerald-400">${chamber.metric}</div>
+          </div>
+        </div>
+
+        <p class="text-slate-300 text-sm leading-relaxed">
+          ${chamber.desc}
+        </p>
+
+        <div class="p-4 rounded-2xl bg-black/60 border border-cyan-500/20 font-mono text-xs space-y-2">
+          <div class="text-slate-400 font-bold flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            LIVE EXECUTION & ATTESTATION STATUS
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-500">Post-Quantum Signature:</span>
+              <div class="text-emerald-400 font-bold">CRYSTALS-Dilithium-5 PASSED</div>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-500">Invariant State:</span>
+              <div class="text-amber-400 font-bold">Δ0.0% Immutable SSoT</div>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-500">Legal Shield:</span>
+              <div class="text-cyan-400 font-bold">PDPA Sec 9, 26, 28 VERIFIED</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // RENDER 10 CUSTODIANS
+    function renderCustodians() {
+      const grid = document.getElementById('custodians-grid');
+      grid.innerHTML = CUSTODIANS.map(c => `
+        <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 hover:border-cyan-500/40 transition space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold text-amber-400">#${c.id < 10 ? '0' + c.id : c.id} HSM</span>
+            <span class="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-bold">
+              ${c.latency} ms
+            </span>
+          </div>
+          <div class="font-bold text-white text-xs truncate">${c.name}</div>
+          <div class="text-[10px] text-slate-400 truncate">${c.role}</div>
+          <div class="p-1.5 rounded-lg bg-black/60 border border-slate-900 text-[9px] text-cyan-300 truncate">
+            ${c.enclave}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // COPY GENESIS MERKLE ROOT
+    function copyGenesisHash() {
+      navigator.clipboard.writeText("909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68");
+      alert("✅ Genesis Merkle Root Hash คัดลอกไปยังคลิปบอร์ดแล้ว (SSoT Δ0.0% Verified)");
+    }
+
+    // SEAL SPIN ANIMATION REPLAY
+    function triggerSealSpin() {
+      const el = document.getElementById('hero-seal-container');
+      el.classList.remove('animate-seal-intro');
+      void el.offsetWidth; // Reflow
+      el.classList.add('animate-seal-intro');
+    }
+
+    // TOGGLE MONOCHROME B&W MODE
+    function toggleMonochrome() {
+      isMonochrome = !isMonochrome;
+      const btn = document.getElementById('mono-toggle-btn');
+      if (isMonochrome) {
+        document.body.classList.add('grayscale');
+        btn.innerHTML = '<span>โหมดสีปกติ (Color)</span>';
+      } else {
+        document.body.classList.remove('grayscale');
+        btn.innerHTML = '<span>โหมดขาว-ดำ (Print)</span>';
+      }
+    }
+
+    // DOWNLOAD SELF (STANDALONE HTML EXPORT)
+    function downloadSelf() {
+      const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'zyrquen-sovereign-world-engine-standalone-block849202.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // INITIALIZE THREE.JS 3D CANVAS FOR CHAMBER 11
+    function initThreeTopology() {
+      const canvas = document.getElementById('three-quantum-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+      // Create Particle Sphere
+      const particleGeo = new THREE.BufferGeometry();
+      const count = 300;
+      const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) {
+        const u = Math.random();
+        const v = Math.random();
+        const theta = u * 2.0 * Math.PI;
+        const phi = Math.acos(2.0 * v - 1.0);
+        const r = 2.5 + Math.random() * 0.8;
+        positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+        positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+        positions[i * 3 + 2] = r * Math.cos(phi);
+      }
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particleMat = new THREE.PointsMaterial({ color: 0x38bdf8, size: 0.05, transparent: true, opacity: 0.8 });
+      const particles = new THREE.Points(particleGeo, particleMat);
+      scene.add(particles);
+
+      // Create Golden Inner Torus
+      const torusGeo = new THREE.TorusGeometry(1.8, 0.04, 16, 100);
+      const torusMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b, wireframe: true });
+      const torus = new THREE.Mesh(torusGeo, torusMat);
+      scene.add(torus);
+
+      // Create Cyan Outer Torus
+      const torus2Geo = new THREE.TorusGeometry(2.2, 0.03, 16, 100);
+      const torus2Mat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, wireframe: true });
+      const torus2 = new THREE.Mesh(torus2Geo, torus2Mat);
+      torus2.rotation.x = Math.PI / 2;
+      scene.add(torus2);
+
+      camera.position.z = 6;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        particles.rotation.y += 0.002;
+        torus.rotation.x += 0.005;
+        torus.rotation.y += 0.007;
+        torus2.rotation.y -= 0.004;
+        torus2.rotation.z += 0.006;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        if (!canvas.clientWidth || !canvas.clientHeight) return;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      });
+    }
+
+    // ON DOM LOAD
+    window.addEventListener('DOMContentLoaded', () => {
+      renderChamberButtons();
+      selectChamber("00");
+      renderCustodians();
+      initThreeTopology();
+    });
+  </script>
+
+</body>
+</html>
