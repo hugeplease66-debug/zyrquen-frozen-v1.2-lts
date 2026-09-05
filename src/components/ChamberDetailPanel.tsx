@@ -470,7 +470,7 @@ export const ChamberDetailPanel: React.FC<ChamberDetailPanelProps> = ({
       timestamp: '2026-09-01T21:04:12Z',
       signers: '10/10 REAL_HSM',
       delta: 'Δ0.0%',
-      leafHash: chamber.hashAnchor.slice(0, 24) + '...',
+      leafHash: chamber?.hashAnchor ? chamber.hashAnchor.slice(0, 24) + '...' : '909ab814479844d8a14816be...',
       status: 'VERIFIED'
     },
     {

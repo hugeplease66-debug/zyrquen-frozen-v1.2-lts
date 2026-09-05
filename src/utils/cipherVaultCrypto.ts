@@ -61,7 +61,7 @@ export async function deriveKeyFromPassphrase(
   return window.crypto.subtle.deriveKey(
     {
       name: 'PBKDF2',
-      salt: salt,
+      salt: salt as unknown as BufferSource,
       iterations: 100000,
       hash: 'SHA-256',
     },
@@ -95,7 +95,7 @@ export async function encryptSnippet(
   const encrypted = await window.crypto.subtle.encrypt(
     {
       name: 'AES-GCM',
-      iv: iv,
+      iv: iv as unknown as BufferSource,
     },
     key,
     enc.encode(plaintext)
@@ -130,7 +130,7 @@ export async function decryptSnippet(
     const decryptedBuffer = await window.crypto.subtle.decrypt(
       {
         name: 'AES-GCM',
-        iv: iv,
+        iv: iv as unknown as BufferSource,
       },
       key,
       ciphertextBuffer

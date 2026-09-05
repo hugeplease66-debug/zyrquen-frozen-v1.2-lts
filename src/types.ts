@@ -366,5 +366,79 @@ export interface InterceptResult {
   details: string[];
 }
 
+export type PqcAlgorithmId =
+  | 'ML-DSA-87'
+  | 'ML-KEM-1024'
+  | 'SLH-DSA-256'
+  | 'FN-DSA-1024'
+  | 'PQC-HYBRID-01'
+  | 'FAILSAFE-HOTSWAP';
+
+export interface PqcAlgorithmConfig {
+  id: PqcAlgorithmId;
+  name: string;
+  standard: string;
+  securityCategory: number;
+  schemeType: string;
+  mathematicalBasis: string;
+  publicKeyBytes: number;
+  secretKeyBytes: number;
+  cipherOrSigBytes: number;
+  ringDimensionN: number;
+  modulusQ: number;
+  matrixRankK: number;
+  matrixRankL: number;
+  speedRating: string;
+  legalAnchor: string;
+  descriptionTh: string;
+}
+
+export interface HsmEnclaveState {
+  hsmId: string;
+  custodianId: string;
+  custodianNameTh: string;
+  custodianNameEn: string;
+  roleTh: string;
+  vaultLocation: string;
+  hardwareModel: string;
+  fipsLevel: string;
+  temperatureC: number;
+  zeroizationLatMs: number;
+  attestationStatus: string;
+  pqcKeyFingerprint: string;
+  lastAttestationBlock: number;
+}
+
+export interface LatticeMemoizerMetrics {
+  cacheHitCount: number;
+  cacheMissCount: number;
+  totalSwitches: number;
+  hitRatePct: number;
+  lastComputeLatencyMs: number;
+  averageMemoizedLatencyMs: number;
+  activeLatticeDimension: string;
+  polynomialNTTOpsPerSec: number;
+  memoryFootprintKb: number;
+}
+
+export interface HsmQuorumEvaluation {
+  totalEnclaves: number;
+  verifiedCount: number;
+  computingCount: number;
+  lockedCount: number;
+  isQuorumValid: boolean;
+  quorumPercentage: number;
+  leadPrincipalStatus: string;
+  leadPrincipalName: string;
+  leadPrincipalId: string;
+  averageTemperatureC: number;
+  maxZeroizationLatencyMs: number;
+  canonicalBlock: number;
+  canonicalSealsCount: number;
+  combinedFingerprintDigest: string;
+  fipsLevel: string;
+  statusLabelTh: string;
+}
+
 
 
