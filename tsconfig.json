@@ -22,5 +22,16 @@
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "include": [
+    "server.ts",
+    "src/types.ts",
+    "src/ErrorBoundary.tsx",
+    "src/contexts/ThemeContext.tsx",
+    "src/components/SystemEventsSidebar.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

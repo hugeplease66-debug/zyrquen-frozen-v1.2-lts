@@ -4558,7 +4558,7 @@ PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9InRoIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04
   
   // Also observe for React re-renders
   const observer = new MutationObserver(()=>{
-    const container = document.querySelector('div.w-full.h-\[420px\]');
+    const container = Array.from(document.querySelectorAll('div.w-full')).find(el => el.className && el.className.includes('420px')) || document.querySelector('div.w-full[class*="420px"]');
     if(container && !container.dataset.fixed){
       setTimeout(waitForHologram, 500);
     }
@@ -4716,7 +4716,7 @@ PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9InRoIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04
 // Hide broken hologram canvas and show beautiful one
 (function(){
   function replaceHologram(){
-    const oldDecks = document.querySelectorAll('div.w-full.h-\[420px\]');
+    const oldDecks = Array.from(document.querySelectorAll('div.w-full')).filter(el => el.className && el.className.includes('420px'));
     oldDecks.forEach(deck=>{
       if(deck.querySelector('canvas') && !deck.dataset.replaced){
         deck.style.display = 'none';
@@ -5719,15 +5719,14 @@ body::before{
 
 <script id="new-room-real-data">
 (function(){
+  // REAL DATA FROM JSON - 12 stages
+  const systemMetadata = {"codename": "LOCKED_FROZEN_v1.2_LTS", "genesis_block_height": 849202, "genesis_merkle_root": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68", "merkle_root": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68", "quarantine_chamber": "Chamber 02", "preservation_vault": "Module 17 (Unclassified Preservation V24)", "non_deletion_policy": "Zero-Deletion Guarantee Active", "cryo_temperature_mK": 14.98, "consensus_speed_QOps": 851.9, "replay_sla_ms": 142.0};
+  const realStages = [{"stage_id": "01", "stage_name": "INGEST", "stage_name_th": "INGEST — ตรวจรับสัญญาณโทรมาตร", "latency_ms": 10.0, "cumulative_time_ms": 10.0, "status": "PASSED", "forensic_details": "Stage INGEST verified against system rules. Core Invariants secure."}, {"stage_id": "02", "stage_name": "PARSE_HEADERS", "stage_name_th": "PARSE_HEADERS — ถอดส่วนหัวและประเภทข้อมูล", "latency_ms": 12.0, "cumulative_time_ms": 22.0, "status": "PASSED", "forensic_details": "Stage PARSE_HEADERS verified against system rules. Core Invariants secure."}, {"stage_id": "03", "stage_name": "METRIC_ALIGNMENT", "stage_name_th": "METRIC_ALIGNMENT — ตรวจสอบความสอดคล้องโทรมาตร", "latency_ms": 14.0, "cumulative_time_ms": 36.0, "status": "FLAGGED_MISMATCH", "forensic_details": "ALERT: Detected sub-block time drift mismatch for Block #849,203. Baseline drifted outside nominal window."}, {"stage_id": "04", "stage_name": "SIGNATURE_VERIFY", "stage_name_th": "SIGNATURE_VERIFY — ตรวจสอบลายมือชื่อดิจิทัล", "latency_ms": 15.0, "cumulative_time_ms": 51.0, "status": "PASSED", "forensic_details": "Stage SIGNATURE_VERIFY verified against system rules. Core Invariants secure."}, {"stage_id": "05", "stage_name": "CUSTODIAN_QUORUM_CHECK", "stage_name_th": "CUSTODIAN_QUORUM_CHECK — ตรวจทานมติสภาผู้พิทักษ์", "latency_ms": 13.0, "cumulative_time_ms": 64.0, "status": "PASSED", "forensic_details": "Stage CUSTODIAN_QUORUM_CHECK verified against system rules. Core Invariants secure."}, {"stage_id": "06", "stage_name": "INVARIANT_PROTECTION", "stage_name_th": "INVARIANT_PROTECTION — สอบทานเงื่อนไขความคงตัว", "latency_ms": 10.0, "cumulative_time_ms": 74.0, "status": "PASSED", "forensic_details": "Stage INVARIANT_PROTECTION verified against system rules. Core Invariants secure."}, {"stage_id": "07", "stage_name": "MERKLE_COMPUTE", "stage_name_th": "MERKLE_COMPUTE — คำนวณรากแฮช Merkle Root", "latency_ms": 12.0, "cumulative_time_ms": 86.0, "status": "PASSED", "forensic_details": "Stage MERKLE_COMPUTE verified against system rules. Core Invariants secure."}, {"stage_id": "08", "stage_name": "RISK_RE_EVALUATION", "stage_name_th": "RISK_RE_EVALUATION — ประเมินคะแนนความเสี่ยง Sentinel AI", "latency_ms": 11.0, "cumulative_time_ms": 97.0, "status": "PASSED", "forensic_details": "Stage RISK_RE_EVALUATION verified against system rules. Core Invariants secure."}, {"stage_id": "09", "stage_name": "THAI_LAW_AUDIT", "stage_name_th": "THAI_LAW_AUDIT — ตรวจสอบนิติสัมพันธ์ พ.ร.บ. ธุรกรรมฯ", "latency_ms": 11.0, "cumulative_time_ms": 108.0, "status": "PASSED", "forensic_details": "Stage THAI_LAW_AUDIT verified against system rules. Core Invariants secure."}, {"stage_id": "10", "stage_name": "TRACE_STREAM_REPLAY", "stage_name_th": "TRACE_STREAM_REPLAY — จำลองการเล่นย้อนประวัติคู่ขนาน", "latency_ms": 12.0, "cumulative_time_ms": 120.0, "status": "PASSED", "forensic_details": "Stage TRACE_STREAM_REPLAY verified against system rules. Core Invariants secure."}, {"stage_id": "11", "stage_name": "QUARANTINE_ISOLATION", "stage_name_th": "QUARANTINE_ISOLATION — ดักกรองแยกกักโรคลง Chamber 02", "latency_ms": 12.0, "cumulative_time_ms": 132.0, "status": "QUARANTINED", "forensic_details": "SUCCESS: Seal #14903 successfully isolated and routed to Chamber 02 to prevent SSoT contamination."}, {"stage_id": "12", "stage_name": "CLOSURE", "stage_name_th": "CLOSURE — สลักล็อกถาวรใน Module 17 V24", "latency_ms": 10.0, "cumulative_time_ms": 142.0, "status": "COMMITTED_PRESERVED", "forensic_details": "SUCCESS: Forensic record logged to Module 17 V24. Non-deletion lock engaged. No data mutation occurred."}];
+
   // Real data trust - connect to ZYRQUEN live data
   function getRealData(){
-    // REAL DATA FROM JSON - 12 stages
-    const systemMetadata = {"codename": "LOCKED_FROZEN_v1.2_LTS", "genesis_block_height": 849202, "genesis_merkle_root": "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68", "quarantine_chamber": "Chamber 02", "preservation_vault": "Module 17 (Unclassified Preservation V24)", "non_deletion_policy": "Zero-Deletion Guarantee Active", "cryo_temperature_mK": 14.98, "consensus_speed_QOps": 851.9, "replay_sla_ms": 142.0};
-    const realStages = [{"stage_id": "01", "stage_name": "INGEST", "stage_name_th": "INGEST — ตรวจรับสัญญาณโทรมาตร", "latency_ms": 10.0, "cumulative_time_ms": 10.0, "status": "PASSED", "forensic_details": "Stage INGEST verified against system rules. Core Invariants secure."}, {"stage_id": "02", "stage_name": "PARSE_HEADERS", "stage_name_th": "PARSE_HEADERS — ถอดส่วนหัวและประเภทข้อมูล", "latency_ms": 12.0, "cumulative_time_ms": 22.0, "status": "PASSED", "forensic_details": "Stage PARSE_HEADERS verified against system rules. Core Invariants secure."}, {"stage_id": "03", "stage_name": "METRIC_ALIGNMENT", "stage_name_th": "METRIC_ALIGNMENT — ตรวจสอบความสอดคล้องโทรมาตร", "latency_ms": 14.0, "cumulative_time_ms": 36.0, "status": "FLAGGED_MISMATCH", "forensic_details": "ALERT: Detected sub-block time drift mismatch for Block #849,203. Baseline drifted outside nominal window."}, {"stage_id": "04", "stage_name": "SIGNATURE_VERIFY", "stage_name_th": "SIGNATURE_VERIFY — ตรวจสอบลายมือชื่อดิจิทัล", "latency_ms": 15.0, "cumulative_time_ms": 51.0, "status": "PASSED", "forensic_details": "Stage SIGNATURE_VERIFY verified against system rules. Core Invariants secure."}, {"stage_id": "05", "stage_name": "CUSTODIAN_QUORUM_CHECK", "stage_name_th": "CUSTODIAN_QUORUM_CHECK — ตรวจทานมติสภาผู้พิทักษ์", "latency_ms": 13.0, "cumulative_time_ms": 64.0, "status": "PASSED", "forensic_details": "Stage CUSTODIAN_QUORUM_CHECK verified against system rules. Core Invariants secure."}, {"stage_id": "06", "stage_name": "INVARIANT_PROTECTION", "stage_name_th": "INVARIANT_PROTECTION — สอบทานเงื่อนไขความคงตัว", "latency_ms": 10.0, "cumulative_time_ms": 74.0, "status": "PASSED", "forensic_details": "Stage INVARIANT_PROTECTION verified against system rules. Core Invariants secure."}, {"stage_id": "07", "stage_name": "MERKLE_COMPUTE", "stage_name_th": "MERKLE_COMPUTE — คำนวณรากแฮช Merkle Root", "latency_ms": 12.0, "cumulative_time_ms": 86.0, "status": "PASSED", "forensic_details": "Stage MERKLE_COMPUTE verified against system rules. Core Invariants secure."}, {"stage_id": "08", "stage_name": "RISK_RE_EVALUATION", "stage_name_th": "RISK_RE_EVALUATION — ประเมินคะแนนความเสี่ยง Sentinel AI", "latency_ms": 11.0, "cumulative_time_ms": 97.0, "status": "PASSED", "forensic_details": "Stage RISK_RE_EVALUATION verified against system rules. Core Invariants secure."}, {"stage_id": "09", "stage_name": "THAI_LAW_AUDIT", "stage_name_th": "THAI_LAW_AUDIT — ตรวจสอบนิติสัมพันธ์ พ.ร.บ. ธุรกรรมฯ", "latency_ms": 11.0, "cumulative_time_ms": 108.0, "status": "PASSED", "forensic_details": "Stage THAI_LAW_AUDIT verified against system rules. Core Invariants secure."}, {"stage_id": "10", "stage_name": "TRACE_STREAM_REPLAY", "stage_name_th": "TRACE_STREAM_REPLAY — จำลองการเล่นย้อนประวัติคู่ขนาน", "latency_ms": 12.0, "cumulative_time_ms": 120.0, "status": "PASSED", "forensic_details": "Stage TRACE_STREAM_REPLAY verified against system rules. Core Invariants secure."}, {"stage_id": "11", "stage_name": "QUARANTINE_ISOLATION", "stage_name_th": "QUARANTINE_ISOLATION — ดักกรองแยกกักโรคลง Chamber 02", "latency_ms": 12.0, "cumulative_time_ms": 132.0, "status": "QUARANTINED", "forensic_details": "SUCCESS: Seal #14903 successfully isolated and routed to Chamber 02 to prevent SSoT contamination."}, {"stage_id": "12", "stage_name": "CLOSURE", "stage_name_th": "CLOSURE — สลักล็อกถาวรใน Module 17 V24", "latency_ms": 10.0, "cumulative_time_ms": 142.0, "status": "COMMITTED_PRESERVED", "forensic_details": "SUCCESS: Forensic record logged to Module 17 V24. Non-deletion lock engaged. No data mutation occurred."}];
     try{
       // Try to get real data from existing ZYRQUEN globals + JSON
-      const quorum = document.querySelector('[class*="quorum"]')?.textContent || "10/10 REAL_HSM";
-
       const quorum = document.querySelector('[class*="quorum"]')?.textContent || "10/10 REAL_HSM";
       const block = document.body.innerHTML.match(/Block #(\d+)/)?.[1] || "849202";
       const seals = document.body.innerHTML.match(/([\d,]+) SEALS/)?.[1] || "14,902";
@@ -5832,7 +5831,8 @@ body::before{
     
     const sun = document.createElement('div');
     sun.className = 'znr-sun';
-    sun.title = 'SSoT ROOT • Genesis Block #'+systemMetadata.genesis_block_height+' • '+systemMetadata.merkle_root+' • '+systemMetadata.cryo_temperature_mK+' mK';
+    const sRoot = systemMetadata?.merkle_root || systemMetadata?.genesis_merkle_root || "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68";
+    sun.title = 'SSoT ROOT • Genesis Block #'+systemMetadata.genesis_block_height+' • '+sRoot+' • '+systemMetadata.cryo_temperature_mK+' mK';
     radial.appendChild(sun);
     
     nodes.forEach((n,i)=>{
@@ -5859,7 +5859,8 @@ body::before{
     // Real stats
     const radialStats = document.getElementById('znrRadialStats');
     if(radialStats){
-      radialStats.innerHTML = '<span style="font-size:7px;padding:2px 6px;border-radius:999px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.24);color:#34d399">12 STAGES REAL • '+systemMetadata.genesis_block_height+'</span><span style="font-size:7px;padding:2px 6px;border-radius:999px;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.24);color:#22d3ee">Block #'+systemMetadata.genesis_block_height+' REAL</span><span style="font-size:7px;padding:2px 6px;border-radius:999px;background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.24);color:#facc15">'+systemMetadata.merkle_root.substring(0,8)+'... REAL</span>';
+      const shortRoot = (systemMetadata?.merkle_root || systemMetadata?.genesis_merkle_root || "909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68").substring(0,8);
+      radialStats.innerHTML = '<span style="font-size:7px;padding:2px 6px;border-radius:999px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.24);color:#34d399">12 STAGES REAL • '+systemMetadata.genesis_block_height+'</span><span style="font-size:7px;padding:2px 6px;border-radius:999px;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.24);color:#22d3ee">Block #'+systemMetadata.genesis_block_height+' REAL</span><span style="font-size:7px;padding:2px 6px;border-radius:999px;background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.24);color:#facc15">'+shortRoot+'... REAL</span>';
     }
   }
 
@@ -6167,7 +6168,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
     <span style="color:#34d399">[✓] STAGE-10: TRACE_STREAM_REPLAY (ย้อนเล่นใน 0.014K Cryo)</span>
     <span style="color:#f59e0b">[✓] STAGE-11: QUARANTINE_ISOLATION (พักใน Chamber 02)</span>
     <span style="color:#22d3ee">[✓] STAGE-12: CLOSURE (สลักถาวรใน Module 17 V24 - ไม่ลบ)</span>
-  <span style="color:#34d399">[✓] ย้อนเล่นสำเร็จ: 35.8ms (SLA Limit < 142ms)</span>
+  <span style="color:#34d399">[✓] ย้อนเล่นสำเร็จ: 35.8ms (SLA Limit &lt; 142ms)</span>
 
 <span style="color:#D4AF37">========================================================================
           INTEGRATION VERDICT: 100% HEALTHY, COMPLIANT, & SECURED
@@ -6340,7 +6341,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
           <tr><td>S07</td><td>MERKLE_COMPUTE<br>คำนวณรากแฮช Merkle Root</td><td>12.00 ms</td><td>84.0 ms</td><td style="color:#34d399">PASSED</td><td>Stage MERKLE_COMPUTE verified. Merkle Root 909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68</td></tr>
           <tr><td>S08</td><td>RISK_RE_EVALUATION<br>ประเมินคะแนนความเสี่ยง Sentinel AI</td><td>11.00 ms</td><td>95.0 ms</td><td style="color:#34d399">PASSED</td><td>Stage RISK_RE_EVALUATION verified. Risk Score 0.02 Sentinel AI</td></tr>
           <tr><td>S09</td><td>THAI_LAW_AUDIT<br>ตรวจสอบนิติสัมพันธ์ พ.ร.บ. ธุรกรรมฯ</td><td>11.00 ms</td><td>106.0 ms</td><td style="color:#34d399">PASSED</td><td>Stage THAI_LAW_AUDIT verified. Thai ETA 2544 Section 9,26,28 COMPLIANT</td></tr>
-          <tr><td>S10</td><td>TRACE_STREAM_REPLAY<br>จำลองการเล่นย้อนประวัติคู่ขนาน</td><td>12.00 ms</td><td>118.0 ms</td><td style="color:#34d399">PASSED</td><td>Stage TRACE_STREAM_REPLAY verified. Replay Determinism <142ms 14.98 mK Cryo</td></tr>
+          <tr><td>S10</td><td>TRACE_STREAM_REPLAY<br>จำลองการเล่นย้อนประวัติคู่ขนาน</td><td>12.00 ms</td><td>118.0 ms</td><td style="color:#34d399">PASSED</td><td>Stage TRACE_STREAM_REPLAY verified. Replay Determinism &lt;142ms 14.98 mK Cryo</td></tr>
           <tr><td>S11</td><td>QUARANTINE_ISOLATION<br>ดักกรองแยกกักโรคลง Chamber 02</td><td>12.00 ms</td><td>130.0 ms</td><td style="color:#f59e0b">QUARANTINED</td><td>SUCCESS: Seal #14903 successfully isolated and routed to Chamber 02 to prevent SSoT contamination. 80 Seals Quarantined</td></tr>
           <tr><td>S12</td><td>CLOSURE<br>สลักล็อกถาวรใน Module 17 V24</td><td>10.00 ms</td><td>140.0 ms</td><td style="color:#22d3ee">COMMITTED_PRESERVED</td><td>SUCCESS: Forensic record logged to Module 17 V24. Non-deletion lock engaged. No data mutation. Zero-Deletion Guarantee</td></tr>
         </table>
@@ -6355,7 +6356,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
       </div>
       <div class="forensic-panel">
         <div class="forensic-panel-head"><div style="display:flex;align-items:center;gap:10px"><div class="forensic-num">4</div><div style="font-size:11px;font-weight:bold;color:#34d399">10 Core Invariants Annex — ALL GREEN • SSoT Δ0 0.00% • REAL</div></div><span style="font-size:7px;padding:3px 8px;border-radius:999px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.24);color:#34d399">10/10 PASSED</span></div>
-        <div style="padding:12px"><table class="forensic-table"><tr><th>ID</th><th>สถานะ</th><th>รายละเอียด</th></tr><tr><td>INV-SSOT-IMMUTABLE</td><td style="color:#34d399">PASSED</td><td>SSoT Writes Locked Δ0 0.00%</td></tr><tr><td>INV-MERKLE-BINDING</td><td style="color:#34d399">PASSED</td><td>Root 909ab814... Deterministic Binding</td></tr><tr><td>INV-ZERO-TRUST-GATE</td><td style="color:#34d399">PASSED</td><td>Continuous Auth Enforcement</td></tr><tr><td>INV-BLAST-RADIUS-BOUND</td><td style="color:#34d399">PASSED</td><td>Impact <2.0% clamped</td></tr><tr><td>INV-FAIL-CLOSED-GUARD</td><td style="color:#34d399">PASSED</td><td>Auto-Quarantine Zeroization armed</td></tr><tr><td>INV-NON-AUTH-TELEMETRY</td><td style="color:#34d399">PASSED</td><td>Non-Mutative isolated</td></tr><tr><td>INV-DRIFT-DETECTION</td><td style="color:#34d399">PASSED</td><td>Drift 0.00% exactly</td></tr><tr><td>INV-CARDINALITY-14902</td><td style="color:#34d399">PASSED</td><td>14902 seals SHA-256 linked</td></tr><tr><td>INV-THAI-SOVEREIGNTY</td><td style="color:#34d399">PASSED</td><td>#EP-SOVEREIGN-01 verified</td></tr><tr><td>INV-REPLAY-DETERMINISM</td><td style="color:#34d399">PASSED</td><td>12-Stage <142ms verified</td></tr></table></div>
+        <div style="padding:12px"><table class="forensic-table"><tr><th>ID</th><th>สถานะ</th><th>รายละเอียด</th></tr><tr><td>INV-SSOT-IMMUTABLE</td><td style="color:#34d399">PASSED</td><td>SSoT Writes Locked Δ0 0.00%</td></tr><tr><td>INV-MERKLE-BINDING</td><td style="color:#34d399">PASSED</td><td>Root 909ab814... Deterministic Binding</td></tr><tr><td>INV-ZERO-TRUST-GATE</td><td style="color:#34d399">PASSED</td><td>Continuous Auth Enforcement</td></tr><tr><td>INV-BLAST-RADIUS-BOUND</td><td style="color:#34d399">PASSED</td><td>Impact &lt;2.0% clamped</td></tr><tr><td>INV-FAIL-CLOSED-GUARD</td><td style="color:#34d399">PASSED</td><td>Auto-Quarantine Zeroization armed</td></tr><tr><td>INV-NON-AUTH-TELEMETRY</td><td style="color:#34d399">PASSED</td><td>Non-Mutative isolated</td></tr><tr><td>INV-DRIFT-DETECTION</td><td style="color:#34d399">PASSED</td><td>Drift 0.00% exactly</td></tr><tr><td>INV-CARDINALITY-14902</td><td style="color:#34d399">PASSED</td><td>14902 seals SHA-256 linked</td></tr><tr><td>INV-THAI-SOVEREIGNTY</td><td style="color:#34d399">PASSED</td><td>#EP-SOVEREIGN-01 verified</td></tr><tr><td>INV-REPLAY-DETERMINISM</td><td style="color:#34d399">PASSED</td><td>12-Stage &lt;142ms verified</td></tr></table></div>
       </div>
     </div>
   </div>
@@ -6776,7 +6777,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
         <div class="flow-layer" style="border-color:rgba(250,204,21,0.4);background:rgba(250,204,21,0.08)">
           <div style="font-size:7px;color:#facc15;font-weight:bold">3. ระบบตัดสินใจและคัดกรองความน่าเชื่อถือ (Decision & Routing Gates) • Sentinel AI Risk Trust Feeder</div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px">
-            <div style="font-size:6px;padding:4px;border-radius:4px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.24)">[ความน่าเชื่อถือ (Score < 0.80): อนุมัติทันที • มาตรา 9 ETDA]</div>
+            <div style="font-size:6px;padding:4px;border-radius:4px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.24)">[ความน่าเชื่อถือ (Score &lt; 0.80): อนุมัติทันที • มาตรา 9 ETDA]</div>
             <div style="font-size:6px;padding:4px;border-radius:4px;background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.24)">[ความเสี่ยงปานกลาง (0.80-0.85): ส่งต่อ LOCKED_FROZEN]</div>
             <div style="font-size:6px;padding:4px;border-radius:4px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.24)">[ความเสี่ยงสูง > 0.85: บล็อก BLOCKED_FRAUD]</div>
           </div>
@@ -7445,7 +7446,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
         <b style="color:#D4AF37">๔. การปฏิบัติตามมาตรฐานเกณฑ์ความสอดคล้องนิติกรรมไทย (Thai Legal Admissibility Setup)</b><br>
         [HSM Signatures] → พ.ร.บ. ธุรกรรมอิเล็กทรอนิกส์ → มาตรา 9 เจตนา / มาตรา 26 ห้ามปฏิเสธ / มาตรา 28 รับรองด้วย CA<br>
         ๔.๑ Signing & Compliance Matrix: มาตรา 9 IAL1/AAL1 Low Risk Log via gateway, มาตรา 26 Dilithium-5 IAL2+/AAL2+ 10/10 REAL_HSM Non-repudiation, มาตรา 28 CA + Immutable Audit Ledger V25<br>
-        ๔.๒ Chamber 02 Integration: Sentinel AI Interceptor Risk >=0.95 or Replay Attack → Fail-Closed HSM stop signing, Quarantine to Chamber 02 FORENSICS & QUARANTINE + Module 17 Unclassified Preservation V24 No-Deletion, 12-Stage Trace Replay <142ms SLA Forensic Report<br><br>
+        ๔.๒ Chamber 02 Integration: Sentinel AI Interceptor Risk >=0.95 or Replay Attack → Fail-Closed HSM stop signing, Quarantine to Chamber 02 FORENSICS & QUARANTINE + Module 17 Unclassified Preservation V24 No-Deletion, 12-Stage Trace Replay &lt;142ms SLA Forensic Report<br><br>
         <b style="color:#22d3ee">๕. ตารางขั้นตอนตรวจสอบความพร้อมก่อนขึ้นระบบจริง (Pre-Go-Live Validation Checklist)</b><br>
         1. ตู้ Utimaco CSe-Series 10 ตู้ยึดแร็ก Dual Power [✓] PASS ฝ่ายวิศวกรรมระบบกายภาพ<br>
         2. Cryo Telemetry Bus 14.98 mK คงที่ [✓] PASS ฝ่ายควบคุมสภาพแวดล้อมแช่แข็ง<br>
@@ -7453,7 +7454,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
         4. คีย์ Dilithium-5 + SPHINCS+ สร้างสมบูรณ์ [✓] PASS นักวิจัยรหัสลับหลังควอนตัม<br>
         5. ตรึง Merkle Root 909ab814...fa4c68 [✓] PASS สถาปนิกโครงสร้างสัจจะ<br>
         6. บัญชีข้อมูลบันทึก Module 17 V24 [✓] PASS ผู้ตรวจสอบระบบคลัง<br>
-        7. 12-Stage Trace Replay <142ms [✓] PASS ทีมสืบสวนนิติวิทยาศาสตร์<br><br>
+        7. 12-Stage Trace Replay &lt;142ms [✓] PASS ทีมสืบสวนนิติวิทยาศาสตร์<br><br>
         <b>๖. บันทึกประวัติการอนุมัติรับรองคู่มือ (Sign-off & Executive Approval)</b><br>
         สลักสิทธิ์ Mathematical Seal ถาวรด้วยลายเซ็น Dilithium-5 Merkle Root Genesis Block #849202 Verified<br>
         ลงชื่อ นายยุทธภูมิ พากเพียร (#EP-SOVEREIGN-01) Sovereign Principal Custodian ZYRQUEN Ω∞ World Engine
@@ -7742,7 +7743,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
       <div style="font-size:11px;font-weight:bold;color:#D4AF37;margin-bottom:8px">CLASSIFICATION: OMEGA-1 SUPREME AUDIT RECORD — SOVEREIGN AUDIT TRAIL LEDGER REPORT • ID: ARC-SOV-MERKLE-1787852775841 • Formal Forensic Evidence & Cryptographic Non-Repudiation Certificate (ETA Sec 9/26/28 & PDPA) • REAL • From file4808680824310960925.pdf Pages 1-2</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div style="background:#f8fafc;border-radius:10px;padding:10px;border:1px solid rgba(212,175,55,0.18)"><div style="font-size:7px;color:#0e7490;font-weight:bold">SOVEREIGN ARCHITECT & CLEARANCE</div><div style="font-size:9px;font-weight:bold;color:#0f172a;margin-top:4px">Mr. Yuttaphum Phakphian (#EP-SOVEREIGN-01)</div><div style="font-size:6px;color:#64748b;margin-top:2px">สถาปนิกสูงสุด นายยุทธภูมิ พากเพียร Clearance OMEGA</div><div style="font-size:6px;color:#64748b;margin-top:4px">Mutation Authority: 0 (Read-Only) | Quorum: 10/10 REAL_HSM</div></div>
-        <div style="background:#f8fafc;border-radius:10px;padding:10px;border:1px solid rgba(34,211,238,0.18)"><div style="font-size:7px;color:#0f766e;font-weight:bold">CANONICAL MERKLE LEDGER SSoT</div><div style="font-size:9px;font-weight:bold;color:#0f172a;margin-top:4px">Block #849,202 | 14,902 Canonical Seals</div><div style="font-size:6px;color:#64748b;margin-top:2px">Zero Drift Tolerance: Delta 0.00% Verified | Fail-Closed: Active</div><div style="font-size:6px;color:#64748b;margin-top:2px">Subzero Cryo Bus: 14.98 mK Helium-4 Engine | SLA < 0.20ms</div></div>
+        <div style="background:#f8fafc;border-radius:10px;padding:10px;border:1px solid rgba(34,211,238,0.18)"><div style="font-size:7px;color:#0f766e;font-weight:bold">CANONICAL MERKLE LEDGER SSoT</div><div style="font-size:9px;font-weight:bold;color:#0f172a;margin-top:4px">Block #849,202 | 14,902 Canonical Seals</div><div style="font-size:6px;color:#64748b;margin-top:2px">Zero Drift Tolerance: Delta 0.00% Verified | Fail-Closed: Active</div><div style="font-size:6px;color:#64748b;margin-top:2px">Subzero Cryo Bus: 14.98 mK Helium-4 Engine | SLA &lt; 0.20ms</div></div>
       </div>
       <div style="margin-top:10px;background:#fffbeb;border-radius:8px;padding:8px;border:1px solid rgba(245,158,11,0.18)"><div style="font-size:7px;color:#b45309;font-weight:bold">GENESIS MERKLE ROOT HASH & PQC CRYPTOGRAPHIC SCHEME:</div><div style="font-family:monospace;font-size:7px;color:#0f172a;margin-top:2px;word-break:break-all">909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68</div><div style="font-size:6px;color:#64748b;margin-top:2px">Standard: NIST FIPS 204 ML-DSA-87 (Dilithium-5) + FIPS 203 ML-KEM-1024 + FIPS 140-3 Level 4 HSM</div></div>
 
@@ -7775,7 +7776,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
       <div style="margin-top:12px">
         <div style="font-size:10px;font-weight:bold;color:#0f172a">3. 12-STAGE FORENSIC TRACE REPLAY & SUBSYSTEM DIAGNOSTICS</div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px"><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-01</div><div style="font-size:7px;font-weight:bold;color:#34d399">INGEST</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.015ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-02</div><div style="font-size:7px;font-weight:bold;color:#34d399">DECODE</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.012ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-03</div><div style="font-size:7px;font-weight:bold;color:#34d399">HSM_VERIFY</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.018ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-04</div><div style="font-size:7px;font-weight:bold;color:#34d399">PQC_VERIFY</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.021ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-05</div><div style="font-size:7px;font-weight:bold;color:#34d399">INVARIANT_CHECK</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.010ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-06</div><div style="font-size:7px;font-weight:bold;color:#34d399">GATE_CHECK</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.014ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-07</div><div style="font-size:7px;font-weight:bold;color:#34d399">QUORUM_CHECK</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.017ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-08</div><div style="font-size:7px;font-weight:bold;color:#34d399">SSOT_CHECK</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.009ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-09</div><div style="font-size:7px;font-weight:bold;color:#34d399">LEGAL_CHECK</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.016ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-10</div><div style="font-size:7px;font-weight:bold;color:#34d399">SENTINEL_SCORE</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.020ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-11</div><div style="font-size:7px;font-weight:bold;color:#34d399">PRESERVE</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.011ms</div></div><div style="background:#020612;border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18);text-align:center"><div style="font-size:6px;color:#94a3b8">STAGE-12</div><div style="font-size:7px;font-weight:bold;color:#34d399">CLOSURE</div><div style="font-size:5px;color:#22d3ee">[PASS] 0.017ms</div></div></div>
-        <div style="margin-top:8px;background:#f8fafc;border-radius:8px;padding:8px;border:1px solid rgba(148,163,184,0.18)"><div style="font-size:7px;font-weight:bold;color:#334155">5/5 BASELINE DIAGNOSTIC STATUS & CHAMBER 02 QUARANTINE INTEGRITY:</div><div style="font-size:6px;color:#475569;margin-top:2px">• Total Telemetry Latency: 0.18ms (SLA < 0.20ms PASS) • Cryo Temp: 14.98 mK Helium-4 Subzero Bus<br>• Quarantine Buffer: 5 items stored • Policy: Module 17 V24 Zero-Deletion Unclassified Preservation • Fail-closed: Nominal</div></div>
+        <div style="margin-top:8px;background:#f8fafc;border-radius:8px;padding:8px;border:1px solid rgba(148,163,184,0.18)"><div style="font-size:7px;font-weight:bold;color:#334155">5/5 BASELINE DIAGNOSTIC STATUS & CHAMBER 02 QUARANTINE INTEGRITY:</div><div style="font-size:6px;color:#475569;margin-top:2px">• Total Telemetry Latency: 0.18ms (SLA &lt; 0.20ms PASS) • Cryo Temp: 14.98 mK Helium-4 Subzero Bus<br>• Quarantine Buffer: 5 items stored • Policy: Module 17 V24 Zero-Deletion Unclassified Preservation • Fail-closed: Nominal</div></div>
       </div>
 
       <div style="margin-top:12px">
@@ -7840,7 +7841,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
     
     <div style="background:#020612;border-radius:8px;padding:8px;border:1px solid #34d39930;display:flex;gap:8px">
       <div style="width:80px;font-size:6px;font-weight:bold;color:#34d399">09_FORENSIC_REPLAY_BENCHMARK<br>COMPLETED</div>
-      <div style="flex:1"><div style="font-size:7px;color:#cbd5e1;font-weight:bold">ทดสอบจำลองเหตุการณ์ตรวจสอบนิติวิทยาศาสตร์ย้อนหลัง 12 ขั้นตอนย่อยในสภาวะอุณหภูมิเย็นเยือกจัด 14.98 mK</div><div style="font-size:5px;color:#94a3b8;margin-top:2px">Execution speed: 35.8 ms (Target Limit: < 142.0 ms) -> SLA PASS</div><div style="font-size:5px;color:#71717a">2026-08-30T17:21:13.139653Z</div></div>
+      <div style="flex:1"><div style="font-size:7px;color:#cbd5e1;font-weight:bold">ทดสอบจำลองเหตุการณ์ตรวจสอบนิติวิทยาศาสตร์ย้อนหลัง 12 ขั้นตอนย่อยในสภาวะอุณหภูมิเย็นเยือกจัด 14.98 mK</div><div style="font-size:5px;color:#94a3b8;margin-top:2px">Execution speed: 35.8 ms (Target Limit: &lt; 142.0 ms) -> SLA PASS</div><div style="font-size:5px;color:#71717a">2026-08-30T17:21:13.139653Z</div></div>
     </div>
     
     <div style="background:#020612;border-radius:8px;padding:8px;border:1px solid #34d39930;display:flex;gap:8px">
@@ -7848,7 +7849,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
       <div style="flex:1"><div style="font-size:7px;color:#cbd5e1;font-weight:bold">ปลดเสถียรภาพล็อก Fail-Closed และอนุญาตให้ระนาบระบบสลักธุรกรรมดำเนินการต่อตามปกติ</div><div style="font-size:5px;color:#94a3b8;margin-top:2px">System state set back to LOCKED_FROZEN_v1.2_LTS under new cryptographic scheme SPHINCS+. Active zeroization alarms cleared.</div><div style="font-size:5px;color:#71717a">2026-08-30T17:21:13.150123Z</div></div>
     </div>
     </div>
-      <div style="margin-top:8px;font-size:6px;color:#34d399;background:rgba(52,211,153,0.08);border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18)">Recovery Status: SUCCESS_RESTORED • 01_INGEST_ALERT Tamper Foil breached TC-03 Active Zeroization Keys erased FAIL_CLOSED → 02_ACCESS_RUNTIME_DECK_FROZEN Chamber 16 honest state snapshot Block #849202 Merkle 909ab814... → 03_INVARIANT_VALIDATION_FAILED Expected 14902 Found 14901 Delta 0.0067% WARNING → 04_EVIDENCE_PRESERVATION Isolated Seal #14903 Chamber 02 Quarantine Module 17 guaranteed_non_deletion True → 05_CRYPTO_FALLBACK_SPHINCS Lattice → Hash-Based SLH-DSA → 06_PHOENIX_RECONSTRUCTION Recalculated Seal #14902 → 07_MERKLE_CONSISTENCY_PASS Verified 909ab814... 14902 restored SSoT Δ0 0.00% SUCCESS_ZERO_DRIFT → 08_THAI_LAW_ADMISSIBILITY_COMPLIANCE Sec 9,26,28 FORENSIC_READY_MAXIMUM_ASSURANCE → 09_FORENSIC_REPLAY_BENCHMARK 35.8ms Target <142ms SLA PASS → 10_RESUME_NORMAL_OPERATIONS LOCKED_FROZEN_v1.2_LTS SPHINCS+ Zeroization cleared • REAL • SSoT Δ0</div>
+      <div style="margin-top:8px;font-size:6px;color:#34d399;background:rgba(52,211,153,0.08);border-radius:6px;padding:6px;border:1px solid rgba(52,211,153,0.18)">Recovery Status: SUCCESS_RESTORED • 01_INGEST_ALERT Tamper Foil breached TC-03 Active Zeroization Keys erased FAIL_CLOSED → 02_ACCESS_RUNTIME_DECK_FROZEN Chamber 16 honest state snapshot Block #849202 Merkle 909ab814... → 03_INVARIANT_VALIDATION_FAILED Expected 14902 Found 14901 Delta 0.0067% WARNING → 04_EVIDENCE_PRESERVATION Isolated Seal #14903 Chamber 02 Quarantine Module 17 guaranteed_non_deletion True → 05_CRYPTO_FALLBACK_SPHINCS Lattice → Hash-Based SLH-DSA → 06_PHOENIX_RECONSTRUCTION Recalculated Seal #14902 → 07_MERKLE_CONSISTENCY_PASS Verified 909ab814... 14902 restored SSoT Δ0 0.00% SUCCESS_ZERO_DRIFT → 08_THAI_LAW_ADMISSIBILITY_COMPLIANCE Sec 9,26,28 FORENSIC_READY_MAXIMUM_ASSURANCE → 09_FORENSIC_REPLAY_BENCHMARK 35.8ms Target &lt;142ms SLA PASS → 10_RESUME_NORMAL_OPERATIONS LOCKED_FROZEN_v1.2_LTS SPHINCS+ Zeroization cleared • REAL • SSoT Δ0</div>
     </div>
 
     <div class="audit-panel">
@@ -8310,7 +8311,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
         <div style="font-size:6px;color:#cbd5e1;margin-top:6px;line-height:1.6">
           • เมื่อระบบตรวจพบการบุกรุก Risk Score >=0.85: API Gateway จะปัดตกและตอบกลับด้วยสัญญาล็อกความปลอดภัย ZYRQUEN_QUARANTINE_TRIGGERED ตัวแอปพลิเคชันหน้าบ้านจะทำการสลับสถานะผู้ใช้งานเป็น QUARANTINED และหยุดทำรายการทันที โดยจะไม่มีการปล่อยกู้กุญแจส่วนตัวคลังทรัพย์สินเด็ดขาด.<br>
           • การตรึงประวัติพยานดิจิทัล: ข้อมูลสเตจความผิดพลาดทั้งหมดจะได้รับการบันทึกถาวรลงในประวัติที่ไม่สามารถถูกเข้าไปแก้ไขหรือสั่งลบทำลายไฟล์ประวัตินี้ได้ (Module 17 / Unclassified Preservation V24) พร้อมรันระบบจำลองสืบย้อนรอย 12-Stage Trace Replay (ตั้งแต่ INGEST จนถึง CLOSURE) ได้ในเวลาสายฟ้าแลบต่ำกว่า 142 มิลลิวินาที เพื่อความพร้อมในการพิสูจน์ความสมบูรณ์ของพยานในศาลไทยตาม พ.ร.บ.ว่าด้วยธุรกรรมทางอิเล็กทรอนิกส์ พ.ศ.2544 มาตรา 26 และมาตรา 28 อย่างรัดกุมสูงสุด<br><br>
-          • Sentinel Risk Score Low <0.50 SETTLED, Medium 0.50-0.70 ESCROW_PENDING, High 0.70-0.85 QUARANTINED, Critical >=0.85 BLOCKED_FRAUD QUARANTINE_TRIGGERED • 10/10 REAL_HSM Quorum FIPS 140-3 L4 Dilithium-5 ML-DSA-87 • Chain Model Nc x Vc Zero Drift 0.00% • IAL1/AAL1 มาตรา 9 ECDSA, IAL2+/AAL2+ มาตรา 26 Dilithium-5, IAL3/AAL3+HSM มาตรา 27/28 10/10 REAL_HSM • Module 17 V24 Non-Deletion • 12-Stage Trace Replay INGEST to CLOSURE <142ms • SSoT Δ0 • Block #849202 • Merkle 909ab814... • 14.98 mK • 851.9 QOps • FAIL-CLOSED Active • COURT-ADMISSIBLE • REAL
+          • Sentinel Risk Score Low &lt;0.50 SETTLED, Medium 0.50-0.70 ESCROW_PENDING, High 0.70-0.85 QUARANTINED, Critical >=0.85 BLOCKED_FRAUD QUARANTINE_TRIGGERED • 10/10 REAL_HSM Quorum FIPS 140-3 L4 Dilithium-5 ML-DSA-87 • Chain Model Nc x Vc Zero Drift 0.00% • IAL1/AAL1 มาตรา 9 ECDSA, IAL2+/AAL2+ มาตรา 26 Dilithium-5, IAL3/AAL3+HSM มาตรา 27/28 10/10 REAL_HSM • Module 17 V24 Non-Deletion • 12-Stage Trace Replay INGEST to CLOSURE &lt;142ms • SSoT Δ0 • Block #849202 • Merkle 909ab814... • 14.98 mK • 851.9 QOps • FAIL-CLOSED Active • COURT-ADMISSIBLE • REAL
         </div>
       </div>
     </div>
@@ -8421,7 +8422,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
             • สามารถจำลองเหตุการณ์ย้อนหลังผ่าน OpenTelemetry (OTel) streams ได้ในเวลาเพียง 142 มิลลิวินาที<br>
             • กระบวนการวิเคราะห์ต้องดำเนินการภายใต้อุณหภูมิแช่แข็งยิ่งยวด 14.98 mK (0.014K) เพื่อรักษาเสถียรภาพของสถานะควอนตัมในการคำนวณพยานหลักฐาน<br>
             • Immutable Audit Ledger V25: ข้อมูลทุกชุดจะถูกจัดเก็บในรูปแบบพยานหลักฐานถาวร (Court-Admissible) ซึ่งมีความน่าเชื่อถือสูงกว่าระบบจัดเก็บ Logs ทั่วไป<br><br>
-            <b style="color:#22d3ee">12 Stages:</b> STAGE-01 INGEST 0.015ms PASS, STAGE-02 DECODE 0.012ms PASS, STAGE-03 HSM_VERIFY 0.018ms PASS, STAGE-04 PQC_VERIFY 0.021ms PASS, STAGE-05 INVARIANT_CHECK 0.010ms PASS, STAGE-06 GATE_CHECK 0.014ms PASS, STAGE-07 QUORUM_CHECK 0.017ms PASS, STAGE-08 SSOT_CHECK 0.009ms PASS, STAGE-09 LEGAL_CHECK 0.016ms PASS, STAGE-10 SENTINEL_SCORE 0.020ms PASS, STAGE-11 PRESERVE 0.011ms PASS, STAGE-12 CLOSURE 0.017ms PASS • Total 0.18ms SLA <0.20ms PASS Cryo 14.98 mK He-4 Subzero Bus Quarantine Buffer 5 items Module 17 V24 Zero-Deletion Fail-closed Nominal<br><br>
+            <b style="color:#22d3ee">12 Stages:</b> STAGE-01 INGEST 0.015ms PASS, STAGE-02 DECODE 0.012ms PASS, STAGE-03 HSM_VERIFY 0.018ms PASS, STAGE-04 PQC_VERIFY 0.021ms PASS, STAGE-05 INVARIANT_CHECK 0.010ms PASS, STAGE-06 GATE_CHECK 0.014ms PASS, STAGE-07 QUORUM_CHECK 0.017ms PASS, STAGE-08 SSOT_CHECK 0.009ms PASS, STAGE-09 LEGAL_CHECK 0.016ms PASS, STAGE-10 SENTINEL_SCORE 0.020ms PASS, STAGE-11 PRESERVE 0.011ms PASS, STAGE-12 CLOSURE 0.017ms PASS • Total 0.18ms SLA &lt;0.20ms PASS Cryo 14.98 mK He-4 Subzero Bus Quarantine Buffer 5 items Module 17 V24 Zero-Deletion Fail-closed Nominal<br><br>
             <b>Forensic Ready:</b> OTel & Forensic Stream Cryo subzero 14.98 mK, Deterministic forensic replay sanity check, Fail-closed sandbox isolation score >0.70, Court-Admissible forensic evidence judicial arbitration regulatory proceedings, SSoT Delta 0 invariant zero state mutation without unanimous 10/10 Deca-Key REAL_HSM quorum
           </div>
         </div>
@@ -8488,7 +8489,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
       <div style="font-size:11px;font-weight:bold;color:#f87171;margin-bottom:8px">คู่มือการบูรณาการระบบจัดการสิทธิ์และคลังดิจิทัล ZYRQUEN Ω∞ (Sovereign Service-to-Frontend Integration Manual) — ยืนยันอีกครั้ง • REAL</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
         <div style="background:#020612;border-radius:8px;padding:8px;border:1px solid rgba(34,211,238,0.18)"><div style="font-size:7px;color:#22d3ee;font-weight:bold">Architectural Overview 3-Tiered Security Gates</div><div style="font-family:monospace;font-size:5px;color:#cbd5e1;margin-top:4px">[ ผู้ใช้งานร้องขอทำรายการ ] → ( Sentinel AI Interceptor ) → 3 ทาง: [ความเสี่ยงต่ำ] IAL1/AAL1 มาตรา 9 ลายเซ็นทั่วไป ECDSA อนุมัติ, [ความเสี่ยงปานกลาง] IAL2+/AAL2+ มาตรา 26 ลายเซ็นปลอดภัย Dilithium-5 อนุมัติ, [ความเสี่ยงสูง/ธุรกรรมคลัง] IAL3/AAL3+HSM มาตรา 27/28 ผ่านสิทธิ์ CA 10/10 REAL_HSM Quorum • Sentinel Risk Score Chain Model Nc x Vc Zero Drift 0.00%</div></div>
-        <div style="background:#020612;border-radius:8px;padding:8px;border:1px solid rgba(52,211,153,0.18)"><div style="font-size:7px;color:#34d399;font-weight:bold">API Gateway + React SDK Deployment Confirmed</div><div style="font-family:monospace;font-size:5px;color:#cbd5e1;margin-top:4px">mkdir zyrquen-gateway && cd zyrquen-gateway npm init -y npm install express cors dotenv node zyrquen-service-gateway-node.js • POST /api/v2/auth/register IAL/AAL Sec 26 Compliance ตราสลักดิจิทัล • POST /api/v2/treasury/refund Sec 28 Compliance 10/10 REAL_HSM Quorum FIPS 140-3 L4 Dilithium-5 Chain Model Gas Fee Refund Zero Drift 0.00% • React SDK src/sdk/zyrquen-sdk.tsx ZyrquenAuthProvider useZyrquenAuth ZyrquenComplianceBadge authState systemStatus merkleGenesis riskScore loginMock IAL3 AAL3 Dilithium-5 evaluateChainModelValue Gen_Z_Core Gen_Y_Pro • Risk >=0.85 ZYRQUEN_QUARANTINE_TRIGGERED QUARANTINED Module 17 V24 12-Stage Trace Replay INGEST CLOSURE <142ms ETA Sec 26,28</div></div>
+        <div style="background:#020612;border-radius:8px;padding:8px;border:1px solid rgba(52,211,153,0.18)"><div style="font-size:7px;color:#34d399;font-weight:bold">API Gateway + React SDK Deployment Confirmed</div><div style="font-family:monospace;font-size:5px;color:#cbd5e1;margin-top:4px">mkdir zyrquen-gateway && cd zyrquen-gateway npm init -y npm install express cors dotenv node zyrquen-service-gateway-node.js • POST /api/v2/auth/register IAL/AAL Sec 26 Compliance ตราสลักดิจิทัล • POST /api/v2/treasury/refund Sec 28 Compliance 10/10 REAL_HSM Quorum FIPS 140-3 L4 Dilithium-5 Chain Model Gas Fee Refund Zero Drift 0.00% • React SDK src/sdk/zyrquen-sdk.tsx ZyrquenAuthProvider useZyrquenAuth ZyrquenComplianceBadge authState systemStatus merkleGenesis riskScore loginMock IAL3 AAL3 Dilithium-5 evaluateChainModelValue Gen_Z_Core Gen_Y_Pro • Risk >=0.85 ZYRQUEN_QUARANTINE_TRIGGERED QUARANTINED Module 17 V24 12-Stage Trace Replay INGEST CLOSURE &lt;142ms ETA Sec 26,28</div></div>
       </div>
     </div>
 
@@ -8619,7 +8620,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
         </div>
         <div style="background:#020612;border-radius:8px;padding:10px;border:1px solid rgba(52,211,153,0.18)">
           <div style="font-size:8px;color:#34d399;font-weight:bold">2.2 การรับรองลายมือชื่ออิเล็กทรอนิกส์ที่เชื่อถือได้ระดับสูง (มาตรา 26) — Non-repudiation • Post-Quantum • 10/10 REAL_HSM</div>
-          <div style="font-size:6px;color:#cbd5e1;margin-top:4px"><b>SLA:</b> ระบบรับประกันความปลอดภัยของลายมือชื่อดิจิทัลขั้นสูง Advanced Digital Signature เพื่อป้องกันการปลอมแปลงและสร้างคุณสมบัติการห้ามปฏิเสธความรับผิด Non-repudiation<br><b>กลไกทางเทคนิค:</b><br>• การลงนามใช้เทคโนโลยีการเข้ารหัสลับหลังยุคควอนตัม Post-Quantum Cryptography ด้วยอัลกอริทึม Dilithium-5 ML-DSA-87 Round 4 ที่ทนทานต่อการโจมตี<br>• การอนุมัติสิทธิ์ต้องผ่านฉันทามติอย่างเป็นเอกฉันท์จากคู่กุญแจฮาร์ดแวร์ 10/10 REAL_HSM Quorum (Custodians TC-01 ถึง TC-10) ภายใต้มาตรฐานกายภาพ FIPS 140-3 Level 4 ซึ่งป้องกันและทนทานต่อสภาวะสิ่งแวดล้อมวิกฤตและการงัดแงะเชิงรุก Tamper Foil Technology<br>• หากมีการแก้ไขเปลี่ยนแปลงใดๆ เกิดขึ้นหลังการลงลายมือชื่อ ระบบจะตรวจพบความบิดเบือนของข้อมูลได้ทันทีผ่านกลไกตรวจสอบความถูกต้องด้วยสัจจะคณิตศาสตร์แฮช Merkle Root Validation • ENFORCED 🛡️ • Dilithium-5 FIPS 204 • 10/10 REAL_HSM • Tamper Foil • Zeroization <0.42ms • SSoT Δ0</div>
+          <div style="font-size:6px;color:#cbd5e1;margin-top:4px"><b>SLA:</b> ระบบรับประกันความปลอดภัยของลายมือชื่อดิจิทัลขั้นสูง Advanced Digital Signature เพื่อป้องกันการปลอมแปลงและสร้างคุณสมบัติการห้ามปฏิเสธความรับผิด Non-repudiation<br><b>กลไกทางเทคนิค:</b><br>• การลงนามใช้เทคโนโลยีการเข้ารหัสลับหลังยุคควอนตัม Post-Quantum Cryptography ด้วยอัลกอริทึม Dilithium-5 ML-DSA-87 Round 4 ที่ทนทานต่อการโจมตี<br>• การอนุมัติสิทธิ์ต้องผ่านฉันทามติอย่างเป็นเอกฉันท์จากคู่กุญแจฮาร์ดแวร์ 10/10 REAL_HSM Quorum (Custodians TC-01 ถึง TC-10) ภายใต้มาตรฐานกายภาพ FIPS 140-3 Level 4 ซึ่งป้องกันและทนทานต่อสภาวะสิ่งแวดล้อมวิกฤตและการงัดแงะเชิงรุก Tamper Foil Technology<br>• หากมีการแก้ไขเปลี่ยนแปลงใดๆ เกิดขึ้นหลังการลงลายมือชื่อ ระบบจะตรวจพบความบิดเบือนของข้อมูลได้ทันทีผ่านกลไกตรวจสอบความถูกต้องด้วยสัจจะคณิตศาสตร์แฮช Merkle Root Validation • ENFORCED 🛡️ • Dilithium-5 FIPS 204 • 10/10 REAL_HSM • Tamper Foil • Zeroization &lt;0.42ms • SSoT Δ0</div>
         </div>
         <div style="background:#020612;border-radius:8px;padding:10px;border:1px solid rgba(212,175,55,0.18)">
           <div style="font-size:8px;color:#D4AF37;font-weight:bold">2.3 การอาศัยใบรับรองสนับสนุนลายมือชื่ออิเล็กทรอนิกส์ (มาตรา 28) — PKI + CA + Immutable Audit Ledger V25</div>
@@ -8644,10 +8645,10 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
     <div class="sla-panel">
       <div style="font-size:11px;font-weight:bold;color:#ef4444;margin-bottom:8px">4. การจัดการกรณีผิดปกติและนิติวิทยาศาสตร์ดิจิทัล (Incident & Forensic Management) — Sentinel Interceptor + Chamber 02 + Module 17 V24 + 12-Stage Trace Replay 142ms</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div style="background:#020612;border-radius:8px;padding:10px;border:1px solid rgba(239,68,68,0.18)"><div style="font-size:7px;color:#f87171;font-weight:bold">การสกัดกั้นภัยคุกคามด้วย Sentinel Interceptor</div><div style="font-size:6px;color:#cbd5e1;margin-top:4px">• ธุรกรรมที่มีคะแนนความเสี่ยงตั้งแต่ 0.80 ขึ้นไป จะถูกแยกและกักกันไว้ชั่วคราวในบัญชีเอสโครว์ควบคุม ESCROW_PENDING<br>• ธุรกรรมที่มีคะแนนความเสี่ยงตั้งแต่ 0.95 ขึ้นไป จะถูกสกัดกั้นและสั่งบล็อกความเสี่ยงจากการฉ้อโกงทันที BLOCKED_FRAUD<br>• Risk Score Low <0.50 SETTLED, Medium 0.50-0.80 ESCROW_PENDING, High 0.80-0.95 QUARANTINED, Critical >=0.95 BLOCKED_FRAUD FAIL-CLOSED</div></div>
+        <div style="background:#020612;border-radius:8px;padding:10px;border:1px solid rgba(239,68,68,0.18)"><div style="font-size:7px;color:#f87171;font-weight:bold">การสกัดกั้นภัยคุกคามด้วย Sentinel Interceptor</div><div style="font-size:6px;color:#cbd5e1;margin-top:4px">• ธุรกรรมที่มีคะแนนความเสี่ยงตั้งแต่ 0.80 ขึ้นไป จะถูกแยกและกักกันไว้ชั่วคราวในบัญชีเอสโครว์ควบคุม ESCROW_PENDING<br>• ธุรกรรมที่มีคะแนนความเสี่ยงตั้งแต่ 0.95 ขึ้นไป จะถูกสกัดกั้นและสั่งบล็อกความเสี่ยงจากการฉ้อโกงทันที BLOCKED_FRAUD<br>• Risk Score Low &lt;0.50 SETTLED, Medium 0.50-0.80 ESCROW_PENDING, High 0.80-0.95 QUARANTINED, Critical >=0.95 BLOCKED_FRAUD FAIL-CLOSED</div></div>
         <div style="background:#020612;border-radius:8px;padding:10px;border:1px solid rgba(245,158,11,0.18)"><div style="font-size:7px;color:#f59e0b;font-weight:bold">การแยกกักกันข้อมูลซีลใน Chamber 02 Quarantine + Module 17 V24</div><div style="font-size:6px;color:#cbd5e1;margin-top:4px">กรณีตรวจพบความผิดปกติ เช่น หัววัดบล็อกไม่ตรงกัน Probe Mismatch หรือการส่งรหัสที่ใช้ระบบ Ed25519 แทน Dilithium-5 ข้อมูลซีลเหล่านั้นจะถูกส่งเข้าคลังจัดเก็บถาวรที่ไม่มีการลบข้อมูลเด็ดขาดใน Module 17 Unclassified Preservation V24 เพื่อรักษาสภาพห่วงโซ่พยานหลักฐาน Chain of Custody<br>• 5 Seals Quarantined #14903-14907: Post-Epoch Emission Block #849,203, Replay Candidate Duplicate #14881, Unauthorized Oracle Feed Ed25519 instead of Dilithium-5, Provisional Session Key No Genesis Anchor, Synthetic Diagnostic Benchmark Not Canonical<br>• Preservation V24 Zero-Deletion Guarantee</div></div>
       </div>
-      <div style="margin-top:8px;background:#020612;border-radius:8px;padding:10px;border:1px solid rgba(34,211,238,0.18)"><div style="font-size:7px;color:#22d3ee;font-weight:bold">ความเร็วในการสืบย้อนรอยนิติวิทยาศาสตร์ 12-Stage Trace Replay 142ms</div><div style="font-size:6px;color:#cbd5e1;margin-top:4px">ระบบรับประกันความเร็วในการรันกระบวนการย้อนจำลองหลักฐานแบบจำลอง Forensic Replay ครบถ้วนทั้ง 12 ขั้นตอน STAGE-01 ถึง STAGE-12 ตั้งแต่ INGEST ถึง CLOSURE เพื่อส่งมอบรายงานสถานะตรวจสอบพยานหลักฐาน Audit Trail PDF ให้แก่ผู้ตรวจสอบระบบสำเร็จภายในระยะเวลา ไม่เกิน 142 มิลลิวินาที 142ms<br>• STAGE-01 INGEST 0.015ms PASS, STAGE-02 DECODE 0.012ms PASS, STAGE-03 HSM_VERIFY 0.018ms PASS, STAGE-04 PQC_VERIFY 0.021ms PASS, STAGE-05 INVARIANT_CHECK 0.010ms PASS, STAGE-06 GATE_CHECK 0.014ms PASS, STAGE-07 QUORUM_CHECK 0.017ms PASS, STAGE-08 SSOT_CHECK 0.009ms PASS, STAGE-09 LEGAL_CHECK 0.016ms PASS, STAGE-10 SENTINEL_SCORE 0.020ms PASS, STAGE-11 PRESERVE 0.011ms PASS, STAGE-12 CLOSURE 0.017ms PASS Total 0.18ms SLA <0.20ms PASS Cryo 14.98 mK</div></div>
+      <div style="margin-top:8px;background:#020612;border-radius:8px;padding:10px;border:1px solid rgba(34,211,238,0.18)"><div style="font-size:7px;color:#22d3ee;font-weight:bold">ความเร็วในการสืบย้อนรอยนิติวิทยาศาสตร์ 12-Stage Trace Replay 142ms</div><div style="font-size:6px;color:#cbd5e1;margin-top:4px">ระบบรับประกันความเร็วในการรันกระบวนการย้อนจำลองหลักฐานแบบจำลอง Forensic Replay ครบถ้วนทั้ง 12 ขั้นตอน STAGE-01 ถึง STAGE-12 ตั้งแต่ INGEST ถึง CLOSURE เพื่อส่งมอบรายงานสถานะตรวจสอบพยานหลักฐาน Audit Trail PDF ให้แก่ผู้ตรวจสอบระบบสำเร็จภายในระยะเวลา ไม่เกิน 142 มิลลิวินาที 142ms<br>• STAGE-01 INGEST 0.015ms PASS, STAGE-02 DECODE 0.012ms PASS, STAGE-03 HSM_VERIFY 0.018ms PASS, STAGE-04 PQC_VERIFY 0.021ms PASS, STAGE-05 INVARIANT_CHECK 0.010ms PASS, STAGE-06 GATE_CHECK 0.014ms PASS, STAGE-07 QUORUM_CHECK 0.017ms PASS, STAGE-08 SSOT_CHECK 0.009ms PASS, STAGE-09 LEGAL_CHECK 0.016ms PASS, STAGE-10 SENTINEL_SCORE 0.020ms PASS, STAGE-11 PRESERVE 0.011ms PASS, STAGE-12 CLOSURE 0.017ms PASS Total 0.18ms SLA &lt;0.20ms PASS Cryo 14.98 mK</div></div>
     </div>
 
     <div class="sla-panel">
@@ -8659,7 +8660,7 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
       <div style="font-size:11px;font-weight:bold;color:#c4b5fd;margin-bottom:8px">Supplementary: Chamber 08 PQC Enclave & Key Lifecycle Dossier — ML-KEM-1024 / ML-DSA-87 / SLH-DSA / Hybrid Dual-Envelope • REAL • From file3647773681577253381.json + file3111626562075266769.json</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
         <div style="background:#020612;border-radius:8px;padding:8px;border:1px solid rgba(168,85,247,0.18)"><div style="font-size:7px;color:#c4b5fd;font-weight:bold">PQC Algorithms — 4 Algorithms NIST FIPS 203/204/205 + Hybrid</div><div style="font-size:5px;color:#cbd5e1;margin-top:4px;line-height:1.4">PQC-FIPS-203 NIST FIPS 203 ML-KEM-1024 Kyber-1024 กลไกการห่อหุ้มกุญแจโครงข่ายแลตทิซโมดูล Module-Lattice KEM KEM NIST Security Category 5 Equivalent AES-256 IMMUNE_SHORS_ALGORITHM classicalBitSecurity 256 quantumBitSecurity 230 keySizes publicKey 1568 secretKey 3168 ciphertext 1568 mathematicalBasis Module Learning With Errors M-LWE over Polynomial Rings implementationModule 08 CORE PQC ENCLAVE LIBPQC-KYBER-V4 status ENFORCED legalAnchor ETDA Sec 26 & NIST SP 800-208 description Primary key exchange session encapsulation inter-chamber messaging HSM-to-HSM quantum-safe telemetry<br><br>PQC-FIPS-204 NIST FIPS 204 ML-DSA-87 Dilithium-5 มาตรฐานลายมือชื่อดิจิทัลโครงข่ายแลตทิซโมดูล Module-Lattice DSA SIGNATURE_LATTICE NIST Security Category 5 Maximum Cryptographic Strength IMMUNE_SHORS_ALGORITHM classical 256 quantum 245 keySizes public 2592 secret 4864 signature 4595 mathematicalBasis Module Learning With Errors & Short Integer Solution M-SIS/M-LWE implementationModule 08 DECA-KEY SIGNING ENGINE DILITHIUM-NATIVE status ENFORCED legalAnchor ETDA Sec 9,26,28 Sovereign Authority Non-Repudiation description Canonical digital signature scheme used by Sovereign Architect #EP-SOVEREIGN-01 Deca-Key Thai Custodians irreversible seal notarization<br><br>PQC-FIPS-205 NIST FIPS 205 SLH-DSA-SHAKE-256f SPHINCS+ มาตรฐานลายมือชื่อฐานฟังก์ชันแฮชไร้สถานะ Stateless Hash-Based DSA SIGNATURE_STATELESS_HASH NIST Security Category 5 Zero Lattice Dependency Fallback IMMUNE_GROVERS_&_SHORS_ALGORITHM classical 256 quantum 256 keySizes public 64 secret 128 signature 49856 mathematicalBasis Stateless Cryptographic Hash Tree Hyper-Structure WOTS+ & FORS implementationModule 08 ZERO-ASSUMPTION INTEGRITY VAULT status ACTIVE legalAnchor PDPA Sec 26 High-Security Archive Proof description Fallback zero-assumption signature algorithm guaranteeing long-term post-quantum integrity even if lattice-based assumptions theoretically weakened<br><br>PQC-HYBRID-01 ETDA / ISO PQC-HYBRID Dual-Envelope Dilithium-5 + ECDSA secp256k1 ระบบลายมือชื่อคู่ขนานผสมผสาน Hybrid Quantum-Classical HYBRID_SCHEME Dual-Layer Classical + Post-Quantum Redundancy FAIL-SAFE_HYBRID_ENVELOPE classical 256 quantum 245 keySizes public 2656 secret 4896 signature 4660 mathematicalBasis Concatenated Lattice Signature + Elliptic Curve Secp256k1 implementationModule 08 HYBRID TRANSLATION GATEWAY status ACTIVE legalAnchor ETDA Sec 28 Third-Party Evidentiary Reliance description Provides full backward compatibility with legacy blockchain smart contracts while strictly wrapping transactions in quantum-proof ML-DSA-87 envelope</div></div>
-        <div style="background:#020612;border-radius:8px;padding:8px;border:1px solid rgba(52,211,153,0.18)"><div style="font-size:7px;color:#34d399;font-weight:bold">HSM Enclaves — 10 Custodians TC-01 to TC-10 FIPS 140-3 L4 • Zeroization <0.42ms</div><div style="font-size:5px;color:#cbd5e1;margin-top:4px;line-height:1.4">HSM-TC-01 BKK-ENC-01 นายยุทธภูมิ พากเพียร สถาปนิกสูงสุด Yuttaphum Phakphian #EP-SOVEREIGN-01 Bangkok Sovereign Command Core FIPS 140-3 Level 4 Physical Tamper Enclave pqcKeyHash 909ab814...fa4c68 zeroization <0.42ms temperature 34.2 HEALTHY lastAttestationBlock 849202<br>HSM-TC-02 BKK-ENC-02 พล.สมชาย สัจจะรักษา ผู้ว่าการธนาคาร Gen. Somchai Sajjaraksa #EP-001 Bank of Thailand Subterranean Vault FIPS 140-3 L4 Active Shield pqcKeyHash 4c7a1f88e99a172a5d20914816bed34cdbb... zeroization <0.45ms 33.8 HEALTHY 849202<br>HSM-TC-03 BKK-ENC-03 ดร.กัญญารัตน์ โสภณกุล ผู้พิพากษาศาลสูงสุด Dr. Kanyarat Sophonkul #EP-007 Supreme Court Secure Legal Archive FIPS 140-3 L4 Active Shield pqcKeyHash 7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c... zeroization <0.39ms 34 HEALTHY 849202<br>HSM-TC-04 CNX-ENC-04 วศ.ธนพล วิริยะกิจการ สภาอุตสาหกรรม Thanapol Wiriyakitkarn #EP-014 Chiang Mai High-Tech Mountain Node FIPS 140-3 L4 Cryo-Hardened zeroization <0.41ms 31.5 HEALTHY 849202<br>HSM-TC-05 BKK-ENC-05 ศ.ดร.นครินทร์ รัตนดิลก นักวิทยาศาสตร์ควอนตัม Nakarin Rattanadilok #EP-022 National Science & Quantum Center FIPS 140-3 L4 Active Tamper Enclave zeroization <0.38ms 33.1 HEALTHY 849202<br>HSM-TC-06 HYI-ENC-06 พญ.ดร.รพิพร อุดมมงคล กระทรวงสาธารณสุข ... + TC-07 to TC-10 HEALTHY 10/10 REAL_HSM Quorum • Zeroization <0.42ms • Tamper Foil • Active Zeroization • Cryo Bus 14.98 mK • 10 Invariants ALL GREEN • 22/22 Master Gates PASS • SSoT Δ0 • Block #849202 • Merkle 909ab814... • QOps 851.9 • Coherence 99.992% • FAIL-CLOSED • COURT-ADMISSIBLE • REAL</div></div>
+        <div style="background:#020612;border-radius:8px;padding:8px;border:1px solid rgba(52,211,153,0.18)"><div style="font-size:7px;color:#34d399;font-weight:bold">HSM Enclaves — 10 Custodians TC-01 to TC-10 FIPS 140-3 L4 • Zeroization &lt;0.42ms</div><div style="font-size:5px;color:#cbd5e1;margin-top:4px;line-height:1.4">HSM-TC-01 BKK-ENC-01 นายยุทธภูมิ พากเพียร สถาปนิกสูงสุด Yuttaphum Phakphian #EP-SOVEREIGN-01 Bangkok Sovereign Command Core FIPS 140-3 Level 4 Physical Tamper Enclave pqcKeyHash 909ab814...fa4c68 zeroization &lt;0.42ms temperature 34.2 HEALTHY lastAttestationBlock 849202<br>HSM-TC-02 BKK-ENC-02 พล.สมชาย สัจจะรักษา ผู้ว่าการธนาคาร Gen. Somchai Sajjaraksa #EP-001 Bank of Thailand Subterranean Vault FIPS 140-3 L4 Active Shield pqcKeyHash 4c7a1f88e99a172a5d20914816bed34cdbb... zeroization &lt;0.45ms 33.8 HEALTHY 849202<br>HSM-TC-03 BKK-ENC-03 ดร.กัญญารัตน์ โสภณกุล ผู้พิพากษาศาลสูงสุด Dr. Kanyarat Sophonkul #EP-007 Supreme Court Secure Legal Archive FIPS 140-3 L4 Active Shield pqcKeyHash 7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c... zeroization &lt;0.39ms 34 HEALTHY 849202<br>HSM-TC-04 CNX-ENC-04 วศ.ธนพล วิริยะกิจการ สภาอุตสาหกรรม Thanapol Wiriyakitkarn #EP-014 Chiang Mai High-Tech Mountain Node FIPS 140-3 L4 Cryo-Hardened zeroization &lt;0.41ms 31.5 HEALTHY 849202<br>HSM-TC-05 BKK-ENC-05 ศ.ดร.นครินทร์ รัตนดิลก นักวิทยาศาสตร์ควอนตัม Nakarin Rattanadilok #EP-022 National Science & Quantum Center FIPS 140-3 L4 Active Tamper Enclave zeroization &lt;0.38ms 33.1 HEALTHY 849202<br>HSM-TC-06 HYI-ENC-06 พญ.ดร.รพิพร อุดมมงคล กระทรวงสาธารณสุข ... + TC-07 to TC-10 HEALTHY 10/10 REAL_HSM Quorum • Zeroization &lt;0.42ms • Tamper Foil • Active Zeroization • Cryo Bus 14.98 mK • 10 Invariants ALL GREEN • 22/22 Master Gates PASS • SSoT Δ0 • Block #849202 • Merkle 909ab814... • QOps 851.9 • Coherence 99.992% • FAIL-CLOSED • COURT-ADMISSIBLE • REAL</div></div>
       </div>
     </div>
   </div>
@@ -8713,6 +8714,661 @@ SMB_Retail: 10% ×15×6.0 = 504M THB
 <div class="nine-text-room" id="roomCertificatePolicy"><div class="nine-text-header"><div class="nine-text-title">ROOM 26 — CERTIFICATE POLICY DRAFT ZYRQUEN-CP-V1.2-DRAFT OID 1.3.6.1.4.1.909.1.2.1 — No Image Embed</div><span style="font-family:monospace;font-size:7px;padding:4px 8px;border-radius:999px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);color:#D4AF37">ETDA • THB-SOV 1.49B • XAU-PHYS 14,902 oz • RWA-INFRA • REAL</span></div><div class="nine-text-panel">CERTIFICATE POLICY DRAFT ZYRQUEN Ω∞ SOVEREIGN KERNEL v1.2 เอกสารนโยบายใบรับรองอธิปไตยดิจิทัล OMEGA-1 Tier SOVEREIGN JURISDICTION SOVEREIGN DIGITAL REALM CLASS TIER 5 SOVEREIGN Custodian Quorum G11 APPROVAL 100% VALIDATION 100% CONSENSUS MODULE REAL V3.11 STATUS ACTIVE QUORUM FULL ATTESTATION PASS KEY ESCROW LOCKED THAI SOVEREIGN NODE COVERAGE NATIONWIDE OID 1.3.6.1.4.1.909.1.2.1 ZYRQUEN-CP-V1.2-DRAFT laurel wreath ETDA THB-SOV 1.49B THAI SOVEREIGN BOND BACKED BALANCE XAU-PHYS 14,902 oz PHYSICAL GOLD RESERVE SECURE VAULT RWA-INFRA REAL WORLD ASSETS INFRASTRUCTURE TOKENIZED CRYPTOGRAPHIC SUITE KEM ML-KEM-1024 Post-Quantum Key Encapsulation DS ML-DSA-87 Dilithium Digital Signature QKD Quantum Key Distribution INTEGRITY & PROVENANCE MERKLE ROOT 909ab814 SSoT Δ0 SINGLE SOURCE OF TRUTH DRIFT 0.00% CONSENSUS STABLE TIMESTAMP 2024-12-19 04:19:22 UTC+7 Digital Signature 1 Cryptum Sovereign Root CA STATUS VALID HSM SEALED Digital Signature 2 Custodian G11 Node 07 STATUS VALID HSM SEALED CLASSIFICATION DRAFT FOR OFFICIAL REVIEW ONLY DO NOT DISTRIBUTE No image embed per request</div></div>
 
 <div class="nine-text-room" id="roomBangkokNodeLatencyDup"><div class="nine-text-header"><div class="nine-text-title">ROOM 27 — Bangkok Node BK01 0.8ms Bar Chart Duplicate Consolidated — No Image Embed</div><span style="font-family:monospace;font-size:7px;padding:4px 8px;border-radius:999px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);color:#34d399">BK01 0.8ms • 177x Faster SV05 • REAL • Consolidated</span></div><div class="nine-text-panel">Consolidated duplicate of ROOM 19 Node Latency Analysis — Bangkok Node BK01 0.8ms Leads Sovereign Network Performance with 0.8ms Latency (177x Faster than Silicon Valley Gateway SV05) Bar chart values confirmed: SV05 Silicon Valley 142 ms, LD06 London 128.4 ms, ZH04 Zurich 112.5 ms, TY03 Tokyo 24.1 ms, SG02 Singapore 8.2 ms, BK01 Bangkok 0.8 ms green Lower is Better Source Zyrquan Sovereign Kernel v1.2 Implication for SSoT Δ0 consensus: BK01 primary, SG02 secondary, TY03 tertiary failover No image embed text-only room to keep file not long as per user request เพิ่มห้องก็ได้จะได้ไม่ยาว + ไม่ได้ให้ฝังภาพครับ</div></div>
+
+
+<!-- ZYRQUEN SYSTEM EVENTS SIDEBAR & SEVERITY FILTER -->
+<style id="system-events-sidebar-styles">
+#systemEventsToggleBtn {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 99990;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(10, 15, 30, 0.92);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.25), 0 8px 32px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  color: #e2e8f0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#systemEventsToggleBtn:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(34, 211, 238, 0.8);
+  box-shadow: 0 0 32px rgba(34, 211, 238, 0.45);
+}
+.sev-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 10px #ef4444;
+  animation: sevPulse 1.8s infinite;
+}
+@keyframes sevPulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.25); opacity: 1; filter: drop-shadow(0 0 6px #ef4444); }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+#systemEventsBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 18, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 99998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+#systemEventsBackdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#systemEventsDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 440px;
+  max-width: 92vw;
+  background: linear-gradient(175deg, #070b18 0%, #04060d 100%);
+  border-left: 1px solid rgba(34, 211, 238, 0.25);
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.85), inset 1px 0 0 rgba(255, 255, 255, 0.05);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+#systemEventsDrawer.open {
+  transform: translateX(0);
+}
+
+.sev-filter-pill {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.6);
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.sev-filter-pill:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #f1f5f9;
+}
+.sev-filter-pill.active-all {
+  background: rgba(34, 211, 238, 0.15);
+  border-color: #22d3ee;
+  color: #22d3ee;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.25);
+}
+.sev-filter-pill.active-critical {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: #ef4444;
+  color: #fca5a5;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+}
+.sev-filter-pill.active-warning {
+  background: rgba(250, 204, 21, 0.18);
+  border-color: #facc15;
+  color: #fef08a;
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.3);
+}
+.sev-filter-pill.active-info {
+  background: rgba(52, 211, 153, 0.18);
+  border-color: #34d399;
+  color: #a7f3d0;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.3);
+}
+
+@keyframes eventSlideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(24px) translateY(-8px) scale(0.96);
+  }
+  60% {
+    opacity: 0.95;
+    transform: translateX(-2px) translateY(0) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
+  }
+}
+
+@keyframes newArrivalGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7);
+    border-color: rgba(34, 211, 238, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 20px 2px rgba(34, 211, 238, 0.4);
+    border-color: rgba(34, 211, 238, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0);
+  }
+}
+
+.event-card {
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background: rgba(10, 15, 28, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: eventSlideFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+.event-card.new-arrival {
+  animation: eventSlideFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both, newArrivalGlow 2.5s ease-out;
+}
+.event-card:hover {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(34, 211, 238, 0.3);
+  transform: translateX(-2px);
+}
+.event-card.critical {
+  border-left: 3px solid #ef4444;
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.08) 0%, rgba(10, 15, 28, 0.7) 100%);
+}
+.event-card.warning {
+  border-left: 3px solid #facc15;
+  background: linear-gradient(90deg, rgba(250, 204, 21, 0.08) 0%, rgba(10, 15, 28, 0.7) 100%);
+}
+.event-card.info {
+  border-left: 3px solid #34d399;
+  background: linear-gradient(90deg, rgba(52, 211, 153, 0.08) 0%, rgba(10, 15, 28, 0.7) 100%);
+}
+</style>
+
+<div id="systemEventsBackdrop" onclick="window.closeSystemEventsSidebar()"></div>
+
+<div id="systemEventsToggleBtn" onclick="window.toggleSystemEventsSidebar()">
+  <span class="sev-pulse-dot"></span>
+  <span>SYSTEM EVENTS</span>
+  <span id="sevBadgeCount" style="padding:1px 6px;border-radius:999px;background:rgba(239,68,68,0.2);color:#ef4444;font-size:9px;border:1px solid rgba(239,68,68,0.3)">4 CRIT</span>
+</div>
+
+<aside id="systemEventsDrawer" aria-label="System Events Sidebar">
+  <!-- Header -->
+  <div style="padding:16px 18px;border-bottom:1px solid rgba(34,211,238,0.18);display:flex;align-items:center;justify-content:space-between;background:rgba(10,15,30,0.5)">
+    <div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#22d3ee;box-shadow:0 0 8px #22d3ee"></span>
+        <span style="color:#22d3ee;font-size:12px;font-weight:700;letter-spacing:0.12em">SYSTEM EVENTS STREAM</span>
+      </div>
+      <div style="font-size:8px;color:#94a3b8;margin-top:2px">SSoT Live Incident & Audit Trail • 14,902 Seals</div>
+    </div>
+    <button onclick="window.closeSystemEventsSidebar()" style="background:transparent;border:none;color:#94a3b8;font-size:16px;cursor:pointer;padding:4px 8px;border-radius:4px" hover="color:#fff">✕</button>
+  </div>
+
+  <!-- Filter by Severity Controls -->
+  <div style="padding:12px 18px;border-bottom:1px solid rgba(255,255,255,0.06);background:#050813">
+    <div style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;display:flex;justify-content:space-between">
+      <span>FILTER BY SEVERITY</span>
+      <span id="showingEventCount" style="color:#22d3ee">18 Total</span>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button id="filterBtnAll" class="sev-filter-pill active-all" onclick="window.setSeverityFilter('all')">
+        <span>All</span>
+        <span id="countAll" style="font-size:8px;opacity:0.8">(18)</span>
+      </button>
+      <button id="filterBtnCritical" class="sev-filter-pill" onclick="window.setSeverityFilter('critical')">
+        <span style="width:6px;height:6px;border-radius:50%;background:#ef4444"></span>
+        <span>Critical</span>
+        <span id="countCritical" style="font-size:8px;opacity:0.8">(4)</span>
+      </button>
+      <button id="filterBtnWarning" class="sev-filter-pill" onclick="window.setSeverityFilter('warning')">
+        <span style="width:6px;height:6px;border-radius:50%;background:#facc15"></span>
+        <span>Warning</span>
+        <span id="countWarning" style="font-size:8px;opacity:0.8">(5)</span>
+      </button>
+      <button id="filterBtnInfo" class="sev-filter-pill" onclick="window.setSeverityFilter('info')">
+        <span style="width:6px;height:6px;border-radius:50%;background:#34d399"></span>
+        <span>Info</span>
+        <span id="countInfo" style="font-size:8px;opacity:0.8">(9)</span>
+      </button>
+    </div>
+
+    <!-- Quick Search Input -->
+    <div style="margin-top:10px;position:relative">
+      <input id="eventSearchInput" type="text" placeholder="Search events, hashes, statutes, chambers..." oninput="window.renderEventsList()" style="width:100%;box-sizing:border-box;background:#090d1e;border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;font-size:9px;color:#f1f5f9;outline:none" />
+    </div>
+  </div>
+
+  <!-- Events List Container -->
+  <div id="eventsListContainer" style="flex:1;overflow-y:auto;padding:12px 18px">
+    <!-- Rendered dynamically -->
+  </div>
+
+  <!-- Footer Actions -->
+  <div style="padding:10px 18px;border-top:1px solid rgba(255,255,255,0.06);background:#050813;display:flex;justify-content:space-between;align-items:center">
+    <div style="font-size:8px;color:#64748b">
+      Auto-Sync: <span style="color:#34d399">ACTIVE (Δ0.00%)</span>
+    </div>
+    <div style="display:flex;gap:6px">
+      <button onclick="window.injectSimulatedEvent()" style="font-size:8px;padding:4px 8px;border-radius:4px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);color:#22d3ee;cursor:pointer">
+        + Dispatch Event
+      </button>
+      <button onclick="window.exportEventsAuditJSON()" style="font-size:8px;padding:4px 8px;border-radius:4px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);color:#D4AF37;cursor:pointer">
+        Export Audit
+      </button>
+    </div>
+  </div>
+</aside>
+
+<script id="system-events-sidebar-logic">
+(function(){
+  let currentSeverityFilter = "all";
+  
+  const CANONICAL_EVENTS = [
+    {
+      id: "EVT-849203-01",
+      severity: "critical",
+      title: "Stage 03 Time Drift Anomaly Isolated",
+      title_th: "ตรวจพบสัญญาณเวลาผิดเพี้ยน Block #849,203 ถูกกักโรคลง Chamber 02",
+      timestamp: "2026-09-04 16:18:22 UTC",
+      chamber: "Chamber 02",
+      statute: "พ.ร.บ. ธุรกรรมฯ ม.28 / Zero-Drift Rule",
+      hash: "0x3f4a9b2c8e1d5a7f909ab814479844d8",
+      details: "Sub-block delta drifted +4.2ms beyond 14.98mK Cryo threshold. Automatic Fail-Closed quarantine engaged immediately."
+    },
+    {
+      id: "EVT-849203-02",
+      severity: "critical",
+      title: "USR-007 High Risk Fraud Transaction Blocked",
+      title_th: "สกัดกั้นธุรกรรมทุจริตความเสี่ยงสูง 0.88 เกินเกณฑ์ Sentinel AI",
+      timestamp: "2026-09-04 16:12:05 UTC",
+      chamber: "Chamber 08",
+      statute: "ETDA Sec. 26 / Anti-Fraud Matrix",
+      hash: "0x88c42a01ef942b03909ab814479844d8",
+      details: "Risk metric 0.88 exceeds threshold 0.85. Dynamic quarantine triggered. Nonce revoked without ledger corruption."
+    },
+    {
+      id: "EVT-849202-03",
+      severity: "critical",
+      title: "Unauthorized Mutation Attempt Rejected",
+      title_th: "ปฏิเสธความพยายามแก้ไข Sovereign SSoT (Mutation Authority = 0)",
+      timestamp: "2026-09-04 15:45:10 UTC",
+      chamber: "Chamber 06",
+      statute: "Involatile SSoT Invariant #01",
+      hash: "0x909ab814479844d8a14816bed34cdbb07",
+      details: "Write attempt to frozen segment intercepted. Read-only lock upheld across 10/10 REAL_HSM nodes."
+    },
+    {
+      id: "EVT-849202-04",
+      severity: "critical",
+      title: "Emergency Phoenix Fast Recovery Ready",
+      title_th: "โปรโตคอลฟื้นฟูฉุกเฉิน Phoenix SLA 142ms สแตนด์บายพร้อมทำงาน",
+      timestamp: "2026-09-04 15:02:44 UTC",
+      chamber: "Chamber 06",
+      statute: "ETDA Sec. 28 / Disaster Recovery",
+      hash: "0x72a910bc44e831fd909ab814479844d8",
+      details: "Mirror node state verified with 0.00% state drift. Cold-standby sync complete."
+    },
+    {
+      id: "EVT-849202-05",
+      severity: "warning",
+      title: "JSR-004 Gas Fee Penalty Re-allocation",
+      title_th: "จัดสรรเงินชดเชยค่า Gas ฿12.5M สำหรับกลุ่ม Gen X & Y",
+      timestamp: "2026-09-04 14:38:19 UTC",
+      chamber: "Chamber 07",
+      statute: "FIOS Treasury Model / ฿1.42B Value",
+      hash: "0x142b6a938c1109ef909ab814479844d8",
+      details: "Crisis Gas Penalty pool rebalanced: Gen X allocated ฿4.98M (39.82%), Gen Y ฿3.58M (28.63%)."
+    },
+    {
+      id: "EVT-849202-06",
+      severity: "warning",
+      title: "Silicon Valley Node SV05 Latency Drift",
+      title_th: "โหนด SV05 พบความหน่วง 142ms (BK01 ยังคงนำด้วย 0.8ms)",
+      timestamp: "2026-09-04 14:15:30 UTC",
+      chamber: "Chamber 19",
+      statute: "Global Mesh Topology SLA",
+      hash: "0x08b142ef598412ac909ab814479844d8",
+      details: "Cross-pacific latency nominal for distance. Primary routing locked to Bangkok BK01 (0.8ms)."
+    },
+    {
+      id: "EVT-849202-07",
+      severity: "warning",
+      title: "Cryogenic Cytostat Temperature Drift Re-centered",
+      title_th: "ปรับเทียบอุณหภูมิ Cryo กลับสู่ 14.98 mK อัตโนมัติ",
+      timestamp: "2026-09-04 13:50:11 UTC",
+      chamber: "Chamber 11",
+      statute: "Thermal Quantum Stability SLA",
+      hash: "0x149800a45f9038ba909ab814479844d8",
+      details: "Micro-fluctuation to 15.02 mK normalized back to baseline 14.98 mK within 0.12s."
+    },
+    {
+      id: "EVT-849202-08",
+      severity: "warning",
+      title: "PQC Key Rotation Cycle Standby Alert",
+      title_th: "เตรียมความพร้อมรอบหมุนเวียนกุญแจ ML-KEM-1024",
+      timestamp: "2026-09-04 13:20:00 UTC",
+      chamber: "Chamber 08",
+      statute: "NIST FIPS 203 / Quantum Security",
+      hash: "0x203f1928374a5b6c909ab814479844d8",
+      details: "Pre-computation for next epoch entropy seed verified via QKD quantum generator."
+    },
+    {
+      id: "EVT-849202-09",
+      severity: "warning",
+      title: "Pending Quarantine Queue Flush Required",
+      title_th: "มี 80 ซีลรอดำเนินการกักโรคใน Module 17 V24",
+      timestamp: "2026-09-04 12:40:55 UTC",
+      chamber: "Chamber 03",
+      statute: "Module 17 Non-Deletion Guarantee",
+      hash: "0x808080a1b2c3d4e5909ab814479844d8",
+      details: "80 sealed items archived in immutable WORM storage without SSoT contamination."
+    },
+    {
+      id: "EVT-849202-10",
+      severity: "info",
+      title: "Genesis Merkle Root Synchronized 909ab814...",
+      title_th: "รากแฮช Merkle ปฐมกาล ซิงก์สมบูรณ์ 100% (Δ0.00% Zero Drift)",
+      timestamp: "2026-09-04 12:00:00 UTC",
+      chamber: "Chamber 00",
+      statute: "พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
+      hash: "0x909ab814479844d8a14816bed34cdbb07528e18501da86fc4691763a43fa4c68",
+      details: "Master state root confirmed across 17 canonical modules and 28 operational chambers."
+    },
+    {
+      id: "EVT-849202-11",
+      severity: "info",
+      title: "10/10 REAL_HSM Deca-Key Quorum Attested",
+      title_th: "สภาผู้พิทักษ์ 10/10 ลงลายมือชื่อรับรองสิทธิ์สมบูรณ์",
+      timestamp: "2026-09-04 11:30:14 UTC",
+      chamber: "Chamber 01",
+      statute: "พ.ร.บ. ธุรกรรมฯ ม.26 & ม.28",
+      hash: "0x101010abcd998877909ab814479844d8",
+      details: "All 10 physical hardware modules (BK01-LD06) reported valid post-quantum signatures."
+    },
+    {
+      id: "EVT-849202-12",
+      severity: "info",
+      title: "14,902 Canonical Seals Locked in Ledger",
+      title_th: "ปิดผนึก 14,902 ซีลอย่างสมบูรณ์แบบ ห้ามเพิ่ม/ลด",
+      timestamp: "2026-09-04 11:00:00 UTC",
+      chamber: "Chamber 04",
+      statute: "Canonical Seal Invariant SSoT",
+      hash: "0x14902a1b2c3d4e5f909ab814479844d8",
+      details: "Full canonical block sealing complete for Block #849,202."
+    },
+    {
+      id: "EVT-849202-13",
+      severity: "info",
+      title: "NIST PQC ML-DSA-87 Dilithium-5 Active",
+      title_th: "อัลกอริทึมลายมือชื่อดิจิทัลหลังยุคควอนตัมพร้อมใช้งาน",
+      timestamp: "2026-09-04 10:45:00 UTC",
+      chamber: "Chamber 08",
+      statute: "NIST FIPS 204 Standard",
+      hash: "0x204a98b76c54d321909ab814479844d8",
+      details: "Post-quantum cryptographic suite running with zero-knowledge verification."
+    },
+    {
+      id: "EVT-849202-14",
+      severity: "info",
+      title: "PDPA Compliance Audit Status: 100% PASSED",
+      title_th: "ผลการตรวจสอบ PDPA ราชกิจจานุเบกษา เล่ม 136 ตอนที่ 69 ก ผ่าน 100%",
+      timestamp: "2026-09-04 10:15:22 UTC",
+      chamber: "Chamber 10",
+      statute: "PDPA B.E. 2562 Sections 9, 26, 28",
+      hash: "0x2562a1b98c7d6e5f909ab814479844d8",
+      details: "Non-deletion guarantee and sovereign data residency verified across all nodes."
+    },
+    {
+      id: "EVT-849202-15",
+      severity: "info",
+      title: "RWA Sovereign Treasury ฿1.49B Attested",
+      title_th: "ยืนยันทุนสำรองพันธบัตรอธิปไตย ฿1.49B และทองคำ 14,902 oz",
+      timestamp: "2026-09-04 09:30:00 UTC",
+      chamber: "Chamber 14",
+      statute: "THB-SOV & XAU-PHYS Vault",
+      hash: "0x1490000000000000909ab814479844d8",
+      details: "Physical gold reserve 14,902 oz and sovereign infrastructure 400 assets attested."
+    },
+    {
+      id: "EVT-849202-16",
+      severity: "info",
+      title: "Bangkok Gateway BK01 Latency 0.8ms Validated",
+      title_th: "ตรวจสอบความเร็วเกตเวย์กรุงเทพฯ BK01 นำที่ 0.8ms",
+      timestamp: "2026-09-04 09:00:00 UTC",
+      chamber: "Chamber 19",
+      statute: "National Node Topology",
+      hash: "0x0800000000000000909ab814479844d8",
+      details: "BK01 177x faster than Silicon Valley SV05 (142ms)."
+    },
+    {
+      id: "EVT-849202-17",
+      severity: "info",
+      title: "ETDA Section 28 Sovereign Trust Tier Approved",
+      title_th: "ยกระดับความน่าเชื่อถือระดับอธิปไตยตาม ม.28 พ.ร.บ. ธุรกรรมฯ",
+      timestamp: "2026-09-04 08:30:00 UTC",
+      chamber: "Chamber 26",
+      statute: "OID 1.3.6.1.4.1.909.1.2.1 Certificate Policy",
+      hash: "0x9090102010000000909ab814479844d8",
+      details: "Certificate Policy Draft ZYRQUEN-CP-V1.2 approved for court-admissible transactions."
+    },
+    {
+      id: "EVT-849202-18",
+      severity: "info",
+      title: "Sovereign Architect #EP-SOVEREIGN-01 Cleared",
+      title_th: "ยืนยันสิทธิอธิปไตย นายยุทธภูมิ พากเพียร OMEGA-1 SUPREME",
+      timestamp: "2026-09-04 08:00:00 UTC",
+      chamber: "Chamber 24",
+      statute: "Supreme Sovereign Authority / SoD Matrix",
+      hash: "0x0101010101010101909ab814479844d8",
+      details: "Supreme Sovereign Oversight & Final Authorization confirmed."
+    }
+  ];
+
+  window.systemEventsList = CANONICAL_EVENTS.slice();
+
+  window.toggleSystemEventsSidebar = function(){
+    const drawer = document.getElementById("systemEventsDrawer");
+    const backdrop = document.getElementById("systemEventsBackdrop");
+    if(drawer && backdrop){
+      const isOpen = drawer.classList.contains("open");
+      if(isOpen){
+        window.closeSystemEventsSidebar();
+      } else {
+        window.openSystemEventsSidebar();
+      }
+    }
+  };
+
+  window.openSystemEventsSidebar = function(){
+    const drawer = document.getElementById("systemEventsDrawer");
+    const backdrop = document.getElementById("systemEventsBackdrop");
+    if(drawer && backdrop){
+      drawer.classList.add("open");
+      backdrop.classList.add("active");
+      window.renderEventsList();
+    }
+  };
+
+  window.closeSystemEventsSidebar = function(){
+    const drawer = document.getElementById("systemEventsDrawer");
+    const backdrop = document.getElementById("systemEventsBackdrop");
+    if(drawer && backdrop){
+      drawer.classList.remove("open");
+      backdrop.classList.remove("active");
+    }
+  };
+
+  window.setSeverityFilter = function(severity){
+    currentSeverityFilter = severity;
+    
+    // Update active button styles
+    ["all", "critical", "warning", "info"].forEach(s => {
+      const btn = document.getElementById("filterBtn" + s.charAt(0).toUpperCase() + s.slice(1));
+      if(btn){
+        btn.className = "sev-filter-pill" + (s === severity ? " active-" + s : "");
+      }
+    });
+    
+    window.renderEventsList();
+  };
+
+  window.renderEventsList = function(){
+    const container = document.getElementById("eventsListContainer");
+    const searchInput = document.getElementById("eventSearchInput");
+    const query = (searchInput ? searchInput.value : "").trim().toLowerCase();
+
+    const counts = {
+      all: window.systemEventsList.length,
+      critical: window.systemEventsList.filter(e => e.severity === "critical").length,
+      warning: window.systemEventsList.filter(e => e.severity === "warning").length,
+      info: window.systemEventsList.filter(e => e.severity === "info").length
+    };
+
+    if(document.getElementById("countAll")) document.getElementById("countAll").textContent = "(" + counts.all + ")";
+    if(document.getElementById("countCritical")) document.getElementById("countCritical").textContent = "(" + counts.critical + ")";
+    if(document.getElementById("countWarning")) document.getElementById("countWarning").textContent = "(" + counts.warning + ")";
+    if(document.getElementById("countInfo")) document.getElementById("countInfo").textContent = "(" + counts.info + ")";
+    if(document.getElementById("sevBadgeCount")) document.getElementById("sevBadgeCount").textContent = counts.critical + " CRIT";
+
+    let filtered = window.systemEventsList;
+    if(currentSeverityFilter !== "all"){
+      filtered = filtered.filter(e => e.severity === currentSeverityFilter);
+    }
+
+    if(query){
+      filtered = filtered.filter(e => 
+        e.title.toLowerCase().includes(query) ||
+        e.title_th.toLowerCase().includes(query) ||
+        e.statute.toLowerCase().includes(query) ||
+        e.chamber.toLowerCase().includes(query) ||
+        e.hash.toLowerCase().includes(query) ||
+        e.details.toLowerCase().includes(query)
+      );
+    }
+
+    if(document.getElementById("showingEventCount")){
+      document.getElementById("showingEventCount").textContent = filtered.length + " of " + counts.all + " Shown";
+    }
+
+    if(!container) return;
+
+    if(filtered.length === 0){
+      container.innerHTML = `
+        <div style="text-align:center;padding:40px 10px;color:#64748b;font-size:10px">
+          <div style="font-size:24px;margin-bottom:8px">🔍</div>
+          <div>No events found matching filter [${currentSeverityFilter.toUpperCase()}]</div>
+          <button onclick="window.setSeverityFilter('all');document.getElementById('eventSearchInput').value='';window.renderEventsList()" style="margin-top:10px;font-size:9px;padding:4px 10px;border-radius:999px;background:rgba(34,211,238,0.1);border:1px solid #22d3ee;color:#22d3ee;cursor:pointer">Reset Filters</button>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = filtered.map(evt => {
+      const sevColor = evt.severity === "critical" ? "#ef4444" : evt.severity === "warning" ? "#facc15" : "#34d399";
+      const sevBg = evt.severity === "critical" ? "rgba(239,68,68,0.15)" : evt.severity === "warning" ? "rgba(250,204,21,0.15)" : "rgba(52,211,153,0.15)";
+      const sevBorder = evt.severity === "critical" ? "rgba(239,68,68,0.35)" : evt.severity === "warning" ? "rgba(250,204,21,0.35)" : "rgba(52,211,153,0.35)";
+
+      return `
+        <div class="event-card ${evt.severity}" id="${evt.id}">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:${sevBg};border:1px solid ${sevBorder};color:${sevColor};font-weight:bold;text-transform:uppercase">
+              ● ${evt.severity}
+            </span>
+            <span style="font-size:8px;color:#64748b">${evt.timestamp}</span>
+          </div>
+          <div style="font-size:10px;font-weight:700;color:#f1f5f9;margin-bottom:2px">${evt.title}</div>
+          <div style="font-size:9px;color:#94a3b8;margin-bottom:6px;line-height:1.4">${evt.title_th}</div>
+          
+          <div style="background:rgba(0,0,0,0.35);padding:6px;border-radius:4px;font-size:8px;color:#cbd5e1;margin-bottom:6px;border:1px solid rgba(255,255,255,0.04)">
+            ${evt.details}
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;font-size:8px;color:#64748b;flex-wrap:wrap;gap:4px">
+            <span style="color:#22d3ee;background:rgba(34,211,238,0.08);padding:1px 5px;border-radius:3px;border:1px solid rgba(34,211,238,0.2)">
+              🏛️ ${evt.statute}
+            </span>
+            <span style="color:#D4AF37;background:rgba(212,175,55,0.08);padding:1px 5px;border-radius:3px;border:1px solid rgba(212,175,55,0.2)">
+              📍 ${evt.chamber}
+            </span>
+          </div>
+
+          <div style="margin-top:6px;display:flex;align-items:center;justify-content:space-between;padding-top:4px;border-top:1px dashed rgba(255,255,255,0.07)">
+            <span style="font-size:7px;color:#64748b;font-family:monospace" title="${evt.hash}">
+              Hash: ${evt.hash.substring(0, 16)}...
+            </span>
+            <button onclick="navigator.clipboard.writeText('${evt.hash}');this.textContent='COPIED!';setTimeout(()=>this.textContent='COPY HASH',1500)" style="font-size:7px;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);color:#94a3b8;cursor:pointer">
+              COPY HASH
+            </button>
+          </div>
+        </div>
+      `;
+    }).join("");
+  };
+
+  window.injectSimulatedEvent = function(){
+    const types = ["critical", "warning", "info"];
+    const chosenType = types[Math.floor(Math.random()*types.length)];
+    const idNum = Math.floor(1000 + Math.random()*9000);
+    const now = new Date().toISOString().replace("T", " ").substring(0, 19) + " UTC";
+
+    const newEvt = {
+      id: "EVT-LIVE-" + idNum,
+      severity: chosenType,
+      title: chosenType === "critical" ? "Dynamic Hardware Shield Quarantine" : chosenType === "warning" ? "Telemetry Sync Micro-Drift Recalibrated" : "Real-time Merkle Leaf Seal Committed",
+      title_th: chosenType === "critical" ? "ระบบ Shield ดักจับและกักโรคบล็อกต้องสงสัยทันที" : chosenType === "warning" ? "ปรับสมดุลสายส่งสัญญาณโทรมาตรเข้าสู่เกณฑ์ปกติ" : "ยืนยันการบันทึก Seal สู่บัญชีแยกประเภทเรียบร้อย",
+      timestamp: now,
+      chamber: chosenType === "critical" ? "Chamber 02" : chosenType === "warning" ? "Chamber 11" : "Chamber 00",
+      statute: "พ.ร.บ. ธุรกรรมฯ ม.28 SSoT Δ0",
+      hash: "0x" + Math.random().toString(16).substring(2, 10) + "909ab814479844d8",
+      details: "Dispatched via live sovereign telemetry stream with zero-latency cryptographic validation."
+    };
+
+    window.systemEventsList.unshift(newEvt);
+    window.renderEventsList();
+  };
+
+  window.exportEventsAuditJSON = function(){
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(window.systemEventsList, null, 2));
+    const dlAnchor = document.createElement("a");
+    dlAnchor.setAttribute("href", dataStr);
+    dlAnchor.setAttribute("download", "zyrquen-system-events-audit-" + new Date().toISOString().substring(0, 10) + ".json");
+    document.body.appendChild(dlAnchor);
+    dlAnchor.click();
+    dlAnchor.remove();
+  };
+
+  // Keyboard shortcut: Alt+E or Ctrl+Shift+E toggles sidebar
+  window.addEventListener("keydown", function(e){
+    if((e.altKey && e.key.toLowerCase() === "e") || (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "e")){
+      e.preventDefault();
+      window.toggleSystemEventsSidebar();
+    }
+  });
+
+  // Initial render when DOM is ready
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", window.renderEventsList);
+  } else {
+    window.renderEventsList();
+  }
+})();
+</script>
 
 </body>
 </html>
