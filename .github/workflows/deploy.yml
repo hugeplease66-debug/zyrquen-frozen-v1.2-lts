@@ -39,6 +39,8 @@ jobs:
 
       - name: Build Application
         run: npm run build
+        env:
+          GITHUB_ACTIONS: 'true'
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -46,7 +48,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './out'
 
   deploy:
     name: Deploy to GitHub Pages
